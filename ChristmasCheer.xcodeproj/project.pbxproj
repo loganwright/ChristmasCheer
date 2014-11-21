@@ -1,0 +1,1118 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		800819A71A22E41C005B0021 /* SlidingMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800819A61A22E41C005B0021 /* SlidingMenuViewController.swift */; };
+		800819AB1A22E440005B0021 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800819A91A22E440005B0021 /* MenuViewController.swift */; };
+		800819AC1A22E440005B0021 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 800819AA1A22E440005B0021 /* MenuViewController.xib */; };
+		800819B41A22E681005B0021 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800819B21A22E681005B0021 /* HomeViewController.swift */; };
+		800819B51A22E681005B0021 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 800819B31A22E681005B0021 /* HomeViewController.xib */; };
+		803942A91A219E43006BF273 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803942A81A219E43006BF273 /* LocationManager.swift */; };
+		803942B21A22D2BE006BF273 /* sleighbells.wav in Resources */ = {isa = PBXBuildFile; fileRef = 803942AF1A22D2BE006BF273 /* sleighbells.wav */; };
+		803942B31A22D2BE006BF273 /* merry_christmas_darling.wav in Resources */ = {isa = PBXBuildFile; fileRef = 803942B01A22D2BE006BF273 /* merry_christmas_darling.wav */; };
+		803942B51A22D62F006BF273 /* santa_laugh.wav in Resources */ = {isa = PBXBuildFile; fileRef = 803942B41A22D62F006BF273 /* santa_laugh.wav */; };
+		803942B71A22D63B006BF273 /* merry_christmas.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 803942B61A22D63B006BF273 /* merry_christmas.mp3 */; };
+		805D04B21BDFEC18007D9070 /* String+Substrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805D04B11BDFEC18007D9070 /* String+Substrings.swift */; };
+		805D04B41BDFF40D007D9070 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805D04B31BDFF40D007D9070 /* UIColor+Hex.swift */; };
+		805D04B51BDFF410007D9070 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805D04B31BDFF40D007D9070 /* UIColor+Hex.swift */; };
+		805D04B61BDFF412007D9070 /* String+Substrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805D04B11BDFEC18007D9070 /* String+Substrings.swift */; };
+		806A694A1A2123FF00DBAC27 /* ApplicationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806A69491A2123FF00DBAC27 /* ApplicationSettings.swift */; };
+		806A694C1A21242800DBAC27 /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806A694B1A21242800DBAC27 /* ParseHelper.swift */; };
+		806A69511A21247A00DBAC27 /* NameEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806A694F1A21247A00DBAC27 /* NameEntryViewController.swift */; };
+		806A69521A21247A00DBAC27 /* NameEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 806A69501A21247A00DBAC27 /* NameEntryViewController.xib */; };
+		806A69551A21374C00DBAC27 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806A69541A21374C00DBAC27 /* Extensions.swift */; };
+		80723B8F1A1FCFA70027EBDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80723B8E1A1FCFA70027EBDA /* AppDelegate.swift */; };
+		80723B961A1FCFA70027EBDA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80723B951A1FCFA70027EBDA /* Images.xcassets */; };
+		80723BA51A1FCFA70027EBDA /* ChristmasCheerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80723BA41A1FCFA70027EBDA /* ChristmasCheerTests.swift */; };
+		808F26DE1A337C5D001A8CE3 /* SlidingMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800819A61A22E41C005B0021 /* SlidingMenuViewController.swift */; };
+		808F26DF1A337C5D001A8CE3 /* ApplicationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806A69491A2123FF00DBAC27 /* ApplicationSettings.swift */; };
+		808F26E01A337C5D001A8CE3 /* ChristmasCheerNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ADC83E1A255FBE0063F72D /* ChristmasCheerNotification.swift */; };
+		808F26E11A337C5D001A8CE3 /* ProfanityFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A6EF71A2787F500F1D6EC /* ProfanityFilter.swift */; };
+		808F26E21A337C5D001A8CE3 /* PermissionsRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E20D2B1A266EB50094D629 /* PermissionsRequestViewController.swift */; };
+		808F26E31A337C5D001A8CE3 /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E20D411A26E5770094D629 /* SCLAlertView.swift */; };
+		808F26E41A337C5D001A8CE3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806A69541A21374C00DBAC27 /* Extensions.swift */; };
+		808F26E51A337C5D001A8CE3 /* NameEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806A694F1A21247A00DBAC27 /* NameEntryViewController.swift */; };
+		808F26E61A337C5D001A8CE3 /* PJProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 80E20D3A1A26D14F0094D629 /* PJProgressHUD.m */; };
+		808F26E71A337C5D001A8CE3 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A6EFC1A27AEE700F1D6EC /* ContactViewController.swift */; };
+		808F26E81A337C5D001A8CE3 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800819A91A22E440005B0021 /* MenuViewController.swift */; };
+		808F26E91A337C5D001A8CE3 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E20D281A2665A60094D629 /* NotificationManager.swift */; };
+		808F26EA1A337C5D001A8CE3 /* AttributionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A6F011A27C05A00F1D6EC /* AttributionViewController.swift */; };
+		808F26EB1A337C5D001A8CE3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800819B21A22E681005B0021 /* HomeViewController.swift */; };
+		808F26EC1A337C5D001A8CE3 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803942A81A219E43006BF273 /* LocationManager.swift */; };
+		808F26ED1A337C5D001A8CE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80723B8E1A1FCFA70027EBDA /* AppDelegate.swift */; };
+		808F26EE1A337C5D001A8CE3 /* PJSingleActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 80E20D371A26D14F0094D629 /* PJSingleActivityIndicator.m */; };
+		808F26EF1A337C5D001A8CE3 /* PJDoubleActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 80E20D351A26D14F0094D629 /* PJDoubleActivityIndicator.m */; };
+		808F26F01A337C5D001A8CE3 /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806A694B1A21242800DBAC27 /* ParseHelper.swift */; };
+		808F26F11A337C5D001A8CE3 /* MenuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D9573F1A242D3700173B2B /* MenuViewCell.swift */; };
+		808F26F31A337C5D001A8CE3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80BB9C631A2771EA00682931 /* AVFoundation.framework */; };
+		808F26F41A337C5D001A8CE3 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		808F26F61A337C5D001A8CE3 /* merry_christmas_darling.wav in Resources */ = {isa = PBXBuildFile; fileRef = 803942B01A22D2BE006BF273 /* merry_christmas_darling.wav */; };
+		808F26F71A337C5D001A8CE3 /* PermissionsRequestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80E20D2C1A266EB50094D629 /* PermissionsRequestViewController.xib */; };
+		808F26F81A337C5D001A8CE3 /* PJProgressHUD.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80E20D3B1A26D14F0094D629 /* PJProgressHUD.xib */; };
+		808F26F91A337C5D001A8CE3 /* santa_laugh.wav in Resources */ = {isa = PBXBuildFile; fileRef = 803942B41A22D62F006BF273 /* santa_laugh.wav */; };
+		808F26FA1A337C5D001A8CE3 /* error_tone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 809A6EF21A27806C00F1D6EC /* error_tone.mp3 */; };
+		808F26FB1A337C5D001A8CE3 /* ContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 809A6EFD1A27AEE700F1D6EC /* ContactViewController.xib */; };
+		808F26FC1A337C5D001A8CE3 /* sleighbells.wav in Resources */ = {isa = PBXBuildFile; fileRef = 803942AF1A22D2BE006BF273 /* sleighbells.wav */; };
+		808F26FD1A337C5D001A8CE3 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 800819AA1A22E440005B0021 /* MenuViewController.xib */; };
+		808F26FE1A337C5D001A8CE3 /* AttributionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 809A6F021A27C05A00F1D6EC /* AttributionViewController.xib */; };
+		808F26FF1A337C5D001A8CE3 /* merry_christmas.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 803942B61A22D63B006BF273 /* merry_christmas.mp3 */; };
+		808F27001A337C5D001A8CE3 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 800819B31A22E681005B0021 /* HomeViewController.xib */; };
+		808F27011A337C5D001A8CE3 /* christmasCrackFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 80D957381A23E95800173B2B /* christmasCrackFont.ttf */; };
+		808F27021A337C5D001A8CE3 /* NameEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 806A69501A21247A00DBAC27 /* NameEntryViewController.xib */; };
+		808F27031A337C5D001A8CE3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80723B951A1FCFA70027EBDA /* Images.xcassets */; };
+		808F27041A337C5D001A8CE3 /* success_tone.wav in Resources */ = {isa = PBXBuildFile; fileRef = 809A6EF01A27802A00F1D6EC /* success_tone.wav */; };
+		808F27051A337C5D001A8CE3 /* MenuViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D957401A242D3700173B2B /* MenuViewCell.xib */; };
+		808F270E1A338F0D001A8CE3 /* EnvironmentVariables.m in Sources */ = {isa = PBXBuildFile; fileRef = 808F270D1A338F0D001A8CE3 /* EnvironmentVariables.m */; };
+		808F270F1A339029001A8CE3 /* EnvironmentVariables.m in Sources */ = {isa = PBXBuildFile; fileRef = 808F270D1A338F0D001A8CE3 /* EnvironmentVariables.m */; };
+		809483831BDC456400F69A46 /* Qu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809483821BDC456400F69A46 /* Qu.swift */; };
+		809483841BDC460300F69A46 /* Qu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809483821BDC456400F69A46 /* Qu.swift */; };
+		809483891BDC710C00F69A46 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809483881BDC710C00F69A46 /* Theme.swift */; };
+		8094838A1BDC716900F69A46 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809483881BDC710C00F69A46 /* Theme.swift */; };
+		8094838C1BDC9E9A00F69A46 /* ColorDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8094838B1BDC9E9A00F69A46 /* ColorDescriptor.swift */; };
+		8094838D1BDC9EBC00F69A46 /* ColorDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8094838B1BDC9E9A00F69A46 /* ColorDescriptor.swift */; };
+		8094838F1BDC9EE800F69A46 /* SoundFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8094838E1BDC9EE800F69A46 /* SoundFile.swift */; };
+		809483901BDC9EE800F69A46 /* SoundFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8094838E1BDC9EE800F69A46 /* SoundFile.swift */; };
+		809483921BDC9F4700F69A46 /* CellConfiguring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809483911BDC9F4700F69A46 /* CellConfiguring.swift */; };
+		809483931BDC9F4700F69A46 /* CellConfiguring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809483911BDC9F4700F69A46 /* CellConfiguring.swift */; };
+		809483951BDCA0D500F69A46 /* UIView+Nib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809483941BDCA0D500F69A46 /* UIView+Nib.swift */; };
+		809483961BDCA0D500F69A46 /* UIView+Nib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809483941BDCA0D500F69A46 /* UIView+Nib.swift */; };
+		809483981BDDD16700F69A46 /* Comparables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809483971BDDD16700F69A46 /* Comparables.swift */; };
+		809483991BDDD16A00F69A46 /* Comparables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809483971BDDD16700F69A46 /* Comparables.swift */; };
+		8094839B1BDDD1C500F69A46 /* Bag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8094839A1BDDD1C500F69A46 /* Bag.swift */; };
+		8094839C1BDDD1C800F69A46 /* Bag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8094839A1BDDD1C500F69A46 /* Bag.swift */; };
+		8094839E1BDDD33B00F69A46 /* attributions.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8094839D1BDDD33B00F69A46 /* attributions.yml */; };
+		8094839F1BDDD78000F69A46 /* attributions.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8094839D1BDDD33B00F69A46 /* attributions.yml */; };
+		809A6EF11A27802A00F1D6EC /* success_tone.wav in Resources */ = {isa = PBXBuildFile; fileRef = 809A6EF01A27802A00F1D6EC /* success_tone.wav */; };
+		809A6EF31A27806C00F1D6EC /* error_tone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 809A6EF21A27806C00F1D6EC /* error_tone.mp3 */; };
+		809A6EF81A2787F500F1D6EC /* ProfanityFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A6EF71A2787F500F1D6EC /* ProfanityFilter.swift */; };
+		809A6EFE1A27AEE700F1D6EC /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A6EFC1A27AEE700F1D6EC /* ContactViewController.swift */; };
+		809A6EFF1A27AEE700F1D6EC /* ContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 809A6EFD1A27AEE700F1D6EC /* ContactViewController.xib */; };
+		809A6F031A27C05A00F1D6EC /* AttributionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A6F011A27C05A00F1D6EC /* AttributionViewController.swift */; };
+		809A6F041A27C05A00F1D6EC /* AttributionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 809A6F021A27C05A00F1D6EC /* AttributionViewController.xib */; };
+		80ADC83F1A255FBE0063F72D /* ChristmasCheerNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ADC83E1A255FBE0063F72D /* ChristmasCheerNotification.swift */; };
+		80BB9C641A2771EA00682931 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80BB9C631A2771EA00682931 /* AVFoundation.framework */; };
+		80D0C6E91A4E5380001953C6 /* SnowFallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D0C6E81A4E5380001953C6 /* SnowFallView.swift */; };
+		80D0C6EA1A4E5380001953C6 /* SnowFallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D0C6E81A4E5380001953C6 /* SnowFallView.swift */; };
+		80D6294A1BE427FE000F2E2B /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D629491BE427FE000F2E2B /* Feedback.swift */; };
+		80D6294B1BE427FE000F2E2B /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D629491BE427FE000F2E2B /* Feedback.swift */; };
+		80D957391A23E95800173B2B /* christmasCrackFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 80D957381A23E95800173B2B /* christmasCrackFont.ttf */; };
+		80D957411A242D3700173B2B /* MenuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D9573F1A242D3700173B2B /* MenuViewCell.swift */; };
+		80D957421A242D3700173B2B /* MenuViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D957401A242D3700173B2B /* MenuViewCell.xib */; };
+		80E20D291A2665A60094D629 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E20D281A2665A60094D629 /* NotificationManager.swift */; };
+		80E20D2D1A266EB50094D629 /* PermissionsRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E20D2B1A266EB50094D629 /* PermissionsRequestViewController.swift */; };
+		80E20D2E1A266EB50094D629 /* PermissionsRequestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80E20D2C1A266EB50094D629 /* PermissionsRequestViewController.xib */; };
+		80E20D3C1A26D14F0094D629 /* PJDoubleActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 80E20D351A26D14F0094D629 /* PJDoubleActivityIndicator.m */; };
+		80E20D3D1A26D14F0094D629 /* PJSingleActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 80E20D371A26D14F0094D629 /* PJSingleActivityIndicator.m */; };
+		80E20D3E1A26D14F0094D629 /* PJProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 80E20D3A1A26D14F0094D629 /* PJProgressHUD.m */; };
+		80E20D3F1A26D14F0094D629 /* PJProgressHUD.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80E20D3B1A26D14F0094D629 /* PJProgressHUD.xib */; };
+		80E20D421A26E5770094D629 /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E20D411A26E5770094D629 /* SCLAlertView.swift */; };
+		B87FBD60C177F09F84C02B98 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3B7ABE0BDED2A70AE7A2259 /* Pods.framework */; };
+		D8A9740E3901BE8E26272972 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3B7ABE0BDED2A70AE7A2259 /* Pods.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		80723B9F1A1FCFA70027EBDA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 80723B811A1FCFA70027EBDA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 80723B881A1FCFA70027EBDA;
+			remoteInfo = ChristmasCheer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		800819A61A22E41C005B0021 /* SlidingMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingMenuViewController.swift; sourceTree = "<group>"; };
+		800819A91A22E440005B0021 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		800819AA1A22E440005B0021 /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
+		800819B21A22E681005B0021 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = UI/HomeViewController/HomeViewController.swift; sourceTree = "<group>"; };
+		800819B31A22E681005B0021 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeViewController.xib; path = UI/HomeViewController/HomeViewController.xib; sourceTree = "<group>"; };
+		803942A81A219E43006BF273 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = Models/LocationManager.swift; sourceTree = "<group>"; };
+		803942AF1A22D2BE006BF273 /* sleighbells.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sleighbells.wav; sourceTree = "<group>"; };
+		803942B01A22D2BE006BF273 /* merry_christmas_darling.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = merry_christmas_darling.wav; sourceTree = "<group>"; };
+		803942B41A22D62F006BF273 /* santa_laugh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = santa_laugh.wav; sourceTree = "<group>"; };
+		803942B61A22D63B006BF273 /* merry_christmas.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = merry_christmas.mp3; sourceTree = "<group>"; };
+		805D04B11BDFEC18007D9070 /* String+Substrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Substrings.swift"; sourceTree = "<group>"; };
+		805D04B31BDFF40D007D9070 /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		806A69491A2123FF00DBAC27 /* ApplicationSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApplicationSettings.swift; path = Models/ApplicationSettings.swift; sourceTree = "<group>"; };
+		806A694B1A21242800DBAC27 /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParseHelper.swift; path = Models/ParseHelper.swift; sourceTree = "<group>"; };
+		806A694F1A21247A00DBAC27 /* NameEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NameEntryViewController.swift; path = UI/NameEntry/NameEntryViewController.swift; sourceTree = "<group>"; };
+		806A69501A21247A00DBAC27 /* NameEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NameEntryViewController.xib; path = UI/NameEntry/NameEntryViewController.xib; sourceTree = "<group>"; };
+		806A69541A21374C00DBAC27 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Extensions/Extensions.swift; sourceTree = "<group>"; };
+		80723B891A1FCFA70027EBDA /* ChristmasCheer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChristmasCheer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		80723B8D1A1FCFA70027EBDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		80723B8E1A1FCFA70027EBDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		80723B951A1FCFA70027EBDA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		80723B9E1A1FCFA70027EBDA /* ChristmasCheerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChristmasCheerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		80723BA31A1FCFA70027EBDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		80723BA41A1FCFA70027EBDA /* ChristmasCheerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChristmasCheerTests.swift; sourceTree = "<group>"; };
+		80723BAE1A1FD1120027EBDA /* ChristmasCheer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ChristmasCheer-Bridging-Header.h"; sourceTree = "<group>"; };
+		808F270A1A337C5D001A8CE3 /* ChristmasCheerDevelopment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChristmasCheerDevelopment.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		808F270B1A337C5E001A8CE3 /* ChristmasCheerDevelopment-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ChristmasCheerDevelopment-Info.plist"; path = "/Users/loganwright/Dropbox/Programming/xCode/ChristmasCheer/ChristmasCheerDevelopment-Info.plist"; sourceTree = "<absolute>"; };
+		808F270C1A338F0D001A8CE3 /* EnvironmentVariables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnvironmentVariables.h; sourceTree = "<group>"; };
+		808F270D1A338F0D001A8CE3 /* EnvironmentVariables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnvironmentVariables.m; sourceTree = "<group>"; };
+		809483821BDC456400F69A46 /* Qu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Qu.swift; path = Helpers/Qu.swift; sourceTree = "<group>"; };
+		809483881BDC710C00F69A46 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Theme.swift; path = UI/Theme.swift; sourceTree = "<group>"; };
+		8094838B1BDC9E9A00F69A46 /* ColorDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorDescriptor.swift; sourceTree = "<group>"; };
+		8094838E1BDC9EE800F69A46 /* SoundFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundFile.swift; sourceTree = "<group>"; };
+		809483911BDC9F4700F69A46 /* CellConfiguring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CellConfiguring.swift; path = Helpers/CellConfiguring.swift; sourceTree = "<group>"; };
+		809483941BDCA0D500F69A46 /* UIView+Nib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Nib.swift"; sourceTree = "<group>"; };
+		809483971BDDD16700F69A46 /* Comparables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comparables.swift; sourceTree = "<group>"; };
+		8094839A1BDDD1C500F69A46 /* Bag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bag.swift; sourceTree = "<group>"; };
+		8094839D1BDDD33B00F69A46 /* attributions.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = attributions.yml; sourceTree = "<group>"; };
+		809A6EF01A27802A00F1D6EC /* success_tone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success_tone.wav; sourceTree = "<group>"; };
+		809A6EF21A27806C00F1D6EC /* error_tone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = error_tone.mp3; sourceTree = "<group>"; };
+		809A6EF71A2787F500F1D6EC /* ProfanityFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfanityFilter.swift; path = Models/ProfanityFilter.swift; sourceTree = "<group>"; };
+		809A6EFC1A27AEE700F1D6EC /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactViewController.swift; path = UI/ContactViewController/ContactViewController.swift; sourceTree = "<group>"; };
+		809A6EFD1A27AEE700F1D6EC /* ContactViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ContactViewController.xib; path = UI/ContactViewController/ContactViewController.xib; sourceTree = "<group>"; };
+		809A6F011A27C05A00F1D6EC /* AttributionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AttributionViewController.swift; path = UI/AttributionViewController/AttributionViewController.swift; sourceTree = "<group>"; };
+		809A6F021A27C05A00F1D6EC /* AttributionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AttributionViewController.xib; path = UI/AttributionViewController/AttributionViewController.xib; sourceTree = "<group>"; };
+		80ADC83E1A255FBE0063F72D /* ChristmasCheerNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChristmasCheerNotification.swift; path = Models/ChristmasCheerNotification.swift; sourceTree = "<group>"; };
+		80BB9C631A2771EA00682931 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		80D0C6E81A4E5380001953C6 /* SnowFallView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowFallView.swift; sourceTree = "<group>"; };
+		80D629491BE427FE000F2E2B /* Feedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Feedback.swift; path = Models/Feedback.swift; sourceTree = "<group>"; };
+		80D957381A23E95800173B2B /* christmasCrackFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = christmasCrackFont.ttf; sourceTree = "<group>"; };
+		80D9573F1A242D3700173B2B /* MenuViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuViewCell.swift; path = Cell/MenuViewCell.swift; sourceTree = "<group>"; };
+		80D957401A242D3700173B2B /* MenuViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MenuViewCell.xib; path = Cell/MenuViewCell.xib; sourceTree = "<group>"; };
+		80E20D281A2665A60094D629 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationManager.swift; path = Models/NotificationManager.swift; sourceTree = "<group>"; };
+		80E20D2B1A266EB50094D629 /* PermissionsRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PermissionsRequestViewController.swift; path = UI/PermissionsRequestViewController/PermissionsRequestViewController.swift; sourceTree = "<group>"; };
+		80E20D2C1A266EB50094D629 /* PermissionsRequestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PermissionsRequestViewController.xib; path = UI/PermissionsRequestViewController/PermissionsRequestViewController.xib; sourceTree = "<group>"; };
+		80E20D341A26D14F0094D629 /* PJDoubleActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJDoubleActivityIndicator.h; sourceTree = "<group>"; };
+		80E20D351A26D14F0094D629 /* PJDoubleActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJDoubleActivityIndicator.m; sourceTree = "<group>"; };
+		80E20D361A26D14F0094D629 /* PJSingleActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJSingleActivityIndicator.h; sourceTree = "<group>"; };
+		80E20D371A26D14F0094D629 /* PJSingleActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJSingleActivityIndicator.m; sourceTree = "<group>"; };
+		80E20D391A26D14F0094D629 /* PJProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJProgressHUD.h; sourceTree = "<group>"; };
+		80E20D3A1A26D14F0094D629 /* PJProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJProgressHUD.m; sourceTree = "<group>"; };
+		80E20D3B1A26D14F0094D629 /* PJProgressHUD.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PJProgressHUD.xib; sourceTree = "<group>"; };
+		80E20D411A26E5770094D629 /* SCLAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCLAlertView.swift; sourceTree = "<group>"; };
+		A2CF9D1D870AE3E6F028BBA8 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		BFF6350676D146F99EC29D4D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		C3B7ABE0BDED2A70AE7A2259 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		80723B861A1FCFA70027EBDA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80BB9C641A2771EA00682931 /* AVFoundation.framework in Frameworks */,
+				B87FBD60C177F09F84C02B98 /* Pods.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		80723B9B1A1FCFA70027EBDA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		808F26F21A337C5D001A8CE3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				808F26F31A337C5D001A8CE3 /* AVFoundation.framework in Frameworks */,
+				808F26F41A337C5D001A8CE3 /* (null) in Frameworks */,
+				D8A9740E3901BE8E26272972 /* Pods.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		35944E424158B9D4DE628975 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				80BB9C631A2771EA00682931 /* AVFoundation.framework */,
+				C3B7ABE0BDED2A70AE7A2259 /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		57F68D4C85843EB671D5D499 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A2CF9D1D870AE3E6F028BBA8 /* Pods.debug.xcconfig */,
+				BFF6350676D146F99EC29D4D /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		800819A51A22E41C005B0021 /* SlidingMenuController */ = {
+			isa = PBXGroup;
+			children = (
+				800819A61A22E41C005B0021 /* SlidingMenuViewController.swift */,
+			);
+			path = SlidingMenuController;
+			sourceTree = "<group>";
+		};
+		800819A81A22E440005B0021 /* MenuViewController */ = {
+			isa = PBXGroup;
+			children = (
+				80D9573E1A242D1100173B2B /* Cell */,
+				800819A91A22E440005B0021 /* MenuViewController.swift */,
+				800819AA1A22E440005B0021 /* MenuViewController.xib */,
+			);
+			path = MenuViewController;
+			sourceTree = "<group>";
+		};
+		803942AA1A22CD07006BF273 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				809A6EEF1A27801A00F1D6EC /* InAppSounds */,
+				80D957371A23E93E00173B2B /* Fonts */,
+				803942AB1A22CD0E006BF273 /* NotificationSounds */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		803942AB1A22CD0E006BF273 /* NotificationSounds */ = {
+			isa = PBXGroup;
+			children = (
+				803942B61A22D63B006BF273 /* merry_christmas.mp3 */,
+				803942B41A22D62F006BF273 /* santa_laugh.wav */,
+				803942AF1A22D2BE006BF273 /* sleighbells.wav */,
+				803942B01A22D2BE006BF273 /* merry_christmas_darling.wav */,
+			);
+			name = NotificationSounds;
+			sourceTree = "<group>";
+		};
+		806A69481A2123E700DBAC27 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				806A69491A2123FF00DBAC27 /* ApplicationSettings.swift */,
+				806A694B1A21242800DBAC27 /* ParseHelper.swift */,
+				803942A81A219E43006BF273 /* LocationManager.swift */,
+				80ADC83E1A255FBE0063F72D /* ChristmasCheerNotification.swift */,
+				80E20D281A2665A60094D629 /* NotificationManager.swift */,
+				809A6EF71A2787F500F1D6EC /* ProfanityFilter.swift */,
+				80D629491BE427FE000F2E2B /* Feedback.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		806A694D1A21245100DBAC27 /* NameEntry */ = {
+			isa = PBXGroup;
+			children = (
+				806A694F1A21247A00DBAC27 /* NameEntryViewController.swift */,
+				806A69501A21247A00DBAC27 /* NameEntryViewController.xib */,
+			);
+			name = NameEntry;
+			sourceTree = "<group>";
+		};
+		806A694E1A21245900DBAC27 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				809483881BDC710C00F69A46 /* Theme.swift */,
+				80D0C6E81A4E5380001953C6 /* SnowFallView.swift */,
+				809A6F001A27C03E00F1D6EC /* AttributionViewController */,
+				809A6EFB1A27AEC400F1D6EC /* ContactViewController */,
+				80E20D401A26E5770094D629 /* SCAlertView */,
+				80E20D331A26D14F0094D629 /* PJActivityIndicator */,
+				80E20D381A26D14F0094D629 /* ProgressHUD */,
+				80E20D2A1A266E6D0094D629 /* PermissionsRequestViewController */,
+				800819A81A22E440005B0021 /* MenuViewController */,
+				800819A51A22E41C005B0021 /* SlidingMenuController */,
+				806A694D1A21245100DBAC27 /* NameEntry */,
+				800819B21A22E681005B0021 /* HomeViewController.swift */,
+				800819B31A22E681005B0021 /* HomeViewController.xib */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		806A69531A21372F00DBAC27 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				806A69541A21374C00DBAC27 /* Extensions.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		80723B801A1FCFA70027EBDA = {
+			isa = PBXGroup;
+			children = (
+				80723B8B1A1FCFA70027EBDA /* ChristmasCheer */,
+				80723BA11A1FCFA70027EBDA /* ChristmasCheerTests */,
+				80723B8A1A1FCFA70027EBDA /* Products */,
+				57F68D4C85843EB671D5D499 /* Pods */,
+				35944E424158B9D4DE628975 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		80723B8A1A1FCFA70027EBDA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				80723B891A1FCFA70027EBDA /* ChristmasCheer.app */,
+				80723B9E1A1FCFA70027EBDA /* ChristmasCheerTests.xctest */,
+				808F270A1A337C5D001A8CE3 /* ChristmasCheerDevelopment.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		80723B8B1A1FCFA70027EBDA /* ChristmasCheer */ = {
+			isa = PBXGroup;
+			children = (
+				809483811BDC455600F69A46 /* Helpers */,
+				806A69531A21372F00DBAC27 /* Extensions */,
+				806A694E1A21245900DBAC27 /* UI */,
+				806A69481A2123E700DBAC27 /* Models */,
+				80723B8E1A1FCFA70027EBDA /* AppDelegate.swift */,
+				80723B8C1A1FCFA70027EBDA /* Supporting Files */,
+				80723B951A1FCFA70027EBDA /* Images.xcassets */,
+				803942AA1A22CD07006BF273 /* Resources */,
+			);
+			path = ChristmasCheer;
+			sourceTree = "<group>";
+		};
+		80723B8C1A1FCFA70027EBDA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				808F270B1A337C5E001A8CE3 /* ChristmasCheerDevelopment-Info.plist */,
+				80723B8D1A1FCFA70027EBDA /* Info.plist */,
+				80723BAE1A1FD1120027EBDA /* ChristmasCheer-Bridging-Header.h */,
+				808F270C1A338F0D001A8CE3 /* EnvironmentVariables.h */,
+				808F270D1A338F0D001A8CE3 /* EnvironmentVariables.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		80723BA11A1FCFA70027EBDA /* ChristmasCheerTests */ = {
+			isa = PBXGroup;
+			children = (
+				80723BA41A1FCFA70027EBDA /* ChristmasCheerTests.swift */,
+				80723BA21A1FCFA70027EBDA /* Supporting Files */,
+			);
+			path = ChristmasCheerTests;
+			sourceTree = "<group>";
+		};
+		80723BA21A1FCFA70027EBDA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				80723BA31A1FCFA70027EBDA /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		809483811BDC455600F69A46 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				809483821BDC456400F69A46 /* Qu.swift */,
+				8094838B1BDC9E9A00F69A46 /* ColorDescriptor.swift */,
+				8094838E1BDC9EE800F69A46 /* SoundFile.swift */,
+				809483911BDC9F4700F69A46 /* CellConfiguring.swift */,
+				809483941BDCA0D500F69A46 /* UIView+Nib.swift */,
+				809483971BDDD16700F69A46 /* Comparables.swift */,
+				8094839A1BDDD1C500F69A46 /* Bag.swift */,
+				805D04B11BDFEC18007D9070 /* String+Substrings.swift */,
+				805D04B31BDFF40D007D9070 /* UIColor+Hex.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		809A6EEF1A27801A00F1D6EC /* InAppSounds */ = {
+			isa = PBXGroup;
+			children = (
+				809A6EF21A27806C00F1D6EC /* error_tone.mp3 */,
+				809A6EF01A27802A00F1D6EC /* success_tone.wav */,
+			);
+			name = InAppSounds;
+			sourceTree = "<group>";
+		};
+		809A6EFB1A27AEC400F1D6EC /* ContactViewController */ = {
+			isa = PBXGroup;
+			children = (
+				809A6EFC1A27AEE700F1D6EC /* ContactViewController.swift */,
+				809A6EFD1A27AEE700F1D6EC /* ContactViewController.xib */,
+			);
+			name = ContactViewController;
+			sourceTree = "<group>";
+		};
+		809A6F001A27C03E00F1D6EC /* AttributionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				809A6F011A27C05A00F1D6EC /* AttributionViewController.swift */,
+				809A6F021A27C05A00F1D6EC /* AttributionViewController.xib */,
+				8094839D1BDDD33B00F69A46 /* attributions.yml */,
+			);
+			name = AttributionViewController;
+			sourceTree = "<group>";
+		};
+		80D957371A23E93E00173B2B /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				80D957381A23E95800173B2B /* christmasCrackFont.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
+		80D9573E1A242D1100173B2B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				80D9573F1A242D3700173B2B /* MenuViewCell.swift */,
+				80D957401A242D3700173B2B /* MenuViewCell.xib */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		80E20D2A1A266E6D0094D629 /* PermissionsRequestViewController */ = {
+			isa = PBXGroup;
+			children = (
+				80E20D2B1A266EB50094D629 /* PermissionsRequestViewController.swift */,
+				80E20D2C1A266EB50094D629 /* PermissionsRequestViewController.xib */,
+			);
+			name = PermissionsRequestViewController;
+			sourceTree = "<group>";
+		};
+		80E20D331A26D14F0094D629 /* PJActivityIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				80E20D341A26D14F0094D629 /* PJDoubleActivityIndicator.h */,
+				80E20D351A26D14F0094D629 /* PJDoubleActivityIndicator.m */,
+				80E20D361A26D14F0094D629 /* PJSingleActivityIndicator.h */,
+				80E20D371A26D14F0094D629 /* PJSingleActivityIndicator.m */,
+			);
+			path = PJActivityIndicator;
+			sourceTree = "<group>";
+		};
+		80E20D381A26D14F0094D629 /* ProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				80E20D391A26D14F0094D629 /* PJProgressHUD.h */,
+				80E20D3A1A26D14F0094D629 /* PJProgressHUD.m */,
+				80E20D3B1A26D14F0094D629 /* PJProgressHUD.xib */,
+			);
+			path = ProgressHUD;
+			sourceTree = "<group>";
+		};
+		80E20D401A26E5770094D629 /* SCAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				80E20D411A26E5770094D629 /* SCLAlertView.swift */,
+			);
+			path = SCAlertView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		80723B881A1FCFA70027EBDA /* ChristmasCheer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 80723BA81A1FCFA70027EBDA /* Build configuration list for PBXNativeTarget "ChristmasCheer" */;
+			buildPhases = (
+				DF6441242FFD116BD2A8E1BC /* Check Pods Manifest.lock */,
+				80723B851A1FCFA70027EBDA /* Sources */,
+				80723B861A1FCFA70027EBDA /* Frameworks */,
+				80723B871A1FCFA70027EBDA /* Resources */,
+				36462A5C5D6DFB3C1BE3F652 /* Copy Pods Resources */,
+				26A7633B90F59ABACE7D6D05 /* Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ChristmasCheer;
+			productName = ChristmasCheer;
+			productReference = 80723B891A1FCFA70027EBDA /* ChristmasCheer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		80723B9D1A1FCFA70027EBDA /* ChristmasCheerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 80723BAB1A1FCFA70027EBDA /* Build configuration list for PBXNativeTarget "ChristmasCheerTests" */;
+			buildPhases = (
+				80723B9A1A1FCFA70027EBDA /* Sources */,
+				80723B9B1A1FCFA70027EBDA /* Frameworks */,
+				80723B9C1A1FCFA70027EBDA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				80723BA01A1FCFA70027EBDA /* PBXTargetDependency */,
+			);
+			name = ChristmasCheerTests;
+			productName = ChristmasCheerTests;
+			productReference = 80723B9E1A1FCFA70027EBDA /* ChristmasCheerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		808F26DB1A337C5D001A8CE3 /* ChristmasCheerDevelopment */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 808F27071A337C5D001A8CE3 /* Build configuration list for PBXNativeTarget "ChristmasCheerDevelopment" */;
+			buildPhases = (
+				808F26DC1A337C5D001A8CE3 /* Check Pods Manifest.lock */,
+				808F26DD1A337C5D001A8CE3 /* Sources */,
+				808F26F21A337C5D001A8CE3 /* Frameworks */,
+				808F26F51A337C5D001A8CE3 /* Resources */,
+				808F27061A337C5D001A8CE3 /* Copy Pods Resources */,
+				9F754B4707277440E7089647 /* Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ChristmasCheerDevelopment;
+			productName = ChristmasCheer;
+			productReference = 808F270A1A337C5D001A8CE3 /* ChristmasCheerDevelopment.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		80723B811A1FCFA70027EBDA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = lowriDevs;
+				TargetAttributes = {
+					80723B881A1FCFA70027EBDA = {
+						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = Q32LXKR624;
+					};
+					80723B9D1A1FCFA70027EBDA = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = 80723B881A1FCFA70027EBDA;
+					};
+				};
+			};
+			buildConfigurationList = 80723B841A1FCFA70027EBDA /* Build configuration list for PBXProject "ChristmasCheer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 80723B801A1FCFA70027EBDA;
+			productRefGroup = 80723B8A1A1FCFA70027EBDA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				80723B881A1FCFA70027EBDA /* ChristmasCheer */,
+				808F26DB1A337C5D001A8CE3 /* ChristmasCheerDevelopment */,
+				80723B9D1A1FCFA70027EBDA /* ChristmasCheerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		80723B871A1FCFA70027EBDA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				803942B31A22D2BE006BF273 /* merry_christmas_darling.wav in Resources */,
+				80E20D2E1A266EB50094D629 /* PermissionsRequestViewController.xib in Resources */,
+				80E20D3F1A26D14F0094D629 /* PJProgressHUD.xib in Resources */,
+				803942B51A22D62F006BF273 /* santa_laugh.wav in Resources */,
+				809A6EF31A27806C00F1D6EC /* error_tone.mp3 in Resources */,
+				809A6EFF1A27AEE700F1D6EC /* ContactViewController.xib in Resources */,
+				803942B21A22D2BE006BF273 /* sleighbells.wav in Resources */,
+				800819AC1A22E440005B0021 /* MenuViewController.xib in Resources */,
+				809A6F041A27C05A00F1D6EC /* AttributionViewController.xib in Resources */,
+				803942B71A22D63B006BF273 /* merry_christmas.mp3 in Resources */,
+				800819B51A22E681005B0021 /* HomeViewController.xib in Resources */,
+				8094839E1BDDD33B00F69A46 /* attributions.yml in Resources */,
+				80D957391A23E95800173B2B /* christmasCrackFont.ttf in Resources */,
+				806A69521A21247A00DBAC27 /* NameEntryViewController.xib in Resources */,
+				80723B961A1FCFA70027EBDA /* Images.xcassets in Resources */,
+				809A6EF11A27802A00F1D6EC /* success_tone.wav in Resources */,
+				80D957421A242D3700173B2B /* MenuViewCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		80723B9C1A1FCFA70027EBDA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		808F26F51A337C5D001A8CE3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8094839F1BDDD78000F69A46 /* attributions.yml in Resources */,
+				808F26F61A337C5D001A8CE3 /* merry_christmas_darling.wav in Resources */,
+				808F26F71A337C5D001A8CE3 /* PermissionsRequestViewController.xib in Resources */,
+				808F26F81A337C5D001A8CE3 /* PJProgressHUD.xib in Resources */,
+				808F26F91A337C5D001A8CE3 /* santa_laugh.wav in Resources */,
+				808F26FA1A337C5D001A8CE3 /* error_tone.mp3 in Resources */,
+				808F26FB1A337C5D001A8CE3 /* ContactViewController.xib in Resources */,
+				808F26FC1A337C5D001A8CE3 /* sleighbells.wav in Resources */,
+				808F26FD1A337C5D001A8CE3 /* MenuViewController.xib in Resources */,
+				808F26FE1A337C5D001A8CE3 /* AttributionViewController.xib in Resources */,
+				808F26FF1A337C5D001A8CE3 /* merry_christmas.mp3 in Resources */,
+				808F27001A337C5D001A8CE3 /* HomeViewController.xib in Resources */,
+				808F27011A337C5D001A8CE3 /* christmasCrackFont.ttf in Resources */,
+				808F27021A337C5D001A8CE3 /* NameEntryViewController.xib in Resources */,
+				808F27031A337C5D001A8CE3 /* Images.xcassets in Resources */,
+				808F27041A337C5D001A8CE3 /* success_tone.wav in Resources */,
+				808F27051A337C5D001A8CE3 /* MenuViewCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		26A7633B90F59ABACE7D6D05 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		36462A5C5D6DFB3C1BE3F652 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		808F26DC1A337C5D001A8CE3 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		808F27061A337C5D001A8CE3 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9F754B4707277440E7089647 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DF6441242FFD116BD2A8E1BC /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		80723B851A1FCFA70027EBDA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				800819A71A22E41C005B0021 /* SlidingMenuViewController.swift in Sources */,
+				8094838F1BDC9EE800F69A46 /* SoundFile.swift in Sources */,
+				806A694A1A2123FF00DBAC27 /* ApplicationSettings.swift in Sources */,
+				80D6294A1BE427FE000F2E2B /* Feedback.swift in Sources */,
+				8094838C1BDC9E9A00F69A46 /* ColorDescriptor.swift in Sources */,
+				80ADC83F1A255FBE0063F72D /* ChristmasCheerNotification.swift in Sources */,
+				809A6EF81A2787F500F1D6EC /* ProfanityFilter.swift in Sources */,
+				80E20D2D1A266EB50094D629 /* PermissionsRequestViewController.swift in Sources */,
+				80E20D421A26E5770094D629 /* SCLAlertView.swift in Sources */,
+				806A69551A21374C00DBAC27 /* Extensions.swift in Sources */,
+				806A69511A21247A00DBAC27 /* NameEntryViewController.swift in Sources */,
+				8094839B1BDDD1C500F69A46 /* Bag.swift in Sources */,
+				80E20D3E1A26D14F0094D629 /* PJProgressHUD.m in Sources */,
+				809A6EFE1A27AEE700F1D6EC /* ContactViewController.swift in Sources */,
+				800819AB1A22E440005B0021 /* MenuViewController.swift in Sources */,
+				809483891BDC710C00F69A46 /* Theme.swift in Sources */,
+				80E20D291A2665A60094D629 /* NotificationManager.swift in Sources */,
+				809A6F031A27C05A00F1D6EC /* AttributionViewController.swift in Sources */,
+				800819B41A22E681005B0021 /* HomeViewController.swift in Sources */,
+				805D04B21BDFEC18007D9070 /* String+Substrings.swift in Sources */,
+				809483981BDDD16700F69A46 /* Comparables.swift in Sources */,
+				803942A91A219E43006BF273 /* LocationManager.swift in Sources */,
+				80723B8F1A1FCFA70027EBDA /* AppDelegate.swift in Sources */,
+				809483831BDC456400F69A46 /* Qu.swift in Sources */,
+				809483951BDCA0D500F69A46 /* UIView+Nib.swift in Sources */,
+				80E20D3D1A26D14F0094D629 /* PJSingleActivityIndicator.m in Sources */,
+				805D04B41BDFF40D007D9070 /* UIColor+Hex.swift in Sources */,
+				80E20D3C1A26D14F0094D629 /* PJDoubleActivityIndicator.m in Sources */,
+				806A694C1A21242800DBAC27 /* ParseHelper.swift in Sources */,
+				808F270E1A338F0D001A8CE3 /* EnvironmentVariables.m in Sources */,
+				809483921BDC9F4700F69A46 /* CellConfiguring.swift in Sources */,
+				80D0C6E91A4E5380001953C6 /* SnowFallView.swift in Sources */,
+				80D957411A242D3700173B2B /* MenuViewCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		80723B9A1A1FCFA70027EBDA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80723BA51A1FCFA70027EBDA /* ChristmasCheerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		808F26DD1A337C5D001A8CE3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				808F26DE1A337C5D001A8CE3 /* SlidingMenuViewController.swift in Sources */,
+				809483901BDC9EE800F69A46 /* SoundFile.swift in Sources */,
+				808F26DF1A337C5D001A8CE3 /* ApplicationSettings.swift in Sources */,
+				80D6294B1BE427FE000F2E2B /* Feedback.swift in Sources */,
+				8094838D1BDC9EBC00F69A46 /* ColorDescriptor.swift in Sources */,
+				808F26E01A337C5D001A8CE3 /* ChristmasCheerNotification.swift in Sources */,
+				808F26E11A337C5D001A8CE3 /* ProfanityFilter.swift in Sources */,
+				808F26E21A337C5D001A8CE3 /* PermissionsRequestViewController.swift in Sources */,
+				808F26E31A337C5D001A8CE3 /* SCLAlertView.swift in Sources */,
+				805D04B61BDFF412007D9070 /* String+Substrings.swift in Sources */,
+				808F26E41A337C5D001A8CE3 /* Extensions.swift in Sources */,
+				808F26E51A337C5D001A8CE3 /* NameEntryViewController.swift in Sources */,
+				8094839C1BDDD1C800F69A46 /* Bag.swift in Sources */,
+				808F26E61A337C5D001A8CE3 /* PJProgressHUD.m in Sources */,
+				805D04B51BDFF410007D9070 /* UIColor+Hex.swift in Sources */,
+				808F26E71A337C5D001A8CE3 /* ContactViewController.swift in Sources */,
+				808F26E81A337C5D001A8CE3 /* MenuViewController.swift in Sources */,
+				8094838A1BDC716900F69A46 /* Theme.swift in Sources */,
+				808F26E91A337C5D001A8CE3 /* NotificationManager.swift in Sources */,
+				808F26EA1A337C5D001A8CE3 /* AttributionViewController.swift in Sources */,
+				808F26EB1A337C5D001A8CE3 /* HomeViewController.swift in Sources */,
+				809483991BDDD16A00F69A46 /* Comparables.swift in Sources */,
+				808F26EC1A337C5D001A8CE3 /* LocationManager.swift in Sources */,
+				808F26ED1A337C5D001A8CE3 /* AppDelegate.swift in Sources */,
+				809483841BDC460300F69A46 /* Qu.swift in Sources */,
+				809483961BDCA0D500F69A46 /* UIView+Nib.swift in Sources */,
+				808F26EE1A337C5D001A8CE3 /* PJSingleActivityIndicator.m in Sources */,
+				808F26EF1A337C5D001A8CE3 /* PJDoubleActivityIndicator.m in Sources */,
+				808F26F01A337C5D001A8CE3 /* ParseHelper.swift in Sources */,
+				808F270F1A339029001A8CE3 /* EnvironmentVariables.m in Sources */,
+				809483931BDC9F4700F69A46 /* CellConfiguring.swift in Sources */,
+				80D0C6EA1A4E5380001953C6 /* SnowFallView.swift in Sources */,
+				808F26F11A337C5D001A8CE3 /* MenuViewCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		80723BA01A1FCFA70027EBDA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 80723B881A1FCFA70027EBDA /* ChristmasCheer */;
+			targetProxy = 80723B9F1A1FCFA70027EBDA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		80723BA61A1FCFA70027EBDA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "094423fc-008e-435c-836e-14150b893b6b";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		80723BA71A1FCFA70027EBDA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "094423fc-008e-435c-836e-14150b893b6b";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		80723BA91A1FCFA70027EBDA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2CF9D1D870AE3E6F028BBA8 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				ENABLE_BITCODE = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+				);
+				INFOPLIST_FILE = ChristmasCheer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.loganwright.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "094423fc-008e-435c-836e-14150b893b6b";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/ChristmasCheer/ChristmasCheer-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		80723BAA1A1FCFA70027EBDA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BFF6350676D146F99EC29D4D /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				ENABLE_BITCODE = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+				);
+				INFOPLIST_FILE = ChristmasCheer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.loganwright.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "094423fc-008e-435c-836e-14150b893b6b";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/ChristmasCheer/ChristmasCheer-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		80723BAC1A1FCFA70027EBDA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ChristmasCheerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.loganwright.ChristmasCheer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChristmasCheer.app/ChristmasCheer";
+			};
+			name = Debug;
+		};
+		80723BAD1A1FCFA70027EBDA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ChristmasCheerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.loganwright.ChristmasCheer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChristmasCheer.app/ChristmasCheer";
+			};
+			name = Release;
+		};
+		808F27081A337C5D001A8CE3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2CF9D1D870AE3E6F028BBA8 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Logan Wright (CYZ262LR3B)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Logan Wright (CYZ262LR3B)";
+				ENABLE_BITCODE = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEVELOPMENT_TARGET=1",
+					"COCOAPODS=1",
+				);
+				INFOPLIST_FILE = "ChristmasCheerDevelopment-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = io.loganwright.ChristmasCheer;
+				PRODUCT_MODULE_NAME = ChristmasCheerDevelopment;
+				PRODUCT_NAME = ChristmasCheerDevelopment;
+				PROVISIONING_PROFILE = "785b57e1-586d-4f55-8693-556fbcad1ee7";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/ChristmasCheer/ChristmasCheer-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		808F27091A337C5D001A8CE3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BFF6350676D146F99EC29D4D /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Logan Wright (CYZ262LR3B)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Logan Wright (CYZ262LR3B)";
+				ENABLE_BITCODE = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"DEVELOPMENT_TARGET=1",
+				);
+				INFOPLIST_FILE = "ChristmasCheerDevelopment-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = io.loganwright.ChristmasCheer;
+				PRODUCT_MODULE_NAME = ChristmasCheerDevelopment;
+				PRODUCT_NAME = ChristmasCheerDevelopment;
+				PROVISIONING_PROFILE = "785b57e1-586d-4f55-8693-556fbcad1ee7";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/ChristmasCheer/ChristmasCheer-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		80723B841A1FCFA70027EBDA /* Build configuration list for PBXProject "ChristmasCheer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				80723BA61A1FCFA70027EBDA /* Debug */,
+				80723BA71A1FCFA70027EBDA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		80723BA81A1FCFA70027EBDA /* Build configuration list for PBXNativeTarget "ChristmasCheer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				80723BA91A1FCFA70027EBDA /* Debug */,
+				80723BAA1A1FCFA70027EBDA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		80723BAB1A1FCFA70027EBDA /* Build configuration list for PBXNativeTarget "ChristmasCheerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				80723BAC1A1FCFA70027EBDA /* Debug */,
+				80723BAD1A1FCFA70027EBDA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		808F27071A337C5D001A8CE3 /* Build configuration list for PBXNativeTarget "ChristmasCheerDevelopment" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				808F27081A337C5D001A8CE3 /* Debug */,
+				808F27091A337C5D001A8CE3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 80723B811A1FCFA70027EBDA /* Project object */;
+}

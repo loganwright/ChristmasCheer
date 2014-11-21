@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "ChristmasCheerDev": {
+            "applicationId": "Bb6vmkJpOfJJXnam6Sz1QhrtcIie5KzKgREZccId",
+            "masterKey": "RA7rEfXsi9zIC2ylJkOWu9WQ8WsBTLlSClTARSCw"
+        },
+        "_default": {
+            "link": "ChristmasCheerDev"
+        }
+    },
+    "global": {
+        "parseVersion": "1.3.1"
+    }
+}

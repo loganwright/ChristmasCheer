@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "ChristmasCheer-Dev": {
+      "applicationId": "Bb6vmkJpOfJJXnam6Sz1QhrtcIie5KzKgREZccId"
+    },
+    "_default": {
+      "link": "ChristmasCheer-Dev"
+    }
+  }
+}
