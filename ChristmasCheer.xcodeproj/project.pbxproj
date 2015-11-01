@@ -371,8 +371,8 @@
 		80723B8C1A1FCFA70027EBDA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				808F270B1A337C5E001A8CE3 /* ChristmasCheerDevelopment-Info.plist */,
 				80723B8D1A1FCFA70027EBDA /* Info.plist */,
+				808F270B1A337C5E001A8CE3 /* ChristmasCheerDevelopment-Info.plist */,
 				80723BAE1A1FD1120027EBDA /* ChristmasCheer-Bridging-Header.h */,
 				808F270C1A338F0D001A8CE3 /* EnvironmentVariables.h */,
 				808F270D1A338F0D001A8CE3 /* EnvironmentVariables.m */,
@@ -509,6 +509,7 @@
 				80723B871A1FCFA70027EBDA /* Resources */,
 				36462A5C5D6DFB3C1BE3F652 /* Copy Pods Resources */,
 				26A7633B90F59ABACE7D6D05 /* Embed Pods Frameworks */,
+				80D629551BE5CDC8000F2E2B /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -716,6 +717,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		80D629551BE5CDC8000F2E2B /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Crashlytics;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "exit 42 // Don't do that :)";
 		};
 		9F754B4707277440E7089647 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
