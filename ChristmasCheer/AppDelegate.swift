@@ -10,6 +10,9 @@ import UIKit
 import Parse
 import Genome
 
+import Fabric
+import Crashlytics
+
 var IS_SIMULATOR: Bool = {
     #if arch(i386) || arch(x86_64)
         return true
@@ -78,6 +81,12 @@ private extension AppDelegate {
         }
     }
     
+    func setupCrashlytics() {
+        // Production only
+        guard !IS_DEVELOPMENT_TARGET else { return }
+        Fabric.with([Crashlytics.self])
+    }
+    
 }
 
 @UIApplicationMain
@@ -93,6 +102,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupWindow()
         setupDevelopmentUI()
         Theme.stylize()
+        
+        setupCrashlytics()
         return true
     }
 
