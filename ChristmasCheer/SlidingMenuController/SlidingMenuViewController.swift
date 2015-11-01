@@ -12,7 +12,7 @@ extension SlidingMenuRootViewController {
     static func cc_mainController() -> SlidingMenuRootViewController {
         let homeVC = HomeViewController()
         let mainNav = NavigationController(rootViewController: homeVC)
-        let menuVC = MenuViewController()
+        let menuVC = CheerListViewController()
         
         let slidingMenuVC = SlidingMenuRootViewController()
         slidingMenuVC.slidableNavigationController = mainNav
@@ -27,7 +27,7 @@ class SlidingMenuRootViewController: UIViewController {
     
     var menuIsOpen = false
 
-    var menuViewController: MenuViewController? {
+    var menuViewController: CheerListViewController? {
         didSet {
             if let menuVC = menuViewController {
                 menuVC.willMoveToParentViewController(self)

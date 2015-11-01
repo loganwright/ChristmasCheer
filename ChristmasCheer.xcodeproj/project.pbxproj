@@ -94,14 +94,14 @@
 		80D0C6EA1A4E5380001953C6 /* SnowFallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D0C6E81A4E5380001953C6 /* SnowFallView.swift */; };
 		80D6294A1BE427FE000F2E2B /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D629491BE427FE000F2E2B /* Feedback.swift */; };
 		80D6294B1BE427FE000F2E2B /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D629491BE427FE000F2E2B /* Feedback.swift */; };
-		80D6295C1BE6D1CF000F2E2B /* MenuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D629581BE6D1CF000F2E2B /* MenuViewCell.swift */; };
-		80D6295D1BE6D1CF000F2E2B /* MenuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D629581BE6D1CF000F2E2B /* MenuViewCell.swift */; };
-		80D6295E1BE6D1CF000F2E2B /* MenuViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D629591BE6D1CF000F2E2B /* MenuViewCell.xib */; };
-		80D6295F1BE6D1CF000F2E2B /* MenuViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D629591BE6D1CF000F2E2B /* MenuViewCell.xib */; };
-		80D629601BE6D1CF000F2E2B /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D6295A1BE6D1CF000F2E2B /* MenuViewController.swift */; };
-		80D629611BE6D1CF000F2E2B /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D6295A1BE6D1CF000F2E2B /* MenuViewController.swift */; };
-		80D629621BE6D1CF000F2E2B /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D6295B1BE6D1CF000F2E2B /* MenuViewController.xib */; };
-		80D629631BE6D1CF000F2E2B /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D6295B1BE6D1CF000F2E2B /* MenuViewController.xib */; };
+		80D6295C1BE6D1CF000F2E2B /* CheerListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D629581BE6D1CF000F2E2B /* CheerListCell.swift */; };
+		80D6295D1BE6D1CF000F2E2B /* CheerListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D629581BE6D1CF000F2E2B /* CheerListCell.swift */; };
+		80D6295E1BE6D1CF000F2E2B /* CheerListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D629591BE6D1CF000F2E2B /* CheerListCell.xib */; };
+		80D6295F1BE6D1CF000F2E2B /* CheerListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D629591BE6D1CF000F2E2B /* CheerListCell.xib */; };
+		80D629601BE6D1CF000F2E2B /* CheerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D6295A1BE6D1CF000F2E2B /* CheerListViewController.swift */; };
+		80D629611BE6D1CF000F2E2B /* CheerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D6295A1BE6D1CF000F2E2B /* CheerListViewController.swift */; };
+		80D629621BE6D1CF000F2E2B /* CheerListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D6295B1BE6D1CF000F2E2B /* CheerListViewController.xib */; };
+		80D629631BE6D1CF000F2E2B /* CheerListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D6295B1BE6D1CF000F2E2B /* CheerListViewController.xib */; };
 		80D957391A23E95800173B2B /* christmasCrackFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 80D957381A23E95800173B2B /* christmasCrackFont.ttf */; };
 		80E20D291A2665A60094D629 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E20D281A2665A60094D629 /* NotificationManager.swift */; };
 		80E20D2D1A266EB50094D629 /* PermissionsRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E20D2B1A266EB50094D629 /* PermissionsRequestViewController.swift */; };
@@ -126,7 +126,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		800819A61A22E41C005B0021 /* SlidingMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingMenuViewController.swift; sourceTree = "<group>"; };
+		800819A61A22E41C005B0021 /* SlidingMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SlidingMenuViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		800819B21A22E681005B0021 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = UI/HomeViewController/HomeViewController.swift; sourceTree = "<group>"; };
 		800819B31A22E681005B0021 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeViewController.xib; path = UI/HomeViewController/HomeViewController.xib; sourceTree = "<group>"; };
 		803942A81A219E43006BF273 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = Models/LocationManager.swift; sourceTree = "<group>"; };
@@ -173,10 +173,10 @@
 		80BB9C631A2771EA00682931 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		80D0C6E81A4E5380001953C6 /* SnowFallView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowFallView.swift; sourceTree = "<group>"; };
 		80D629491BE427FE000F2E2B /* Feedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Feedback.swift; path = Models/Feedback.swift; sourceTree = "<group>"; };
-		80D629581BE6D1CF000F2E2B /* MenuViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewCell.swift; sourceTree = "<group>"; };
-		80D629591BE6D1CF000F2E2B /* MenuViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewCell.xib; sourceTree = "<group>"; };
-		80D6295A1BE6D1CF000F2E2B /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		80D6295B1BE6D1CF000F2E2B /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
+		80D629581BE6D1CF000F2E2B /* CheerListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheerListCell.swift; sourceTree = "<group>"; };
+		80D629591BE6D1CF000F2E2B /* CheerListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheerListCell.xib; sourceTree = "<group>"; };
+		80D6295A1BE6D1CF000F2E2B /* CheerListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CheerListViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		80D6295B1BE6D1CF000F2E2B /* CheerListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheerListViewController.xib; sourceTree = "<group>"; };
 		80D957381A23E95800173B2B /* christmasCrackFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = christmasCrackFont.ttf; sourceTree = "<group>"; };
 		80E20D281A2665A60094D629 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationManager.swift; path = Models/NotificationManager.swift; sourceTree = "<group>"; };
 		80E20D2B1A266EB50094D629 /* PermissionsRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PermissionsRequestViewController.swift; path = UI/PermissionsRequestViewController/PermissionsRequestViewController.swift; sourceTree = "<group>"; };
@@ -435,8 +435,8 @@
 			isa = PBXGroup;
 			children = (
 				80D629571BE6D1CF000F2E2B /* Cell */,
-				80D6295A1BE6D1CF000F2E2B /* MenuViewController.swift */,
-				80D6295B1BE6D1CF000F2E2B /* MenuViewController.xib */,
+				80D6295A1BE6D1CF000F2E2B /* CheerListViewController.swift */,
+				80D6295B1BE6D1CF000F2E2B /* CheerListViewController.xib */,
 			);
 			name = CheerListController;
 			path = UI/CheerListController;
@@ -445,8 +445,8 @@
 		80D629571BE6D1CF000F2E2B /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				80D629581BE6D1CF000F2E2B /* MenuViewCell.swift */,
-				80D629591BE6D1CF000F2E2B /* MenuViewCell.xib */,
+				80D629581BE6D1CF000F2E2B /* CheerListCell.swift */,
+				80D629591BE6D1CF000F2E2B /* CheerListCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -606,7 +606,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				803942B31A22D2BE006BF273 /* merry_christmas_darling.wav in Resources */,
-				80D6295E1BE6D1CF000F2E2B /* MenuViewCell.xib in Resources */,
+				80D6295E1BE6D1CF000F2E2B /* CheerListCell.xib in Resources */,
 				80E20D2E1A266EB50094D629 /* PermissionsRequestViewController.xib in Resources */,
 				80E20D3F1A26D14F0094D629 /* PJProgressHUD.xib in Resources */,
 				803942B51A22D62F006BF273 /* santa_laugh.wav in Resources */,
@@ -620,7 +620,7 @@
 				80D957391A23E95800173B2B /* christmasCrackFont.ttf in Resources */,
 				806A69521A21247A00DBAC27 /* NameEntryViewController.xib in Resources */,
 				80723B961A1FCFA70027EBDA /* Images.xcassets in Resources */,
-				80D629621BE6D1CF000F2E2B /* MenuViewController.xib in Resources */,
+				80D629621BE6D1CF000F2E2B /* CheerListViewController.xib in Resources */,
 				809A6EF11A27802A00F1D6EC /* success_tone.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -637,7 +637,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8094839F1BDDD78000F69A46 /* attributions.yml in Resources */,
-				80D6295F1BE6D1CF000F2E2B /* MenuViewCell.xib in Resources */,
+				80D6295F1BE6D1CF000F2E2B /* CheerListCell.xib in Resources */,
 				808F26F61A337C5D001A8CE3 /* merry_christmas_darling.wav in Resources */,
 				808F26F71A337C5D001A8CE3 /* PermissionsRequestViewController.xib in Resources */,
 				808F26F81A337C5D001A8CE3 /* PJProgressHUD.xib in Resources */,
@@ -651,7 +651,7 @@
 				808F27011A337C5D001A8CE3 /* christmasCrackFont.ttf in Resources */,
 				808F27021A337C5D001A8CE3 /* NameEntryViewController.xib in Resources */,
 				808F27031A337C5D001A8CE3 /* Images.xcassets in Resources */,
-				80D629631BE6D1CF000F2E2B /* MenuViewController.xib in Resources */,
+				80D629631BE6D1CF000F2E2B /* CheerListViewController.xib in Resources */,
 				808F27041A337C5D001A8CE3 /* success_tone.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -774,7 +774,7 @@
 				8094838F1BDC9EE800F69A46 /* SoundFile.swift in Sources */,
 				806A694A1A2123FF00DBAC27 /* ApplicationSettings.swift in Sources */,
 				80D6294A1BE427FE000F2E2B /* Feedback.swift in Sources */,
-				80D629601BE6D1CF000F2E2B /* MenuViewController.swift in Sources */,
+				80D629601BE6D1CF000F2E2B /* CheerListViewController.swift in Sources */,
 				8094838C1BDC9E9A00F69A46 /* ColorDescriptor.swift in Sources */,
 				80ADC83F1A255FBE0063F72D /* ChristmasCheerNotification.swift in Sources */,
 				809A6EF81A2787F500F1D6EC /* ProfanityFilter.swift in Sources */,
@@ -800,7 +800,7 @@
 				80E20D3C1A26D14F0094D629 /* PJDoubleActivityIndicator.m in Sources */,
 				806A694C1A21242800DBAC27 /* ParseHelper.swift in Sources */,
 				808F270E1A338F0D001A8CE3 /* EnvironmentVariables.m in Sources */,
-				80D6295C1BE6D1CF000F2E2B /* MenuViewCell.swift in Sources */,
+				80D6295C1BE6D1CF000F2E2B /* CheerListCell.swift in Sources */,
 				809483921BDC9F4700F69A46 /* CellConfiguring.swift in Sources */,
 				80D0C6E91A4E5380001953C6 /* SnowFallView.swift in Sources */,
 			);
@@ -822,7 +822,7 @@
 				809483901BDC9EE800F69A46 /* SoundFile.swift in Sources */,
 				808F26DF1A337C5D001A8CE3 /* ApplicationSettings.swift in Sources */,
 				80D6294B1BE427FE000F2E2B /* Feedback.swift in Sources */,
-				80D629611BE6D1CF000F2E2B /* MenuViewController.swift in Sources */,
+				80D629611BE6D1CF000F2E2B /* CheerListViewController.swift in Sources */,
 				8094838D1BDC9EBC00F69A46 /* ColorDescriptor.swift in Sources */,
 				808F26E01A337C5D001A8CE3 /* ChristmasCheerNotification.swift in Sources */,
 				808F26E11A337C5D001A8CE3 /* ProfanityFilter.swift in Sources */,
@@ -848,7 +848,7 @@
 				808F26EF1A337C5D001A8CE3 /* PJDoubleActivityIndicator.m in Sources */,
 				808F26F01A337C5D001A8CE3 /* ParseHelper.swift in Sources */,
 				808F270F1A339029001A8CE3 /* EnvironmentVariables.m in Sources */,
-				80D6295D1BE6D1CF000F2E2B /* MenuViewCell.swift in Sources */,
+				80D6295D1BE6D1CF000F2E2B /* CheerListCell.swift in Sources */,
 				809483931BDC9F4700F69A46 /* CellConfiguring.swift in Sources */,
 				80D0C6EA1A4E5380001953C6 /* SnowFallView.swift in Sources */,
 			);
