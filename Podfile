@@ -11,3 +11,6 @@ pod 'Genome'
 
 pod 'Cartography'
 pod 'YamlSwift'
+
+pod 'Fabric'
+pod 'Crashlytics'
