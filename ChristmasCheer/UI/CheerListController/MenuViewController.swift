@@ -73,6 +73,7 @@ class MenuViewController: UIViewController, MenuViewCellDelegate {
     }
     
     func setupTableView() {
+        tableView.backgroundColor = UIColor.clearColor()
         tableView.tableFooterView = UIView()
         tableView.registerCell(MenuViewCell.self)
         tableView.registerHeader(AttributionHeaderCell.self)
