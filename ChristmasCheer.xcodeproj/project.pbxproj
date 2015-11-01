@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		800819A71A22E41C005B0021 /* SlidingMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800819A61A22E41C005B0021 /* SlidingMenuViewController.swift */; };
 		800819B41A22E681005B0021 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800819B21A22E681005B0021 /* HomeViewController.swift */; };
 		800819B51A22E681005B0021 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 800819B31A22E681005B0021 /* HomeViewController.xib */; };
 		803942A91A219E43006BF273 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803942A81A219E43006BF273 /* LocationManager.swift */; };
@@ -27,7 +26,6 @@
 		80723B8F1A1FCFA70027EBDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80723B8E1A1FCFA70027EBDA /* AppDelegate.swift */; };
 		80723B961A1FCFA70027EBDA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80723B951A1FCFA70027EBDA /* Images.xcassets */; };
 		80723BA51A1FCFA70027EBDA /* ChristmasCheerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80723BA41A1FCFA70027EBDA /* ChristmasCheerTests.swift */; };
-		808F26DE1A337C5D001A8CE3 /* SlidingMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800819A61A22E41C005B0021 /* SlidingMenuViewController.swift */; };
 		808F26DF1A337C5D001A8CE3 /* ApplicationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806A69491A2123FF00DBAC27 /* ApplicationSettings.swift */; };
 		808F26E01A337C5D001A8CE3 /* ChristmasCheerNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ADC83E1A255FBE0063F72D /* ChristmasCheerNotification.swift */; };
 		808F26E11A337C5D001A8CE3 /* ProfanityFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A6EF71A2787F500F1D6EC /* ProfanityFilter.swift */; };
@@ -126,7 +124,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		800819A61A22E41C005B0021 /* SlidingMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SlidingMenuViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		800819B21A22E681005B0021 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = UI/HomeViewController/HomeViewController.swift; sourceTree = "<group>"; };
 		800819B31A22E681005B0021 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeViewController.xib; path = UI/HomeViewController/HomeViewController.xib; sourceTree = "<group>"; };
 		803942A81A219E43006BF273 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = Models/LocationManager.swift; sourceTree = "<group>"; };
@@ -242,14 +239,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		800819A51A22E41C005B0021 /* SlidingMenuController */ = {
-			isa = PBXGroup;
-			children = (
-				800819A61A22E41C005B0021 /* SlidingMenuViewController.swift */,
-			);
-			path = SlidingMenuController;
-			sourceTree = "<group>";
-		};
 		803942AA1A22CD07006BF273 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -306,7 +295,6 @@
 				80E20D331A26D14F0094D629 /* PJActivityIndicator */,
 				80E20D381A26D14F0094D629 /* ProgressHUD */,
 				80E20D2A1A266E6D0094D629 /* PermissionsRequestViewController */,
-				800819A51A22E41C005B0021 /* SlidingMenuController */,
 				806A694D1A21245100DBAC27 /* NameEntry */,
 				800819B21A22E681005B0021 /* HomeViewController.swift */,
 				800819B31A22E681005B0021 /* HomeViewController.xib */,
@@ -770,7 +758,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				800819A71A22E41C005B0021 /* SlidingMenuViewController.swift in Sources */,
 				8094838F1BDC9EE800F69A46 /* SoundFile.swift in Sources */,
 				806A694A1A2123FF00DBAC27 /* ApplicationSettings.swift in Sources */,
 				80D6294A1BE427FE000F2E2B /* Feedback.swift in Sources */,
@@ -818,7 +805,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				808F26DE1A337C5D001A8CE3 /* SlidingMenuViewController.swift in Sources */,
 				809483901BDC9EE800F69A46 /* SoundFile.swift in Sources */,
 				808F26DF1A337C5D001A8CE3 /* ApplicationSettings.swift in Sources */,
 				80D6294B1BE427FE000F2E2B /* Feedback.swift in Sources */,
