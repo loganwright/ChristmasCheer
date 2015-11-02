@@ -11,6 +11,10 @@ import Cartography
 
 // MARK: ContactViewController
 
+/*
+Remove namespacing for iOS 8, otherwise, nibs don't load properly
+*/
+@objc(ContactViewController)
 class ContactViewController: UIViewController, UITextViewDelegate {
 
     private var bottomTextViewConstraint: NSLayoutConstraint!

@@ -176,6 +176,10 @@ class AttributionHeaderCell : UITableViewHeaderFooterView {
     }
 }
 
+/*
+Remove namespacing for iOS 8, otherwise, nibs don't load properly
+*/
+@objc(AttributionViewController)
 class AttributionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!

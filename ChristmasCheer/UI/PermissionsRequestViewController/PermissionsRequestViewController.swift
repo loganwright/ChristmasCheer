@@ -60,6 +60,10 @@ extension PermissionsRequestViewController.Purpose {
     
 }
 
+/*
+Remove namespacing for iOS 8, otherwise, nibs don't load properly
+*/
+@objc(PermissionsRequestViewController)
 class PermissionsRequestViewController: UIViewController {
     
     // MARK: Constants

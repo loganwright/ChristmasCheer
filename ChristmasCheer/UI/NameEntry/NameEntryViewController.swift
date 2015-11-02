@@ -9,6 +9,10 @@
 import UIKit
 import Parse
 
+/*
+Remove namespacing for iOS 8, otherwise, nibs don't load properly
+*/
+@objc(NameEntryViewController)
 class NameEntryViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
