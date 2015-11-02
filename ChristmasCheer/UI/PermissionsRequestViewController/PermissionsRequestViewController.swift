@@ -132,7 +132,8 @@ class PermissionsRequestViewController: UIViewController {
         case .LocationServices:
             LocationManager.sharedManager.locationStatusUpdated = callback
         case .Notifications:
-            NotificationManager.authorizationStatusUpdated = callback
+            break // Doing later w/ completion, move location to this style
+//            NotificationManager.authorizationStatusUpdated = callback
         }
     }
     
@@ -182,22 +183,33 @@ class PermissionsRequestViewController: UIViewController {
         switch purpose {
         case .LocationServices
             where LocationManager.locationServicesEnabled:
-            dismiss()
+            saveOrDismissInstallation()
         case .Notifications
             where NotificationManager.notificationsAuthorized:
-            handleNotificationsAlreadyAuthorized()
+            saveOrDismissInstallation()
         default:
             break
         }
     }
     
-    private func handleNotificationsAlreadyAuthorized() {
+    private func saveOrDismissInstallation() {
         let installation = PFInstallation.currentInstallation()
-        if installation.hasRegisteredWithServer {
-            dismiss()
-        } else {
-            // We've approved notifications, but we haven't set the installation up serverside. Save it.
-            registerInstallationWithServer()
+        
+        switch purpose {
+        case .LocationServices:
+            if installation.hasRegisteredWithServer {
+                dismiss()
+            } else {
+                // We've approved location, but the installation hasn't been saved yet.
+                registerInstallationWithServer()
+            }
+        case .Notifications:
+            if let _ = installation.deviceToken {
+                dismiss()
+            } else {
+                // We've approved notifications, but the installation hasn't been saved yet.
+                registerInstallationWithServer()
+            }
         }
     }
     
@@ -207,12 +219,6 @@ class PermissionsRequestViewController: UIViewController {
     
     private func updateMessagingLabel() {
         messageLabel.text = purpose.requestDescription
-    }
-    
-    // MARK: Back Button Pressed
-    
-    func backButtonPressed(sender: UIBarButtonItem) {
-        dismiss()
     }
     
     // MARK: Button Presses
@@ -243,7 +249,7 @@ class PermissionsRequestViewController: UIViewController {
         case .NotDetermined:
             LocationManager.requestPermissions()
         case .Authorized, .AuthorizedWhenInUse:
-            dismiss()
+            saveOrDismissInstallation()
         case .Denied, .Restricted:
             showPermissionsDeniedAlert()
         }
@@ -252,9 +258,13 @@ class PermissionsRequestViewController: UIViewController {
     private func performNotificationsPermissionAction() {
         switch NotificationManager.authorizationStatus {
         case .NotYetDetermined:
-            NotificationManager.requestRemoteNotificationAuthorization()
+            PJProgressHUD.showWithStatus("Registering your device with Apple. (Requires Internet)")
+            NotificationManager.requestRemoteNotificationAuthorization { [weak self] in
+                PJProgressHUD.hide()
+                self?.performActionForCurrentPurpose()
+            }
         case .Authorized:
-            handleNotificationsAlreadyAuthorized()
+            saveOrDismissInstallation()
         case .Denied:
             showPermissionsDeniedAlert()
         }
@@ -336,6 +346,30 @@ extension PFInstallation {
         // If the app quit before saving to server, we persist the data here.
         guard deviceToken == nil, let data = tokenData else { return }
         setDeviceTokenFromData(data)
+    }
+}
+
+extension PermissionsRequestViewController {
+    private func attemptToRegisterInstallationForUsername(name: String) {
+        let installation = PFInstallation.currentInstallation()
+        installation.register { [weak self] result in
+            switch result {
+            case .Success(_):
+                ApplicationSettings.displayName = name
+                FeedbackSounds.SuccessSound.play()
+                self?.dismissViewControllerAnimated(true, completion: nil)
+            case .Failure(_):
+                self?.showFailedToCreateInstallationAlert()
+            }
+        }
+    }
+    
+    private func showFailedToCreateInstallationAlert() {
+        let title = "Oh No!"
+        let message = "There must be a blizzard because I can't contact the elves to sign you up!  Check your connection and try to sign up again!"
+        let confirmation = "Ok"
+        let alert = SCLAlertView()
+        alert.showSuccess(title, subTitle: message, closeButtonTitle: confirmation)
     }
 }
 

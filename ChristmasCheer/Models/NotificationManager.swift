@@ -36,10 +36,14 @@ class NotificationManager: NSObject {
         return authStatus
     }
     
-    static var authorizationStatusUpdated: (approved: Bool) -> Void = { _ in }
+    static var authorizationStatusUpdated = {}
     
     class func didRegisterNotificationSettings() {
-        authorizationStatusUpdated(approved: authorizationStatus == .Authorized)
+        authorizationStatusUpdated()
+    }
+    
+    class func didFailToRegisterNotificationSettings() {
+        authorizationStatusUpdated()
     }
     
     
@@ -66,12 +70,14 @@ class NotificationManager: NSObject {
     
     // MARK: Permissions Request
     
-    class func requestRemoteNotificationAuthorization() {
+    class func requestRemoteNotificationAuthorization(completion: Void -> Void) {
         if !self.hasReceivedNotificationRegistrationPrompt {
+            authorizationStatusUpdated = completion
             let userNotificationTypes: UIUserNotificationType = [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound]
             let notificationSettings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
             UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
         } else {
+            completion()
             print("User already prompted for remote notifications!")
         }
     }
