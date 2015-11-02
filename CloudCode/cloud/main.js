@@ -2,7 +2,7 @@
 Can't change installation class so this functions as both.
 */
 
-var COUNT_ID = "4lVIZKCS4a"
+var COUNT_ID = "7lX8Qe2HC7"
 
 Parse.Cloud.afterSave(Parse.Installation, function(request) {
 
