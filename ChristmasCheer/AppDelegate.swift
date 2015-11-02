@@ -155,6 +155,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ApplicationSettings.deviceTokenData = deviceToken
         NotificationManager.hasReceivedNotificationRegistrationPrompt = true
         NotificationManager.didRegisterNotificationSettings()
+        
+        PFInstallation.currentInstallation().setDeviceTokenFromData(deviceToken)
+        PFInstallation.currentInstallation().saveInBackground()
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
