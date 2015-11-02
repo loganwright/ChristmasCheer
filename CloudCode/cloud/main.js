@@ -6,58 +6,98 @@ var COUNT_ID = "7lX8Qe2HC7"
 
 Parse.Cloud.afterSave(Parse.Installation, function(request) {
 
-  if (!request.object.existed()) {
-    Parse.Cloud.useMasterKey();
-    var Counts = Parse.Object.extend("Counts");
-    var query = new Parse.Query(Counts);
-    query.get(COUNT_ID, { // Parse Installation Counter
-      success: function(installationCount) {
-        // The object was retrieved successfully.
-        console.log("Found installation counter");
-        installationCount.increment("count");
-        installationCount.save(null, {
-            success: function(count) {
-              // Execute any logic that should take place after the object is saved.
-              console.log("Installation ref successful")
-            },
-            error: function(count, error) {
-              // Execute any logic that should take place if the save fails.
-              // error is a Parse.Error with an error code and message.
-              alert('COUNTER FAILED TO UPDATE!' + error.message);
-            }
-          });
-
-        // Simple syntax to create a new subclass of Parse.Object.
-        var InstallationRef = Parse.Object.extend("InstallationRef");
-        var installationRef = new InstallationRef();
-
-        var acl = new Parse.ACL();
-        acl.setPublicReadAccess(false);
-        acl.setPublicWriteAccess(false);
-        installationRef.setACL(acl);
-
-        installationRef.set("installationId", request.object.id);
-        installationRef.set("appName", request.object.get("appName"));
-        installationRef.save(null, {
-            success: function(installationRefOb) {
-              // Execute any logic that should take place after the object is saved.
-              console.log("Installation ref successful")
-            },
-            error: function(installationRefOb, error) {
-              // Execute any logic that should take place if the save fails.
-              // error is a Parse.Error with an error code and message.
-              alert('Failed to create new installationRef for refId' + request.object.objectId + ', with error code: ' + error.message);
-            }
-          });
-      },
-      error: function(object, error) {
-        // The object was not retrieved successfully.
-        // error is a Parse.Error with an error code and message.
-        console.error("Error finding installation count!" + error.code + ": " + error.message);
-      }
-    });
+  var installation = request.object;
+  if (!installation.existed()) {
+	   console.log("Installation doesn't already exist, verifying installation ref");
+     // There's a bug where installation refs show as existed when they haven't associated data yet.  If the object is reading as new, we'll double check.
+     var installationIsNew = function() {
+       console.log("New installation ref");
+       updateCountAndInstallationRef(request);
+     }
+     runIfInstallationIsNew(installation, installationIsNew);
+  } else {
+    console.log("Installation already exists: " + installation.id);
   }
 });
+
+function runIfInstallationIsNew(installation, installationIsNew) {
+  Parse.Cloud.useMasterKey();
+  console.log("Checking for existing installation ref " + installation.id);
+
+  var InstallationRef = Parse.Object.extend("InstallationRef");
+  var query = new Parse.Query(InstallationRef);
+  query.equalTo("installationId", installation.id);
+
+  var querySuccess = function(results) {
+    console.log("Installation Ref Query Successful: " + results.length + " : " + results);
+    if (results.length == 0) {
+      console.log("Installation ref must be new");
+      installationIsNew();
+    } else {
+      console.log("Installation ref already exists for installation: " + installation.id);
+    }
+  }
+  var queryFailure = function(error) {
+    console.log("Installation ref query failed: " + error.message);
+  }
+
+  query.find({
+    success: querySuccess,
+    error: queryFailure
+  });
+}
+
+function updateCountAndInstallationRef(request) {
+  Parse.Cloud.useMasterKey();
+  var Counts = Parse.Object.extend("Counts");
+  var query = new Parse.Query(Counts);
+  query.get(COUNT_ID, { // Parse Installation Counter
+    success: function(installationCount) {
+      // The object was retrieved successfully.
+      console.log("Found installation counter");
+      installationCount.increment("count");
+      installationCount.save(null, {
+          success: function(count) {
+            // Execute any logic that should take place after the object is saved.
+            console.log("Installation count save successful")
+          },
+          error: function(count, error) {
+            // Execute any logic that should take place if the save fails.
+            // error is a Parse.Error with an error code and message.
+            alert('COUNTER FAILED TO UPDATE!' + error.message);
+          }
+        });
+
+      // Simple syntax to create a new subclass of Parse.Object.
+      var InstallationRef = Parse.Object.extend("InstallationRef");
+      var installationRef = new InstallationRef();
+
+      var acl = new Parse.ACL();
+      acl.setPublicReadAccess(false);
+      acl.setPublicWriteAccess(false);
+      installationRef.setACL(acl);
+
+      installationRef.set("installationId", request.object.id);
+      installationRef.set("appName", request.object.get("appName"));
+      installationRef.save(null, {
+          success: function(installationRefOb) {
+            // Execute any logic that should take place after the object is saved.
+            console.log("Installation ref successful")
+          },
+          error: function(installationRefOb, error) {
+            // Execute any logic that should take place if the save fails.
+            // error is a Parse.Error with an error code and message.
+            alert('Failed to create new installationRef for refId' + request.object.objectId + ', with error code: ' + error.message);
+          }
+        });
+    },
+    error: function(object, error) {
+      // The object was not retrieved successfully.
+      // error is a Parse.Error with an error code and message.
+      console.error("Error finding installation count!" + error.code + ": " + error.message);
+    }
+  });
+}
 
 /*
 SEND RANDOM CHEER FUNCTIONALITY
