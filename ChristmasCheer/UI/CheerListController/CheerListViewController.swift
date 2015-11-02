@@ -26,8 +26,6 @@ private struct CheerListTableViewSection {
 
 class CheerListViewController: UIViewController, CheerListCellDelegate {
     
-    @IBOutlet weak var statusBarCover: UIView!
-    
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var attributionButton: UIButton!
@@ -50,6 +48,7 @@ class CheerListViewController: UIViewController, CheerListCellDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         resize()
+        fetchDataAndReloadTableView()
     }
     
     func resize() {
@@ -64,7 +63,20 @@ class CheerListViewController: UIViewController, CheerListCellDelegate {
     // MARK: Setup
     
     func setup() {
+        setupNavBar()
         setupTableView()
+        
+        title = "Cheer List"
+    }
+    
+    private func setupNavBar() {
+        let button: UIButton = UIButton(type: .System)
+        button.setImage(UIImage(named: "snowflake_icon"), forState: .Normal)
+        button.addTarget(self, action: "backButtonPressed:", forControlEvents: .TouchUpInside)
+        button.bounds = CGRect(x: 0, y: 0, width: 44, height: 44)
+        button.imageEdgeInsets = UIEdgeInsets(top: 11, left: 0, bottom: 13, right: 24)
+        let barButton = UIBarButtonItem(customView: button)
+        navigationItem.leftBarButtonItem = barButton
     }
     
     func setupTableView() {
@@ -78,7 +90,6 @@ class CheerListViewController: UIViewController, CheerListCellDelegate {
     
     func stylize() {
         view.backgroundColor = ColorPalette.TexturedBackground.color
-        statusBarCover.backgroundColor = ColorPalette.Green.color
         tableView.separatorColor = ColorPalette.DarkGray.color
         
         stylizeButtonTray()
@@ -173,6 +184,10 @@ class CheerListViewController: UIViewController, CheerListCellDelegate {
     
     // MARK: Button Presses
     
+    func backButtonPressed(sender: UIButton) {
+        navigationController?.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     @IBAction func attributionButtonPressed(sender: UIButton) {
         let attributionVC = AttributionViewController()
         let nav = NavigationController(rootViewController: attributionVC)
@@ -232,6 +247,7 @@ extension CheerListViewController : UITableViewDataSource {
         let cheer = section.associatedCheer[indexPath.row]
         let cell: CheerListCell = tableView.dequeueCell(indexPath)
         cell.configure(cheer)
+        cell.delegate = self
         return cell
     }
     
