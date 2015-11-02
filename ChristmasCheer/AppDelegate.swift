@@ -115,6 +115,23 @@ private extension HomeViewController {
     }
 }
 
+extension PFInstallation {
+    func saveIfRegisteredForNotifications() {
+        /*
+        The installation will only save if necessary,
+        
+        This exists to solve a problem where the user installation fails after registering, so they never receive push notifications because we never save again.
+        
+        This is necessary until we save somewhere else in the app.  At this point, a user's installation object will never save again.
+        
+        
+        We don't want to save before device token exists because otherwise it will save users before they save.
+        */
+        guard let _ = deviceToken else { return }
+        saveInBackground()
+    }
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -130,6 +147,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Theme.stylize()
         
         setupCrashlytics()
+        
+        let installation = PFInstallation.currentInstallation()
+        installation.saveIfRegisteredForNotifications()
         return true
     }
 
