@@ -10,9 +10,6 @@ import UIKit
 import AVFoundation
 import Parse
 
-import RxSwift
-import RxCocoa
-
 enum ParseError : ErrorType {
     case FailedQuery(String)
     case Unknown(String)

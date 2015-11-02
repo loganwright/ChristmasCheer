@@ -1,5 +1,5 @@
 //
-//  MenuViewCell.swift
+//  CheerListCell.swift
 //  ChristmasCheer
 //
 //  Created by Logan Wright on 11/24/14.
@@ -8,21 +8,18 @@
 
 import UIKit
 
-let MenuViewCellNibName = "MenuViewCell"
-let MenuViewCellIdentifier = "MenuViewCellIdentifier"
-
-protocol MenuViewCellDelegate : class {
-    func menuViewCell(menuViewCell: MenuViewCell, didPressReturnCheerButtonForOriginalNote originalNote: ChristmasCheerNotification)
+protocol CheerListCellDelegate : class {
+    func cheerListCell(menuViewCell: CheerListCell, didPressReturnCheerButtonForOriginalNote originalNote: ChristmasCheerNotification)
 }
 
-class MenuViewCell: UITableViewCell {
+class CheerListCell: UITableViewCell {
 
     @IBOutlet weak var indicatorButton: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var returnTheCheerButton: UIButton!
     var cheerNotification: ChristmasCheerNotification!
-    weak var delegate: MenuViewCellDelegate?
+    weak var delegate: CheerListCellDelegate?
     
     // To prevent cell separator inset
     @available(iOS 8.0, *)
@@ -37,18 +34,18 @@ class MenuViewCell: UITableViewCell {
     
     var indicatorImage: UIImage? {
         get {
-            return self.indicatorButton.imageView?.image
+            return indicatorButton.imageView?.image
         }
         set {
-            self.indicatorButton.setImage(newValue, forState: .Normal)
+            indicatorButton.setImage(newValue, forState: .Normal)
         }
     }
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.clipsToBounds = true
-        self.backgroundColor = UIColor.clearColor()
+        clipsToBounds = true
+        backgroundColor = UIColor.clearColor()
         indicatorButton.backgroundColor = ColorPalette.SparklyRed.color
         indicatorButton.tintColor = ColorPalette.SparklyWhite.color
         indicatorButton.imageView?.contentMode = .ScaleAspectFit
@@ -65,41 +62,27 @@ class MenuViewCell: UITableViewCell {
         returnTheCheerButton.titleEdgeInsets = UIEdgeInsets(top: 6.0, left: 0, bottom: 0, right: 0)
         returnTheCheerButton.layer.cornerRadius = CGRectGetHeight(returnTheCheerButton.bounds) / 4.0
     }
-    
-    func setupWithEmptyTableMessage() {
-        self.nameLabel.text = "No Cheer Yet."
-        self.locationLabel.text = "Try sending some!"
-        self.returnTheCheerButton.enabled = false
-        self.indicatorButton.backgroundColor = ColorPalette.SparklyRed.color
-
-    }
 
     @IBAction func returnTheCheerButtonPressed(sender: UIButton) {
-        self.delegate?.menuViewCell(self, didPressReturnCheerButtonForOriginalNote: self.cheerNotification)
+        delegate?.cheerListCell(self, didPressReturnCheerButtonForOriginalNote: cheerNotification)
     }
     
     // MARK: Selected
     
     override func setSelected(selected: Bool, animated: Bool) {
-        if selected {
-            let color = ColorPalette.SparklyWhite.color
-            self.backgroundColor = color
-            self.contentView.backgroundColor = color
+        let color: UIColor
+        if highlighted {
+            color = ColorPalette.SparklyWhite.color
         } else {
-            self.contentView.backgroundColor = UIColor.clearColor()
-            self.backgroundColor = UIColor.clearColor()
+            color = UIColor.clearColor()
         }
+        backgroundColor = color
+        contentView.backgroundColor = color
     }
     
     override func setHighlighted(highlighted: Bool, animated: Bool) {
-        if highlighted {
-            let color = ColorPalette.SparklyWhite.color
-            self.backgroundColor = color
-            self.contentView.backgroundColor = color
-        } else {
-            self.contentView.backgroundColor = UIColor.clearColor()
-            self.backgroundColor = UIColor.clearColor()
-        }
+        // Selected / Highlighted == Same
+        setSelected(highlighted, animated: animated)
     }
     
     func configure(note: ChristmasCheerNotification) {

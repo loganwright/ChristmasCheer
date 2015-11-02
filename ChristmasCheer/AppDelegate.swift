@@ -70,15 +70,7 @@ private extension AppDelegate {
     }
     
     func updateForActiveState() {
-        let navigationController = slidingRootViewController?.slidableNavigationController
-        let topVC = navigationController?.topViewController
-        switch topVC {
-        case let permissionVC as PermissionsRequestViewController:
-            permissionVC.ensurePermissionsRequired()
-        case let homeVC as HomeViewController:
-            homeVC.ensureSessionIsStillValid()
-        default: break
-        }
+        homeViewController.updateForApplicationActiveState()
     }
     
     func setupCrashlytics() {
@@ -89,12 +81,46 @@ private extension AppDelegate {
     
 }
 
+private extension HomeViewController {
+    func updateForApplicationActiveState() {
+        guard checkAndUpdatePresentedControllerIfNecessary() else { return }
+        ensureSessionIsStillValid()
+    }
+    
+    func refreshCheerListIfPossible() {
+        guard
+            let presentedNav = navigationController?.presentedViewController as? UINavigationController,
+            let visible = presentedNav.topViewController as? CheerListViewController
+            else { return }
+        
+        visible.fetchDataAndReloadTableView()
+    }
+    
+    func checkAndUpdatePresentedControllerIfNecessary() -> Bool {
+        guard
+            let presentedNav = navigationController?.presentedViewController as? UINavigationController,
+            let visible = presentedNav.topViewController
+            else { return true }
+        
+        switch visible {
+        case let permissionsVC as PermissionsRequestViewController:
+            permissionsVC.ensurePermissionsRequired()
+            return false
+        case let cheerListVC as CheerListViewController:
+            cheerListVC.fetchDataAndReloadTableView()
+            return false
+        default:
+            return true
+        }
+    }
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    weak var slidingRootViewController: SlidingMenuRootViewController?
-
+    let homeViewController = HomeViewController()
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Parse.configure(launchOptions)
         Parse.updateOffSeasonStatus()
@@ -108,13 +134,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func setupWindow() {
-        let slidingRootViewController = SlidingMenuRootViewController.cc_mainController()
-        self.slidingRootViewController = slidingRootViewController
-
-        let window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window.rootViewController = slidingRootViewController
-        window.makeKeyAndVisible()
-        self.window = window
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window?.rootViewController = NavigationController(rootViewController: self.homeViewController)
+        window?.makeKeyAndVisible()
     }
     
     func applicationDidBecomeActive(application: UIApplication) {
@@ -151,8 +173,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SCLAlertView.showNotification(notification)
         notification.aps.sound?.play()
         
-        if let open = slidingRootViewController?.menuIsOpen where open {
-            slidingRootViewController?.menuViewController?.fetchDataAndReloadTableView()
-        }
+        homeViewController.refreshCheerListIfPossible()
     }
 }

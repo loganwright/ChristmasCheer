@@ -1,5 +1,5 @@
 //
-//  MenuViewController.swift
+//  CheerListViewController.swift
 //  FriendLender
 //
 //  Created by Logan Wright on 9/24/14.
@@ -10,9 +10,9 @@ import UIKit
 import MessageUI
 import Parse
 
-// MARK: MenuViewTableViewSection
+// MARK: CheerListTableViewSection
 
-private struct MenuViewTableViewSection {
+private struct CheerListTableViewSection {
     enum SectionType {
         case Unresponded, Returned, Received
     }
@@ -22,11 +22,9 @@ private struct MenuViewTableViewSection {
     let associatedCheer: [ChristmasCheerNotification]
 }
 
-// MARK: MenuViewController
+// MARK: CheerListViewController
 
-class MenuViewController: UIViewController, MenuViewCellDelegate {
-    
-    @IBOutlet weak var statusBarCover: UIView!
+class CheerListViewController: UIViewController, CheerListCellDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -35,14 +33,9 @@ class MenuViewController: UIViewController, MenuViewCellDelegate {
     @IBOutlet weak var infoButton: UIButton!
     @IBOutlet weak var rateButton: UIButton!
     
-    // MARK: Constants
-    
-    private let MenuTableViewGeneralCellIdentifier = "MenuTableViewGeneralCellIdentifier"
-    private let MenuTableViewDatePickerCellIdentifier = "MenuTableViewDatePickerCellIdentifier"
-    
     // MARK: Properties
     
-    private var tableViewData: [MenuViewTableViewSection] = []
+    private var tableViewData: [CheerListTableViewSection] = []
     
     // MARK: Lifecycle
    
@@ -55,6 +48,7 @@ class MenuViewController: UIViewController, MenuViewCellDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         resize()
+        fetchDataAndReloadTableView()
     }
     
     func resize() {
@@ -69,12 +63,26 @@ class MenuViewController: UIViewController, MenuViewCellDelegate {
     // MARK: Setup
     
     func setup() {
+        setupNavBar()
         setupTableView()
+        
+        title = "Cheer List"
+    }
+    
+    private func setupNavBar() {
+        let button: UIButton = UIButton(type: .System)
+        button.setImage(UIImage(named: "snowflake_icon"), forState: .Normal)
+        button.addTarget(self, action: "backButtonPressed:", forControlEvents: .TouchUpInside)
+        button.bounds = CGRect(x: 0, y: 0, width: 44, height: 44)
+        button.imageEdgeInsets = UIEdgeInsets(top: 11, left: 0, bottom: 13, right: 24)
+        let barButton = UIBarButtonItem(customView: button)
+        navigationItem.leftBarButtonItem = barButton
     }
     
     func setupTableView() {
+        tableView.backgroundColor = UIColor.clearColor()
         tableView.tableFooterView = UIView()
-        tableView.registerCell(MenuViewCell.self)
+        tableView.registerCell(CheerListCell.self)
         tableView.registerHeader(AttributionHeaderCell.self)
     }
     
@@ -82,7 +90,6 @@ class MenuViewController: UIViewController, MenuViewCellDelegate {
     
     func stylize() {
         view.backgroundColor = ColorPalette.TexturedBackground.color
-        statusBarCover.backgroundColor = ColorPalette.Green.color
         tableView.separatorColor = ColorPalette.DarkGray.color
         
         stylizeButtonTray()
@@ -119,9 +126,9 @@ class MenuViewController: UIViewController, MenuViewCellDelegate {
         let returnedCheer = notifications.filter { $0.initiationNoteId != nil }
         
         tableViewData = [
-            MenuViewTableViewSection(title: nil, sectionType: .Unresponded, associatedCheer: unresponded),
-            MenuViewTableViewSection(title: "Received Cheer", sectionType: .Received, associatedCheer: receivedCheer),
-            MenuViewTableViewSection(title: "Returned Cheer", sectionType: .Returned, associatedCheer: returnedCheer)
+            CheerListTableViewSection(title: nil, sectionType: .Unresponded, associatedCheer: unresponded),
+            CheerListTableViewSection(title: "Received Cheer", sectionType: .Received, associatedCheer: receivedCheer),
+            CheerListTableViewSection(title: "Returned Cheer", sectionType: .Returned, associatedCheer: returnedCheer)
         ]
         
         self.reloadTableView()
@@ -140,9 +147,9 @@ class MenuViewController: UIViewController, MenuViewCellDelegate {
         }
     }
     
-    // MARK: MenuViewCellDelegate
+    // MARK: CheerListCellDelegate
     
-    func menuViewCell(menuViewCell: MenuViewCell, didPressReturnCheerButtonForOriginalNote originalNote: ChristmasCheerNotification) {
+    func cheerListCell(menuViewCell: CheerListCell, didPressReturnCheerButtonForOriginalNote originalNote: ChristmasCheerNotification) {
         PJProgressHUD.showWithStatus("Contacting the North Pole ...")
         ParseHelper.returnCheer(originalNote) { [weak self] result in
             guard let welf = self else { return }
@@ -176,6 +183,10 @@ class MenuViewController: UIViewController, MenuViewCellDelegate {
     }
     
     // MARK: Button Presses
+    
+    func backButtonPressed(sender: UIButton) {
+        navigationController?.dismissViewControllerAnimated(true, completion: nil)
+    }
     
     @IBAction func attributionButtonPressed(sender: UIButton) {
         let attributionVC = AttributionViewController()
@@ -218,7 +229,7 @@ class MenuViewController: UIViewController, MenuViewCellDelegate {
     }
 }
 
-extension MenuViewController : UITableViewDataSource {
+extension CheerListViewController : UITableViewDataSource {
 
     // MARK: UITableViewDataSource
     
@@ -234,8 +245,9 @@ extension MenuViewController : UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let section = self.tableViewData[indexPath.section]
         let cheer = section.associatedCheer[indexPath.row]
-        let cell: MenuViewCell = tableView.dequeueCell(indexPath)
+        let cell: CheerListCell = tableView.dequeueCell(indexPath)
         cell.configure(cheer)
+        cell.delegate = self
         return cell
     }
     

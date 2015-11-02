@@ -140,6 +140,21 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
     }
     
     private func setupNavBar() {
+        setupCheerListButton()
+        setupShareButton()
+    }
+    
+    private func setupCheerListButton() {
+        let button: UIButton = UIButton(type: .System)
+        button.setImage(UIImage(named: "snowflake_icon"), forState: .Normal)
+        button.addTarget(self, action: "cheerListButtonPressed:", forControlEvents: .TouchUpInside)
+        button.bounds = CGRect(x: 0, y: 0, width: 44, height: 44)
+        button.imageEdgeInsets = UIEdgeInsets(top: 11, left: 0, bottom: 13, right: 24)
+        let barButton = UIBarButtonItem(customView: button)
+        navigationItem.leftBarButtonItem = barButton
+    }
+    
+    private func setupShareButton() {
         let button: UIButton = UIButton(type: .System)
         button.setImage(UIImage(named: "gift_icon"), forState: .Normal)
         button.addTarget(self, action: "shareButtonPressed:", forControlEvents: .TouchUpInside)
@@ -299,6 +314,11 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
     }
     
     // MARK: Sharing
+    
+    func cheerListButtonPressed(sender: UIBarButtonItem) {
+        let nav = NavigationController(rootViewController: CheerListViewController())
+        navigationController?.presentViewController(nav, animated: true, completion: nil)
+    }
     
     func shareButtonPressed(sender: UIBarButtonItem) {
         let text = "Help me spread some Christmas Cheer with this cool app I found!"
