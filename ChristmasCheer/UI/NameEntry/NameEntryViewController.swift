@@ -51,29 +51,6 @@ class NameEntryViewController: UIViewController, UITextFieldDelegate {
             FeedbackSounds.ErrorSound.play()
             showProfanityFailureAlert()
         }
-        
-    }
-    
-    private func attemptToRegisterInstallationForUsername(name: String) {
-        let installation = PFInstallation.currentInstallation()
-        installation.register { [weak self] result in
-            switch result {
-            case .Success(_):
-                ApplicationSettings.displayName = name
-                FeedbackSounds.SuccessSound.play()
-                self?.dismissViewControllerAnimated(true, completion: nil)
-            case .Failure(_):
-                self?.showFailedToCreateInstallationAlert()
-            }
-        }
-    }
-    
-    private func showFailedToCreateInstallationAlert() {
-        let title = "Oh No!"
-        let message = "There must be a blizzard because I can't contact the elves to sign you up!  Check your connection and try to sign up again!"
-        let confirmation = "Ok"
-        let alert = SCLAlertView()
-        alert.showSuccess(title, subTitle: message, closeButtonTitle: confirmation)
     }
     
     private func showNameConfirmationAlertForName(name: String) {
@@ -83,7 +60,9 @@ class NameEntryViewController: UIViewController, UITextFieldDelegate {
         let confirmation = "Wait, go back!"
         let alert = SCLAlertView()
         alert.addButton("Yup, I'm Sure!") { [weak self] in
-            self?.attemptToRegisterInstallationForUsername(name)
+            ApplicationSettings.displayName = name
+            FeedbackSounds.SuccessSound.play()
+            self?.dismissViewControllerAnimated(true, completion: nil)
         }
         alert.showSuccess(title, subTitle: message, closeButtonTitle: confirmation)
     }

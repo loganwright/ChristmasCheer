@@ -172,17 +172,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // Has Registered
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        PFInstallation.currentInstallation().setDeviceTokenFromData(deviceToken)
+        
         ApplicationSettings.deviceTokenData = deviceToken
+        
         NotificationManager.hasReceivedNotificationRegistrationPrompt = true
         NotificationManager.didRegisterNotificationSettings()
-        
-        PFInstallation.currentInstallation().setDeviceTokenFromData(deviceToken)
-        PFInstallation.currentInstallation().saveInBackground()
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         print("FAILED TO REGISTER ERROR: \(error)")
-        
+        NotificationManager.didFailToRegisterNotificationSettings()
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {

@@ -25,6 +25,8 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
     // MARK: Private Properties
     private var isPermissionsViewControllerPresented = false
     private var countdownTimer: NSTimer?
+    
+    // Required to allow functionality w/o notifications, but Imma bug you about it.
     private var hasPresentedNotificationPermissionsControllerAtLeastOnce = false
     
     private var viewIsCurrentlyPresented: Bool = false

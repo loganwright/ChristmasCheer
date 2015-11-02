@@ -47,12 +47,12 @@ class CheerListViewController: UIViewController, CheerListCellDelegate {
         super.viewDidLoad()
         setup()
         stylize()
+        fetchDataAndReloadTableView()
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         resize()
-        fetchDataAndReloadTableView()
     }
     
     func resize() {
