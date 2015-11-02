@@ -24,6 +24,10 @@ private struct CheerListTableViewSection {
 
 // MARK: CheerListViewController
 
+/*
+Remove namespacing for iOS 8, otherwise, nibs don't load properly
+*/
+@objc(CheerListViewController)
 class CheerListViewController: UIViewController, CheerListCellDelegate {
     
     @IBOutlet weak var tableView: UITableView!

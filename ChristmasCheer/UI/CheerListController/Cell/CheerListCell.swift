@@ -12,6 +12,7 @@ protocol CheerListCellDelegate : class {
     func cheerListCell(menuViewCell: CheerListCell, didPressReturnCheerButtonForOriginalNote originalNote: ChristmasCheerNotification)
 }
 
+@objc(CheerListCell)
 class CheerListCell: UITableViewCell {
 
     @IBOutlet weak var indicatorButton: UIButton!

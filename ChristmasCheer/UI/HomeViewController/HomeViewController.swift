@@ -11,6 +11,10 @@ import CoreLocation
 import Parse
 import Cartography
 
+/*
+Remove namespacing for iOS 8, otherwise, nibs don't load properly
+*/
+@objc(HomeViewController)
 class HomeViewController: UIViewController, PermissionsRequestViewControllerDelegate, UINavigationControllerDelegate {
     
     // MARK: Views
