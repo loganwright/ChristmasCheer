@@ -97,33 +97,28 @@ final class ParseHelper {
     
     // MARK: Get Notifications
     
-    class func fetchNotifications(completion: Result<[ChristmasCheerNotification]> -> Void) {
-        guard
-            let query = ChristmasCheerNotification.query(),
-            let installationId = PFInstallation.currentInstallation().objectId
-            else {
-                let error = ParseError.Unknown("Unable to create notification query")
-                completion(.Failure(error))
-                return
-            }
-        
-        query.whereKey("toInstallationId", equalTo: installationId)
-        query.limit = 1000
-        query.orderByDescending("createdAt")
-        query.cachePolicy = .NetworkElseCache
-        
-        Qu.Background {
-            let result: Result<[ChristmasCheerNotification]>
-            do {
-                result = .Success(try query.findObjects())
-            } catch {
-                result = .Failure(error)
-            }
-            
-            Qu.Main {
-                completion(result)
-            }
+    class func fetchUnreturnedCheer(completion: Result<[ChristmasCheerNotification]> -> Void) {
+        guard let query = PFQuery.cheerQuery() else {
+            let error = ParseError.Unknown("Unable to create cheer query")
+            completion(.Failure(error))
+            return
         }
+        
+        query.whereKeyDoesNotExist("initiationNoteId")
+        query.whereKey("hasBeenRespondedTo", equalTo: false)
+        query.cachePolicy = .CacheThenNetwork
+        // Using block method to use cache then network policy
+        query.findObjects(completion)
+    }
+    
+    class func fetchNotifications(completion: Result<[ChristmasCheerNotification]> -> Void) {
+        guard let query = PFQuery.cheerQuery() else {
+            let error = ParseError.Unknown("Unable to create cheer query")
+            completion(.Failure(error))
+            return
+        }
+        
+        query.execute(completion)
     }
     
     // MARK: Feedback / Support
@@ -160,6 +155,23 @@ final class ParseHelper {
     }
 }
 
+private extension PFQuery {
+    static func cheerQuery() -> PFQuery? {
+        guard
+            let query = ChristmasCheerNotification.query(),
+            let installationId = PFInstallation.currentInstallation().objectId
+            else {
+                return nil
+        }
+        
+        query.whereKey("toInstallationId", equalTo: installationId)
+        query.limit = 1000
+        query.orderByDescending("createdAt")
+        query.cachePolicy = .NetworkElseCache
+        return query
+    }
+}
+
 extension ChristmasCheerNotification {
     static func fetchWithNotification(notification: Notification, completion: Result<ChristmasCheerNotification> -> Void) {
         let originalNote = ChristmasCheerNotification()
@@ -181,10 +193,47 @@ extension ChristmasCheerNotification {
 }
 
 extension PFQuery {
+    
+    func findObjects<T : PFObject>(completion: Result<[T]> -> Void) {
+        findObjectsInBackgroundWithBlock { objects, error in
+            let result: Result<[T]>
+            if let objects = objects as? [T] {
+                result = .Success(objects)
+            } else if let objects = objects {
+                let error = ParseError.Unknown("Expected type: \(T.self) got: \(objects)")
+                result = .Failure(error)
+            } else if let error = error {
+                result = .Failure(error)
+            } else {
+                let error = ParseError.Unknown("No result or objects for unreturned cheer query")
+                result = .Failure(error)
+            }
+            
+            Qu.Main {
+                completion(result)
+            }
+        }
+    }
+    
     func findObjects<T : PFObject>() throws -> [T] {
         guard let objects = try findObjects() as? [T] else {
             throw ParseError.FailedQuery("Unable to cast to type: \([T].self)")
         }
         return objects
+    }
+    
+    func execute<T : PFObject>(completion: Result<[T]> -> Void) {
+        Qu.Background {
+            let result: Result<[T]>
+            do {
+                result = .Success(try self.findObjects())
+            } catch {
+                result = .Failure(error)
+            }
+            
+            Qu.Main {
+                completion(result)
+            }
+        }
     }
 }

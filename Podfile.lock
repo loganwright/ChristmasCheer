@@ -1,4 +1,5 @@
 PODS:
+  - BBBadgeBarButtonItem (1.2)
   - Bolts/Tasks (1.4.0)
   - Cartography (0.6.0)
   - Crashlytics (3.3.4)
@@ -6,19 +7,21 @@ PODS:
     - Fabric/Base (= 1.5.5)
   - Fabric/Base (1.5.5)
   - Genome (1.0.4)
-  - Parse (HEAD based on 1.9.1):
+  - Parse (1.9.1):
     - Bolts/Tasks (>= 1.4.0)
   - YamlSwift (1.2.1)
 
 DEPENDENCIES:
+  - BBBadgeBarButtonItem
   - Cartography
   - Crashlytics
   - Fabric
   - Genome
-  - Parse (HEAD)
+  - Parse (= 1.9.1)
   - YamlSwift
 
 SPEC CHECKSUMS:
+  BBBadgeBarButtonItem: c2fbca0bff18e21b70defc9438a8a5048008e7ca
   Bolts: 0e9bce58b9b9f5e8a7a4d47b16d2fabec289072b
   Cartography: 70af183a248547694a8cfaa6b989cb7e04589985
   Crashlytics: 41c082440d2e14da444186fff65e79c0b4b35d4c

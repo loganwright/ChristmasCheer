@@ -32,6 +32,9 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
     private var viewIsCurrentlyPresented: Bool = false
     
     private let snowFallingView = MESnowFallView()
+    private var snowflakeButton: UIButton!
+    
+    private var repeater: Repeater?
     
     // MARK: Lifecycle
     
@@ -51,12 +54,12 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         viewIsCurrentlyPresented = true
-        ensureSessionIsStillValid()
+        updateSession()
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        self.viewIsCurrentlyPresented = false
+        viewIsCurrentlyPresented = false
     }
     
     override func viewDidLayoutSubviews() {
@@ -64,15 +67,64 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
         christmasCheerButton.layer.cornerRadius = CGRectGetHeight(christmasCheerButton.bounds) / 2.0
     }
     
+    // MARK: Unread Cheer Check
+    
+    private func checkForUnreturnedCheer() {
+        repeater = Repeater(interval: 1.minute, fireImmediately: true) { [weak self] in
+            self?.updateUnreturnedCheerBadge()
+        }
+    }
+    
+    
+    private func updateUnreturnedCheerBadge() {
+        ParseHelper.fetchUnreturnedCheer { [weak self] result in
+            switch result {
+            case let .Success(unreturnedCheer):
+                self?.styleSnowButtonForCheerCount(unreturnedCheer.count)
+            case let .Failure(error):
+                print("error fetching unreturned cheer: \(error)")
+            }
+        }
+    }
+    
+    private func styleSnowButtonForCheerCount(cheerCount: Int) {
+        let title: String?
+        let img: UIImage?
+        let color: UIColor?
+        let size: CGSize
+        if cheerCount <= 0 {
+            title = nil
+            img = UIImage(named: "snowflake_icon")
+            color = nil
+            size = CGSize(width: 44, height: 44)
+        } else {
+            title = "\(cheerCount)"
+            img = nil
+            color = ColorPalette.SparklyWhite.color
+            size = CGSize(width: 22, height: 22)
+        }
+        snowflakeButton.setTitle(title, forState: .Normal)
+        snowflakeButton.setImage(img, forState: .Normal)
+        snowflakeButton.backgroundColor = color
+        snowflakeButton.bounds.size = size
+        snowflakeButton.layer.cornerRadius = min(CGRectGetWidth(snowflakeButton.bounds), CGRectGetHeight(snowflakeButton.bounds)) / 2
+    }
+    
     // MARK: Permissions Management
     
-    func ensureSessionIsStillValid() {
-        guard !isPermissionsViewControllerPresented && viewIsCurrentlyPresented else { return }
-        guard requestOrUpdateDisplayName() else { return }
-        guard requestOrUpdateLocationPermissions() else { return }
-        guard requestOrUpdateNotificationPermissions() else { return }
+    func updateSession() {
+        guard ensureSessionIsStillValid() else { return }
+        checkForUnreturnedCheer()
+    }
+    
+    private func ensureSessionIsStillValid() -> Bool {
+        guard !isPermissionsViewControllerPresented && viewIsCurrentlyPresented else { return false }
+        guard requestOrUpdateDisplayName() else { return false }
+        guard requestOrUpdateLocationPermissions() else { return false }
+        guard requestOrUpdateNotificationPermissions() else { return false }
         
         ensureCanSendChristmasCheer()
+        return true
     }
     
     private func requestOrUpdateDisplayName() -> Bool {
@@ -146,18 +198,19 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
     }
     
     private func setupNavBar() {
-        setupCheerListButton()
+        setupSnowflakeButton()
         setupShareButton()
     }
     
-    private func setupCheerListButton() {
-        let button: UIButton = UIButton(type: .System)
-        button.setImage(UIImage(named: "snowflake_icon"), forState: .Normal)
-        button.addTarget(self, action: "cheerListButtonPressed:", forControlEvents: .TouchUpInside)
-        button.bounds = CGRect(x: 0, y: 0, width: 44, height: 44)
-        button.imageEdgeInsets = UIEdgeInsets(top: 11, left: 0, bottom: 13, right: 24)
-        let barButton = UIBarButtonItem(customView: button)
-        navigationItem.leftBarButtonItem = barButton
+    private func setupSnowflakeButton() {
+        snowflakeButton = UIButton(type: .System)
+        snowflakeButton.addTarget(self, action: "cheerListButtonPressed:", forControlEvents: .TouchUpInside)
+        snowflakeButton.bounds = CGRect(x: 0, y: 0, width: 44, height: 44)
+        snowflakeButton.titleLabel?.font = ChristmasCrackFont.Regular(26).font
+        snowflakeButton.setTitleColor(ColorPalette.SparklyRed.color, forState: .Normal)
+        snowflakeButton.setImage(UIImage(named: "snowflake_icon"), forState: .Normal)
+        snowflakeButton.imageEdgeInsets = UIEdgeInsets(top: 11, left: 0, bottom: 13, right: 24)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: snowflakeButton)
     }
     
     private func setupShareButton() {
@@ -315,7 +368,7 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
     func shouldDismissPermissionsRequestViewController(prvc: PermissionsRequestViewController) {
         prvc.dismissViewControllerAnimated(true) { [weak self] in
             self?.isPermissionsViewControllerPresented = false
-            self?.ensureSessionIsStillValid()
+            self?.updateSession()
         }
     }
     
@@ -365,4 +418,73 @@ private extension NSTimeInterval {
     }
 }
 
+private final class Repeater {
+    let interval: NSTimeInterval
+    let condition: Void -> Bool
+    let operation: Void -> Void
+    
+    var queued = false
+    
+    init(interval: NSTimeInterval, fireImmediately: Bool = true, condition: Void -> Bool = { true }, operation: Void -> Void) {
+        self.interval = interval
+        self.condition = condition
+        self.operation = operation
+        
+        if fireImmediately {
+            fired()
+        } else {
+            queueRepeater()
+        }
+    }
+    
+    private func queueRepeater() {
+        guard !queued else { return }
+        queued = true
+        After(interval) { [weak self] in
+            self?.queued = true
+            self?.fired()
+        }
+    }
+    
+    private func fired() {
+        guard condition() else { return }
+        operation()
+        queueRepeater()
+    }
+    
+}
 
+//
+//  After.swift
+//
+//  Created by Logan Wright on 10/24/15.
+//  Copyright © 2015 lowriDevs. All rights reserved.
+//
+
+public func After(after: NSTimeInterval, op: () -> ()) {
+    After(after, op: op, completion: nil)
+}
+
+public func After(after: NSTimeInterval, numberOfTimes: Int, op: () -> (), completion: Void -> Void = {}) {
+    let numberOfTimesLeft = numberOfTimes - 1
+    let wrappedCompletion: Void -> Void
+    if numberOfTimesLeft > 0 {
+        wrappedCompletion = {
+            After(after, numberOfTimes: numberOfTimesLeft, op: op, completion: completion)
+        }
+    } else {
+        wrappedCompletion = completion
+    }
+    
+    After(after, op: op, completion: wrappedCompletion)
+}
+
+public func After(after: NSTimeInterval, op: () -> (), completion: (() -> Void)?) {
+    let seconds = Int64(after * Double(NSEC_PER_SEC))
+    let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, seconds)
+    dispatch_after(dispatchTime, dispatch_get_main_queue()) {
+        let blockOp = NSBlockOperation(block: op)
+        blockOp.completionBlock = completion
+        NSOperationQueue.mainQueue().addOperation(blockOp)
+    }
+}
