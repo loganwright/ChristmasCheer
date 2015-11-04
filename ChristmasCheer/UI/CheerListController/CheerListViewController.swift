@@ -74,13 +74,8 @@ class CheerListViewController: UIViewController, CheerListCellDelegate {
     }
     
     private func setupNavBar() {
-        let button: UIButton = UIButton(type: .System)
-        button.setImage(UIImage(named: "snowflake_icon"), forState: .Normal)
-        button.addTarget(self, action: "backButtonPressed:", forControlEvents: .TouchUpInside)
-        button.bounds = CGRect(x: 0, y: 0, width: 44, height: 44)
-        button.imageEdgeInsets = UIEdgeInsets(top: 11, left: 0, bottom: 13, right: 24)
-        let barButton = UIBarButtonItem(customView: button)
-        navigationItem.leftBarButtonItem = barButton
+        navigationItem.leftBarButtonItem = UIBarButtonItem
+            .cc_backBarButtonItem(self, selector: "backButtonPressed:")
     }
     
     func setupTableView() {

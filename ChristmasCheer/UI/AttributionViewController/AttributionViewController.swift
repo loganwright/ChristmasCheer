@@ -176,6 +176,25 @@ class AttributionHeaderCell : UITableViewHeaderFooterView {
     }
 }
 
+extension UIBarButtonItem {
+    static func cc_backBarButtonItem(target: AnyObject?, selector: Selector) -> UIBarButtonItem {
+        let backButton = UIBarButtonItem(
+            title: "Back",
+            style: .Plain,
+            target: target,
+            action: selector
+        )
+        let attributes = [
+            NSFontAttributeName : ChristmasCrackFont.Regular(32.0).font
+        ]
+        backButton.setTitleTextAttributes(
+            attributes,
+            forState: .Normal
+        )
+        return backButton
+    }
+}
+
 /*
 Remove namespacing for iOS 8, otherwise, nibs don't load properly
 */
@@ -216,20 +235,8 @@ class AttributionViewController: UIViewController, UITableViewDelegate, UITableV
     
     private func setupNavigationBar() {
         title = "Attributions"
-        let backButton = UIBarButtonItem(
-            title: "Back",
-            style: .Plain,
-            target: self,
-            action: "backButtonPressed:"
-        )
-        let attributes = [
-            NSFontAttributeName : ChristmasCrackFont.Regular(32.0).font
-        ]
-        backButton.setTitleTextAttributes(
-            attributes,
-            forState: .Normal
-        )
-        navigationItem.leftBarButtonItem = backButton
+        navigationItem.leftBarButtonItem = UIBarButtonItem
+            .cc_backBarButtonItem(self, selector: "backButtonPressed:")
     }
     
     private func setupData() {

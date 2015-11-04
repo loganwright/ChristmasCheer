@@ -5,7 +5,7 @@ platform :ios, '8.0'
 
 link_with 'ChristmasCheer', 'ChristmasCheerDevelopment'
 
-pod 'Parse', :head
+pod 'Parse', '1.9.1'
 
 pod 'Genome'
 

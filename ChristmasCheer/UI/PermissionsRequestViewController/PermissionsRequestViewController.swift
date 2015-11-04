@@ -258,15 +258,21 @@ class PermissionsRequestViewController: UIViewController {
     private func performNotificationsPermissionAction() {
         switch NotificationManager.authorizationStatus {
         case .NotYetDetermined:
-            PJProgressHUD.showWithStatus("Registering your device with Apple. (Requires Internet)")
-            NotificationManager.requestRemoteNotificationAuthorization { [weak self] in
-                PJProgressHUD.hide()
-                self?.performActionForCurrentPurpose()
-            }
+            requestNotificationPermissions()
         case .Authorized:
             saveOrDismissInstallation()
         case .Denied:
             showPermissionsDeniedAlert()
+        }
+    }
+    
+    private func requestNotificationPermissions() {
+        PJProgressHUD.showWithStatus("Registering your device with Apple. (Requires Internet)")
+        NotificationManager.requestRemoteNotificationAuthorization { [weak self] auth in
+            PJProgressHUD.hide()
+            // If auth still isn't determined, then the request failed, usually due to no internet, or simulator
+            guard auth != .NotYetDetermined else { return }
+            self?.performActionForCurrentPurpose()
         }
     }
     

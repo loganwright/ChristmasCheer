@@ -84,7 +84,7 @@ private extension AppDelegate {
 private extension HomeViewController {
     func updateForApplicationActiveState() {
         guard checkAndUpdatePresentedControllerIfNecessary() else { return }
-        ensureSessionIsStillValid()
+        updateSession()
     }
     
     func refreshCheerListIfPossible() {
