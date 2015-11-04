@@ -194,22 +194,11 @@ class PermissionsRequestViewController: UIViewController {
     
     private func saveOrDismissInstallation() {
         let installation = PFInstallation.currentInstallation()
-        
-        switch purpose {
-        case .LocationServices:
-            if installation.hasRegisteredWithServer {
-                dismiss()
-            } else {
-                // We've approved location, but the installation hasn't been saved yet.
-                registerInstallationWithServer()
-            }
-        case .Notifications:
-            if let _ = installation.deviceToken {
-                dismiss()
-            } else {
-                // We've approved notifications, but the installation hasn't been saved yet.
-                registerInstallationWithServer()
-            }
+        if !installation.isDirty() {
+            dismiss()
+        } else {
+            // We've approved location, but the installation hasn't been saved yet.
+            registerInstallationWithServer()
         }
     }
     
@@ -272,7 +261,7 @@ class PermissionsRequestViewController: UIViewController {
             PJProgressHUD.hide()
             // If auth still isn't determined, then the request failed, usually due to no internet, or simulator
             guard auth != .NotYetDetermined else { return }
-            self?.registerInstallationWithServer()
+            self?.performActionForCurrentPurpose()
         }
     }
     
