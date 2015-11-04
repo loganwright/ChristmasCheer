@@ -61,6 +61,22 @@
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
+    <false/>
+    <key>UIApplicationShortcutItems</key>
+    <array>
+        <dict>
+            <key>UIApplicationShortcutItemIconFile</key>
+            <string>snowflake_icon</string>
+            <key>UIApplicationShortcutItemTitle</key>
+            <string>Send Random Cheer!</string>
+            <key>UIApplicationShortcutItemType</key>
+            <string>io.loganwright.christmasCheer.sendRandomCheer</string>
+            <key>UIApplicationShortcutItemUserInfo</key>
+            <dict>
+                <key>Key</key>
+                <string>Value</string>
+            </dict>
+        </dict>
+    </array>
 </dict>
 </plist>

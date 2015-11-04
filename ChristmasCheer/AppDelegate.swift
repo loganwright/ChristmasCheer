@@ -219,4 +219,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         action.handleNotification(notification, completion: completionHandler)
     }
+    
+    @available(iOS 9.0, *)
+    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+        guard let shortcut = ApplicationShortcut(rawValue: shortcutItem.type) else {
+            completionHandler(false)
+            return
+        }
+        
+        switch shortcut {
+        case .SendRandomCheer:
+            handleSendRandomCheerShortcut(completionHandler)
+        }
+    }
+    
+    private func handleSendRandomCheerShortcut(completionHandler: Bool -> Void) {
+        /*
+        I realize this probably isn't the best way to do this w/ mixing UI and model, but for now, this is the best way I can think of w/o too much time.
+        */
+        let op = {
+            self.homeViewController.sendCheer(completionHandler)
+        }
+        if homeViewController.presentedViewController != nil {
+            homeViewController.dismissViewControllerAnimated(false, completion: op)
+        } else {
+            homeViewController.sendCheer(completionHandler)
+        }
+    }
+}
+
+enum ApplicationShortcut : String {
+    // Defined in .plist
+    case SendRandomCheer = "io.loganwright.christmasCheer.sendRandomCheer"
 }
