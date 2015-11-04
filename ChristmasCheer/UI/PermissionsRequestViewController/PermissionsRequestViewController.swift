@@ -272,7 +272,7 @@ class PermissionsRequestViewController: UIViewController {
             PJProgressHUD.hide()
             // If auth still isn't determined, then the request failed, usually due to no internet, or simulator
             guard auth != .NotYetDetermined else { return }
-            self?.performActionForCurrentPurpose()
+            self?.registerInstallationWithServer()
         }
     }
     
@@ -356,20 +356,6 @@ extension PFInstallation {
 }
 
 extension PermissionsRequestViewController {
-    private func attemptToRegisterInstallationForUsername(name: String) {
-        let installation = PFInstallation.currentInstallation()
-        installation.register { [weak self] result in
-            switch result {
-            case .Success(_):
-                ApplicationSettings.displayName = name
-                FeedbackSounds.SuccessSound.play()
-                self?.dismissViewControllerAnimated(true, completion: nil)
-            case .Failure(_):
-                self?.showFailedToCreateInstallationAlert()
-            }
-        }
-    }
-    
     private func showFailedToCreateInstallationAlert() {
         let title = "Oh No!"
         let message = "There must be a blizzard because I can't contact the elves to sign you up!  Check your connection and try to sign up again!"
