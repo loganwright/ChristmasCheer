@@ -150,6 +150,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let installation = PFInstallation.currentInstallation()
         installation.saveIfRegisteredForNotifications()
+        
+        /**
+        *  This will not request authorization unless the user has already approved.
+        * 
+        *  This is done so that adding notification actions / categories happens automatically for upgrading users
+        */
+        NotificationManager.requestRemoteNotificationAuthorization { _ in }
         return true
     }
 
@@ -198,4 +205,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         homeViewController.refreshCheerListIfPossible()
     }
+    
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
+        guard
+            let id = identifier,
+            let action = NotificationAction(rawValue: id),
+            let info = userInfo as? JSON,
+            let notification = try? Notification.mappedInstance(info)
+            else {
+                completionHandler()
+                return
+            }
+        
+        action.handleNotification(notification, completion: completionHandler)
+    }
+    
+    @available(iOS 9.0, *)
+    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+        guard let shortcut = ApplicationShortcut(rawValue: shortcutItem.type) else {
+            completionHandler(false)
+            return
+        }
+        
+        switch shortcut {
+        case .SendRandomCheer:
+            handleSendRandomCheerShortcut(completionHandler)
+        }
+    }
+    
+    private func handleSendRandomCheerShortcut(completionHandler: Bool -> Void) {
+        /*
+        I realize this probably isn't the best way to do this w/ mixing UI and model, but for now, this is the best way I can think of w/o too much time.
+        */
+        let op = {
+            self.homeViewController.sendCheer(completionHandler)
+        }
+        if homeViewController.presentedViewController != nil {
+            homeViewController.dismissViewControllerAnimated(false, completion: op)
+        } else {
+            homeViewController.sendCheer(completionHandler)
+        }
+    }
+}
+
+enum ApplicationShortcut : String {
+    // Defined in .plist
+    case SendRandomCheer = "io.loganwright.christmasCheer.sendRandomCheer"
 }

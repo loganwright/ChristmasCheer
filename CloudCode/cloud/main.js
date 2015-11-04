@@ -240,6 +240,7 @@ function pushDataForNewCheerNote(newCheerNote, isResponse) {
     title: "Merry Christmas!",
     sound: randomTone,
     alert: newCheerNote.get("message"),
+    category: "InitiatorCheer",
     isResponse: isResponse === true
   };
 
@@ -427,6 +428,7 @@ Parse.Cloud.define("returnCheer", function(request, response) {
                   title: "Merry Christmas!",
                   sound: randomNote,
                   alert: message,
+                  category: "ResponseCheer"
                 }
               }, {
                 success: function() {

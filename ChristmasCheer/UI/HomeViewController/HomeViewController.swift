@@ -251,19 +251,27 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
     // MARK: Christmas Cheer Sending
     
     dynamic private func sendChristmasCheerButtonPressed(sender: UIButton) {
+        sendCheer()
+    }
+    
+    func sendCheer(completion: Bool -> Void = { _ in }) {
         guard ensureSeasonIsOpenOrAlert() else { return }
         guard ensureCanSendCheerOrAlert() else { return }
         
         PJProgressHUD.showWithStatus("Contacting the North Pole ...")
         ParseHelper.sendRandomCheer { [weak self] result in
+            let success: Bool
             switch result {
             case .Success(_):
                 self?.showSendChristmasCheerSuccessAlert()
+                success = true
             case .Failure(_):
                 self?.showSendChristmasCheerFailureAlert()
+                success = false
             }
             self?.ensureCanSendChristmasCheer()
             PJProgressHUD.hide()
+            completion(success)
         }
     }
 
