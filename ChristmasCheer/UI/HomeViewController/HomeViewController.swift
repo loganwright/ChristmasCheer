@@ -255,8 +255,14 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
     }
     
     func sendCheer(completion: Bool -> Void = { _ in }) {
-        guard ensureSeasonIsOpenOrAlert() else { return }
-        guard ensureCanSendCheerOrAlert() else { return }
+        guard ensureSeasonIsOpenOrAlert() else {
+            completion(false)
+            return
+        }
+        guard ensureCanSendCheerOrAlert() else {
+            completion(false)
+            return
+        }
         
         PJProgressHUD.showWithStatus("Contacting the North Pole ...")
         ParseHelper.sendRandomCheer { [weak self] result in
