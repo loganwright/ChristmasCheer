@@ -150,6 +150,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let installation = PFInstallation.currentInstallation()
         installation.saveIfRegisteredForNotifications()
+        
+        /**
+        *  This will not request authorization unless the user has already approved.
+        * 
+        *  This is done so that adding notification actions / categories happens automatically for upgrading users
+        */
+        NotificationManager.requestRemoteNotificationAuthorization { _ in }
         return true
     }
 
@@ -197,5 +204,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notification.aps.sound?.play()
         
         homeViewController.refreshCheerListIfPossible()
+    }
+    
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
+        guard
+            let id = identifier,
+            let action = NotificationAction(rawValue: id),
+            let info = userInfo as? JSON,
+            let notification = try? Notification.mappedInstance(info)
+            else {
+                completionHandler()
+                return
+            }
+        
+        action.handleNotification(notification, completion: completionHandler)
     }
 }

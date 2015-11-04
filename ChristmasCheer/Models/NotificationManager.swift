@@ -71,17 +71,94 @@ class NotificationManager: NSObject {
     // MARK: Permissions Request
     
     class func requestRemoteNotificationAuthorization(completion: AuthorizationStatus -> Void) {
-        if !self.hasReceivedNotificationRegistrationPrompt {
-            authorizationStatusUpdated = completion
-            let userNotificationTypes: UIUserNotificationType = [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound]
-            let notificationSettings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
-            UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
-        } else {
-            completion(authorizationStatus)
-            print("User already prompted for remote notifications!")
+        guard !self.hasReceivedNotificationRegistrationPrompt
+            || authorizationStatus == .Authorized
+            // If the user is already authorized, we call this function multiple times so that we can register new notification types on upgrade
+            else {
+                completion(authorizationStatus)
+                return
+            }
+        
+        authorizationStatusUpdated = completion
+        let userNotificationTypes: UIUserNotificationType = [
+            .Alert,
+            .Badge,
+            .Sound
+        ]
+        let categories = NotificationCategory.allCategories.flatMap { $0.category }
+        let notificationSettings = UIUserNotificationSettings(
+            forTypes: userNotificationTypes,
+            categories: Set(categories)
+        )
+        UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
+    }
+}
+
+/*
+I go between names, but I prefer this
+
+receivedCheer == InitiatorCheer
+returnedCheer == ResponseCheer
+
+Initiator and Response is more clear
+*/
+enum NotificationCategory : String {
+    // These keys are replicated on server, must be updated there, or WILL NOT WORK
+    case InitiatorCheer
+    case ResponseCheer
+    
+    static let allCategories: [NotificationCategory] = [.InitiatorCheer, .ResponseCheer]
+    
+    var category: UIUserNotificationCategory? {
+        switch self {
+        case .InitiatorCheer:
+            let category = UIMutableUserNotificationCategory()
+            category.identifier = rawValue
+            let actions = [
+                NotificationAction.ReturnCheer.action
+            ]
+            category.setActions(actions, forContext: .Default)
+            return category
+        case .ResponseCheer:
+            return nil
         }
     }
 }
+
+enum NotificationAction : String {
+    case ReturnCheer
+    
+    var action: UIUserNotificationAction {
+        let action = UIMutableUserNotificationAction()
+        switch self {
+        case .ReturnCheer:
+            action.activationMode = .Background
+            action.title = "Return Cheer"
+            action.identifier = rawValue
+            action.destructive = false
+            action.authenticationRequired = false
+            return action
+        }
+    }
+    
+    func handleNotification(notification: Notification, completion: Void -> Void) {
+        switch self {
+        case .ReturnCheer:
+            ParseHelper.returnCheer(notification) { result in
+                switch result {
+                case .Success(_):
+                    // Success in background, do nothing
+                    completion()
+                case let .Failure(error):
+                    // Failure in background, perhaps in future, schedule local notification for user to try again
+                    print("Failed to return cheer via quick action: \(error)")
+                    break
+                }
+            }
+        }
+    }
+}
+
 
 struct Notification : BasicMappable {
     
@@ -116,12 +193,17 @@ struct Aps : BasicMappable {
     
     var message: String!
     var sound: NotificationSounds?
+    var category: NotificationCategory?
     
     mutating func sequence(map: Map) throws {
         try message <~ map["alert"]
         try sound <~ map["sound"]
             .transformFromJson {
                 NotificationSounds(rawValue: $0)
+        }
+        try category <~ map["category"]
+            .transformFromJson {
+                NotificationCategory(rawValue: $0)
         }
     }
 }
