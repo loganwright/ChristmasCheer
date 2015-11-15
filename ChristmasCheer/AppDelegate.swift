@@ -159,6 +159,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if NotificationManager.notificationsAuthorized {
             NotificationManager.requestRemoteNotificationAuthorization { _ in }
         }
+        
+        ParseHelper._fetchNotifications { result in
+            switch result {
+            case let .Success(cheerPairs):
+                print("Pairs: \(cheerPairs)")
+                print("")
+            case let .Failure(error):
+                print("Error: \(error)")
+                print("")
+            }
+        }
         return true
     }
 

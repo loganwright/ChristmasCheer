@@ -9,6 +9,8 @@
 import UIKit
 import Parse
 
+typealias Cheer = ChristmasCheerNotification
+
 class ChristmasCheerNotification : PFObject, PFSubclassing {
     
     // MARK: Properties
@@ -38,4 +40,14 @@ class ChristmasCheerNotification : PFObject, PFSubclassing {
     class func parseClassName() -> String {
         return "ChristmasCheerNotification"
     }
+}
+
+extension Cheer {
+    var isInitiatorCheer: Bool {
+        return !isResponseCheer
+    }
+    var isResponseCheer: Bool {
+        return initiationNoteId != nil
+    }
+    
 }

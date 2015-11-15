@@ -93,7 +93,7 @@ class CheerListCell: UITableViewCell {
         cheerNotification = note
         
         // Is a response
-        if let _ = note.initiationNoteId {
+        if note.isResponseCheer {
             indicatorButton.backgroundColor = ColorPalette.Green.color
         } else {
             indicatorButton.backgroundColor = ColorPalette.SparklyRed.color
