@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		800205AB1BF854D2005852C9 /* _CheerListComboCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 800205AA1BF854D2005852C9 /* _CheerListComboCell.xib */; };
+		800205AC1BF854D2005852C9 /* _CheerListComboCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 800205AA1BF854D2005852C9 /* _CheerListComboCell.xib */; };
 		800819B41A22E681005B0021 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800819B21A22E681005B0021 /* HomeViewController.swift */; };
 		800819B51A22E681005B0021 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 800819B31A22E681005B0021 /* HomeViewController.xib */; };
 		803942A91A219E43006BF273 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803942A81A219E43006BF273 /* LocationManager.swift */; };
@@ -124,6 +126,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		800205AA1BF854D2005852C9 /* _CheerListComboCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = _CheerListComboCell.xib; sourceTree = "<group>"; };
 		800819B21A22E681005B0021 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = UI/HomeViewController/HomeViewController.swift; sourceTree = "<group>"; };
 		800819B31A22E681005B0021 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeViewController.xib; path = UI/HomeViewController/HomeViewController.xib; sourceTree = "<group>"; };
 		803942A81A219E43006BF273 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = Models/LocationManager.swift; sourceTree = "<group>"; };
@@ -435,6 +438,7 @@
 			children = (
 				80D629581BE6D1CF000F2E2B /* CheerListCell.swift */,
 				80D629591BE6D1CF000F2E2B /* CheerListCell.xib */,
+				800205AA1BF854D2005852C9 /* _CheerListComboCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -599,6 +603,7 @@
 				80E20D3F1A26D14F0094D629 /* PJProgressHUD.xib in Resources */,
 				803942B51A22D62F006BF273 /* santa_laugh.wav in Resources */,
 				809A6EF31A27806C00F1D6EC /* error_tone.mp3 in Resources */,
+				800205AB1BF854D2005852C9 /* _CheerListComboCell.xib in Resources */,
 				809A6EFF1A27AEE700F1D6EC /* ContactViewController.xib in Resources */,
 				803942B21A22D2BE006BF273 /* sleighbells.wav in Resources */,
 				809A6F041A27C05A00F1D6EC /* AttributionViewController.xib in Resources */,
@@ -630,6 +635,7 @@
 				808F26F71A337C5D001A8CE3 /* PermissionsRequestViewController.xib in Resources */,
 				808F26F81A337C5D001A8CE3 /* PJProgressHUD.xib in Resources */,
 				808F26F91A337C5D001A8CE3 /* santa_laugh.wav in Resources */,
+				800205AC1BF854D2005852C9 /* _CheerListComboCell.xib in Resources */,
 				808F26FA1A337C5D001A8CE3 /* error_tone.mp3 in Resources */,
 				808F26FB1A337C5D001A8CE3 /* ContactViewController.xib in Resources */,
 				808F26FC1A337C5D001A8CE3 /* sleighbells.wav in Resources */,
