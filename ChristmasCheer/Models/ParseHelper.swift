@@ -252,7 +252,7 @@ private extension PFQuery {
         }
         
         query.whereKey("fromInstallationId", equalTo: installationId)
-//        query.whereKey("hasBeenRespondedTo", equalTo: true)
+        query.whereKey("hasBeenRespondedTo", equalTo: true)
         return query
     }
     
