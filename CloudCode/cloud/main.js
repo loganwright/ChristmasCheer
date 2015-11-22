@@ -3,6 +3,8 @@ Can't change installation class so this functions as both.
 */
 
 var COUNT_ID = "7lX8Qe2HC7"
+// THIS IS TEMPORARY TO SANDBOX APPLE TESTERS & Pre 1.0.3 Users
+var APP_STORE_TESTING_VERSION = "1.0.3";
 
 Parse.Cloud.afterSave(Parse.Installation, function(request) {
 
@@ -77,6 +79,7 @@ function updateCountAndInstallationRef(request) {
       acl.setPublicWriteAccess(false);
       installationRef.setACL(acl);
 
+      installationRef.set("appVersion", request.object.get("appVersion"));
       installationRef.set("installationId", request.object.id);
       installationRef.set("appName", request.object.get("appName"));
       installationRef.save(null, {
@@ -106,19 +109,19 @@ SEND RANDOM CHEER FUNCTIONALITY
 Parse.Cloud.define("sendRandomCheer", sendRandomCheer)
 
 function sendRandomCheer(request, response) {
-  Parse.Cloud.useMasterKey();
+  // THIS IS TEMPORARY TO SANDBOX APPLE TESTERS & Pre 1.0.3 Users
+  // Passed up from client > 1.0.3
+  var currentVersion = request.params.appVersion;
+  console.log("Current version " + currentVersion);
+  if (currentVersion === APP_STORE_TESTING_VERSION) {
+    response.success("Sandboxed :)");
+    return;
+  } else {
+    response.success("Off Season!");
+    return;
+  }
 
-  // // THIS IS TEMPORARY TO SANDBOX APPLE TESTERS
-  // var APP_STORE_TESTING_VERSION = "1.0.3";
-  // // Passed up from client > 1.0.3
-  // var currentVersion = request.params.appVersion;
-  // console.log("Current version " + currentVersion);
-  // if (currentVersion === APP_STORE_TESTING_VERSION) {
-  //   // Return success so app testers don't go out into production but test that it works.
-  //   console.log("Is app store version");
-  //   response.success("Congratulations");
-  //   return
-  // }
+  Parse.Cloud.useMasterKey();
 
   var fromId = request.params.fromInstallationId;
   console.log("Cheer sent from Id: " + fromId);
@@ -379,8 +382,20 @@ RETURN CHEER FUNCTIONALITY
 */
 
 Parse.Cloud.define("returnCheer", function(request, response) {
+  // THIS IS TEMPORARY TO SANDBOX APPLE TESTERS & Pre 1.0.3 Users
+  // Passed up from client > 1.0.3
+  var currentVersion = request.params.appVersion;
+  console.log("Current version " + currentVersion);
+  if (currentVersion === APP_STORE_TESTING_VERSION) {
+    response.success("Sandboxed :)");
+    return;
+  } else {
+    response.success("Off Season!");
+    return;
+  }
 
   Parse.Cloud.useMasterKey();
+
   var originalNoteId = request.params.originalNoteId;
   var ChristmasCheerNotification = Parse.Object.extend("ChristmasCheerNotification");
   var originalNoteQuery = new Parse.Query(ChristmasCheerNotification);
