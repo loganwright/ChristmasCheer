@@ -216,8 +216,8 @@ extension SCLAlertView {
                 PJProgressHUD.showWithStatus("Contacting the North Pole ...")
                 ParseHelper.returnCheer(notification) { result in
                     switch result {
-                    case .Success(let originalNote):
-                        notifyReturnCheerSendSuccessForName(originalNote.fromName)
+                    case let .Success(originalNote, response):
+                        notifyReturnCheerSendSuccessForName(originalNote.fromName, successMessage: response.message)
                     case .Failure(_):
                         notifyReturnCheerSendFailure()
                     }
@@ -237,9 +237,10 @@ extension SCLAlertView {
         alert.showError(title, subTitle: message, closeButtonTitle: confirmation)
     }
     
-    static func notifyReturnCheerSendSuccessForName(toName: String) {
+    static func notifyReturnCheerSendSuccessForName(toName: String, successMessage: String?) {
         let title = "Sweet!"
-        let message = "The elves are delivering your cheer to \(toName) as we speak!  Way to get into the Christmas spirit!"
+        let message = successMessage
+            ?? "The elves are delivering your cheer to \(toName) as we speak!  Way to get into the Christmas spirit!"
         let confirmation = "Done!"
         let alert = SCLAlertView()
         alert.showSuccess(title, subTitle: message, closeButtonTitle: confirmation)

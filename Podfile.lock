@@ -15,7 +15,7 @@ DEPENDENCIES:
   - Crashlytics
   - Fabric
   - Genome
-  - Parse (= 1.9.1)
+  - Parse
   - YamlSwift
 
 SPEC CHECKSUMS:

@@ -954,7 +954,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.loganwright.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "094423fc-008e-435c-836e-14150b893b6b";
+				PROVISIONING_PROFILE = "69cc0f02-e0bd-462d-96e4-9cbf6106e76f";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/ChristmasCheer/ChristmasCheer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -966,7 +966,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Logan Wright (Q32LXKR624)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -979,7 +979,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.loganwright.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "094423fc-008e-435c-836e-14150b893b6b";
+				PROVISIONING_PROFILE = "69cc0f02-e0bd-462d-96e4-9cbf6106e76f";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/ChristmasCheer/ChristmasCheer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -30,23 +30,9 @@ extension Parse {
         if IS_DEVELOPMENT_TARGET {
             Parse.setApplicationId("Bb6vmkJpOfJJXnam6Sz1QhrtcIie5KzKgREZccId", clientKey: "RA7rEfXsi9zIC2ylJkOWu9WQ8WsBTLlSClTARSCw")
         } else {
-            fatalError("KEYS NOT CONFIGURED")
+            fatalError("uh uh uh")
         }
         PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
-    }
-    
-    static func updateOffSeasonStatus() {
-        if IS_DEVELOPMENT_TARGET {
-            ApplicationSettings.isOffSeason = false
-        } else {
-            PFConfig.getConfigInBackgroundWithBlock { config, _ in
-                guard
-                    let config = config,
-                    let isOffSeason = config["isOffSeason"] as? Bool
-                    else { return }
-                ApplicationSettings.isOffSeason = isOffSeason
-            }
-        }
     }
 }
 
@@ -140,7 +126,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Parse.configure(launchOptions)
-        Parse.updateOffSeasonStatus()
         
         setupWindow()
         setupDevelopmentUI()

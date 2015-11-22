@@ -153,11 +153,11 @@ class CheerListViewController: UIViewController, CheerListCellDelegate {
         ParseHelper.returnCheer(originalNote) { [weak self] result in
             guard let welf = self else { return }
             switch result {
-            case .Success(_):
+            case let .Success(originalNote, response):
                 let rawNotifications = welf.tableViewData
                     .flatMap { $0.associatedCheer }
                 welf.setupDataAndReloadTableViewWithRawNotifications(rawNotifications)
-                welf.notifyReturnCheerSendSuccessForName(originalNote.fromName)
+                welf.notifyReturnCheerSendSuccessForName(originalNote.fromName, successMessage: response.message)
             case .Failure(_):
                 welf.notifyReturnCheerSendFailure()
             }
@@ -173,9 +173,10 @@ class CheerListViewController: UIViewController, CheerListCellDelegate {
         alert.showError(title, subTitle: message, closeButtonTitle: confirmation)
     }
 
-    private func notifyReturnCheerSendSuccessForName(toName: String) {
+    private func notifyReturnCheerSendSuccessForName(toName: String, successMessage: String?) {
         let title = "Woot!"
-        let message = "The reindeer have your message and they'll be passing it on to \(toName).  Thanks for embracing the Christmas spirit!"
+        let message = successMessage
+            ?? "The reindeer have your message and they'll be passing it on to \(toName).  Thanks for embracing the Christmas spirit!"
         let confirmation = "I'm Awesome!"
         let alert = SCLAlertView()
         alert.showSuccess(title, subTitle: message, closeButtonTitle: confirmation)

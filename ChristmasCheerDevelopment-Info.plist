@@ -17,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.3</string>
+	<string>1.0.4</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.3</string>
+	<string>1.0.4</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationUsageDescription</key>
@@ -31,6 +31,22 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>christmasCrackFont.ttf</string>
+	</array>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>snowflake_icon</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Send Random Cheer!</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>io.loganwright.christmasCheer.sendRandomCheer</string>
+			<key>UIApplicationShortcutItemUserInfo</key>
+			<dict>
+				<key>Key</key>
+				<string>Value</string>
+			</dict>
+		</dict>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
@@ -48,21 +64,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-    <key>UIApplicationShortcutItems</key>
-    <array>
-        <dict>
-            <key>UIApplicationShortcutItemIconFile</key>
-            <string>snowflake_icon</string>
-            <key>UIApplicationShortcutItemTitle</key>
-            <string>Send Random Cheer!</string>
-            <key>UIApplicationShortcutItemType</key>
-            <string>io.loganwright.christmasCheer.sendRandomCheer</string>
-            <key>UIApplicationShortcutItemUserInfo</key>
-            <dict>
-                <key>Key</key>
-                <string>Value</string>
-            </dict>
-        </dict>
-    </array>
 </dict>
 </plist>

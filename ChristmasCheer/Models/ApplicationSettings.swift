@@ -48,7 +48,6 @@ enum Setting : String, EnumSettingsKeyAccessible {
     case LastSentChristmasCheerTimestamp = "CCApplicationSettingsLastSentChristmasCheerTimestampKey"
     case LocationName = "CCApplicationSettingsLocationNameKey"
     case UserIdentifier = "CCApplicationSettingsUserIdentifierKey"
-    case IsOffSeason = "CCApplicationSettingsIsOffSeasonKey"
     case DeviceTokenData = "CCApplicationSettingsDeviceTokenDataKey"
 }
 
@@ -114,15 +113,6 @@ class ApplicationSettings: NSObject {
             return timestamp > 1.minute
         } else {
             return true
-        }
-    }
-    
-    class var isOffSeason: Bool {
-        get {
-            return Setting.IsOffSeason.readFromDefaults() ?? false
-        }
-        set {
-            Setting.IsOffSeason.writeToDefaults(newValue)
         }
     }
     

@@ -255,10 +255,6 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
     }
     
     func sendCheer(completion: Bool -> Void = { _ in }) {
-        guard ensureSeasonIsOpenOrAlert() else {
-            completion(false)
-            return
-        }
         guard ensureCanSendCheerOrAlert() else {
             completion(false)
             return
@@ -268,8 +264,11 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
         ParseHelper.sendRandomCheer { [weak self] result in
             let success: Bool
             switch result {
-            case .Success(_):
-                self?.showSendChristmasCheerSuccessAlert()
+            case let .Success(response) where response.isOffSeason:
+                self?.showOffSeasonChristmasCheerAlert()
+                success = false
+            case let .Success(response):
+                self?.showSendChristmasCheerSuccessAlert(response.message)
                 success = true
             case .Failure(_):
                 self?.showSendChristmasCheerFailureAlert()
@@ -279,17 +278,6 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
             PJProgressHUD.hide()
             completion(success)
         }
-    }
-
-    private func ensureSeasonIsOpenOrAlert() -> Bool {
-        let isOpen: Bool
-        if ApplicationSettings.isOffSeason {
-            showOffSeasonChristmasCheerAlert()
-            isOpen = false
-        } else {
-            isOpen = true
-        }
-        return isOpen
     }
     
     private func ensureCanSendCheerOrAlert() -> Bool {
@@ -327,9 +315,10 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
         alert.showError(title, subTitle: message, closeButtonTitle: confirmation)
     }
     
-    private func showSendChristmasCheerSuccessAlert() {
+    private func showSendChristmasCheerSuccessAlert(successMessage: String?) {
         let title = "Woot!"
-        let message = "Somewhere in the world, another person has just received your Christmas Cheer! We'll let you know if they return it to you!  Merry Christmas!"
+        let message = successMessage
+            ?? "Somewhere in the world, another person has just received your Christmas Cheer! We'll let you know if they return it to you!  Merry Christmas!"
         let confirmation = "Yay!"
         let alert = SCLAlertView()
         alert.showSuccess(title, subTitle: message, closeButtonTitle: confirmation)

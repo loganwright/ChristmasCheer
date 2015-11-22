@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import Parse
+import Genome
 
 enum ParseError : ErrorType {
     case FailedQuery(String)
@@ -21,15 +22,27 @@ enum Result<T> {
     case Failure(ErrorType)
 }
 
+struct ServerResponse : BasicMappable {
+    private(set) var message: String?
+    private(set) var isOffSeason: Bool = false
+    
+    mutating func sequence(map: Map) throws {
+        try message <~ map["message"]
+        try isOffSeason <~ map["isOffSeason"]
+    }
+}
+
 final class ParseHelper {
     
-    class func sendRandomCheer(completion: Result<Void> -> Void) {
+    class func sendRandomCheer(completion: Result<ServerResponse> -> Void) {
         let params: [String : String] = baseCheerParams()
         Qu.Background {
-            let result: Result<Void>
+            let result: Result<ServerResponse>
             do {
-                let _ = try PFCloud.callFunction("sendRandomCheer", withParameters: params)
-                result = .Success()
+                let rawResponse = try PFCloud.callFunction("sendRandomCheer", withParameters: params)
+                let json = rawResponse as? JSON ?? [:]
+                let response = try ServerResponse.mappedInstance(json)
+                result = .Success(response)
             } catch {
                 result = .Failure(error)
             }
@@ -41,7 +54,7 @@ final class ParseHelper {
         }
     }
     
-    class func returnCheer(notification: Notification, completion: Result<ChristmasCheerNotification> -> Void) {
+    class func returnCheer(notification: Notification, completion: Result<(originalNote: ChristmasCheerNotification, response: ServerResponse)> -> Void) {
         ChristmasCheerNotification.fetchWithNotification(notification) { result in
             switch result {
             case let .Success(originalNote):
@@ -52,17 +65,19 @@ final class ParseHelper {
         }
     }
     
-    class func returnCheer(originalNote: ChristmasCheerNotification, completion: Result<ChristmasCheerNotification> -> Void) {
+    class func returnCheer(originalNote: ChristmasCheerNotification, completion: Result<(originalNote: ChristmasCheerNotification, response: ServerResponse)> -> Void) {
         var params = baseCheerParams()
         params["originalNoteId"] = originalNote.objectId
-
+        
         Qu.Background {
-            let result: Result<ChristmasCheerNotification>
+            let result: Result<(originalNote: ChristmasCheerNotification, response: ServerResponse)>
             do {
-                let _ = try PFCloud.callFunction("returnCheer", withParameters: params)
+                let rawResponse = try PFCloud.callFunction("returnCheer", withParameters: params)
+                let json = rawResponse as? JSON ?? [:]
+                let response = try ServerResponse.mappedInstance(json)
                 // No need to save, it is mirrored server side.  Just edit locally.
                 originalNote.hasBeenRespondedTo = true
-                result = .Success(originalNote)
+                result = .Success((originalNote: originalNote, response: response))
             } catch {
                 result = .Failure(error)
             }

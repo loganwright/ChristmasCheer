@@ -3,8 +3,9 @@ Can't change installation class so this functions as both.
 */
 
 var COUNT_ID = "7lX8Qe2HC7"
-// THIS IS TEMPORARY TO SANDBOX APPLE TESTERS & Pre 1.0.3 Users
-var APP_STORE_TESTING_VERSION = "1.0.3";
+// THIS IS TEMPORARY TO SANDBOX APPLE TESTERS & Pre 1.0.4 Users
+var APP_STORE_TESTING_VERSION = "1.0.4";
+var IS_OFF_SEASON = true;
 
 Parse.Cloud.afterSave(Parse.Installation, function(request) {
 
@@ -109,15 +110,23 @@ SEND RANDOM CHEER FUNCTIONALITY
 Parse.Cloud.define("sendRandomCheer", sendRandomCheer)
 
 function sendRandomCheer(request, response) {
-  // THIS IS TEMPORARY TO SANDBOX APPLE TESTERS & Pre 1.0.3 Users
-  // Passed up from client > 1.0.3
+  var successResponse = {
+    isOffSeason: false,
+    message: "Somewhere in the world, another person has just received your Christmas Cheer! We'll let you know if they return it to you!  Merry Christmas!"
+  };
+
+  // THIS IS TEMPORARY TO SANDBOX APPLE TESTERS & Pre 1.0.4 Users
+  // Passed up from client > 1.0.4
   var currentVersion = request.params.appVersion;
   console.log("Current version " + currentVersion);
   if (currentVersion === APP_STORE_TESTING_VERSION) {
-    response.success("Sandboxed :)");
+    response.success(successResponse);
     return;
   } else {
-    response.success("Off Season!");
+    response.success({
+      isOffSeason: true,
+      message: "We'll be back next year"
+    });
     return;
   }
 
@@ -128,7 +137,8 @@ function sendRandomCheer(request, response) {
   var isUserBanned = isIdBanned(fromId);
   if (isUserBanned) {
     console.log("Banned user attempted to send cheer: " + fromId);
-    response.success("Whatever bro, Imma pretend you're doing something.");
+    //Whatever bro, Imma pretend you're doing something.
+    response.success(successResponse);
   }
 
   var params = request.params;
@@ -138,7 +148,7 @@ function sendRandomCheer(request, response) {
 
   var callback = function(success) {
     if (success) {
-      response.success("SUCCESS");
+      response.success(successResponse);
     } else {
       response.error("FAILURE!");
     }
@@ -382,15 +392,23 @@ RETURN CHEER FUNCTIONALITY
 */
 
 Parse.Cloud.define("returnCheer", function(request, response) {
-  // THIS IS TEMPORARY TO SANDBOX APPLE TESTERS & Pre 1.0.3 Users
-  // Passed up from client > 1.0.3
+  var successResponse = {
+    isOffSeason: false,
+    message: "The reindeer have your message and they'll be passing it on for you.  Thanks for embracing the Christmas spirit!"
+  };
+
+  // THIS IS TEMPORARY TO SANDBOX APPLE TESTERS
+  // Passed up from client > 1.0.4
   var currentVersion = request.params.appVersion;
   console.log("Current version " + currentVersion);
   if (currentVersion === APP_STORE_TESTING_VERSION) {
-    response.success("Sandboxed :)");
+    response.success(successResponse);
     return;
   } else {
-    response.success("Off Season!");
+    response.success({
+      isOffSeason: true,
+      message: "We'll be back next year :)"
+    });
     return;
   }
 
@@ -448,7 +466,10 @@ Parse.Cloud.define("returnCheer", function(request, response) {
                 success: function() {
                   var successMessage = "Succesfully returned christmas cheer push from installation id: " + fromInstallationId + " to installationId:" + toInstallationId;
                   console.log(successMessage);
-                  response.success(successMessage);
+                  response.success({
+                    isOffSeason: false,
+                    message: "The reindeer have your message and they'll be passing it on to " + originalNote.get("fromName") + ".  Thanks for embracing the Christmas spirit!"
+                  });
                 },
                 error: function(error) {
                   var failureMessage = "FAILURE to send push from installation id: " + fromInstallationId + " to id:" + toInstallationId + "for original note id: " + originalNote.id;
