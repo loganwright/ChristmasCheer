@@ -108,6 +108,13 @@ Parse.Cloud.define("sendRandomCheer", sendRandomCheer)
 function sendRandomCheer(request, response) {
   Parse.Cloud.useMasterKey();
 
+  // THIS IS TEMPORARY TO SANDBOX APPLE TESTERS
+  var APP_STORE_TESTING_VERSION = "1.0.3"
+  var currentVersion = request.object.get("appVersion");
+  if (currentVersion === APP_STORE_TESTING_VERSION) {
+    request.success("Congratulations")
+  }
+
   var fromId = request.params.fromInstallationId;
   console.log("Cheer sent from Id: " + fromId);
   var isUserBanned = isIdBanned(fromId);
