@@ -14,8 +14,6 @@ protocol CheerListCellDelegate : class {
 
 @objc(CheerListCell)
 class CheerListCell: UITableViewCell {
-
-    @IBOutlet weak var indicatorButton: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var returnTheCheerButton: UIButton!
@@ -33,28 +31,11 @@ class CheerListCell: UITableViewCell {
         }
     }
     
-    var indicatorImage: UIImage? {
-        get {
-            return indicatorButton.imageView?.image
-        }
-        set {
-            indicatorButton.setImage(newValue, forState: .Normal)
-        }
-    }
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         clipsToBounds = true
         backgroundColor = UIColor.clearColor()
-        indicatorButton.backgroundColor = ColorPalette.SparklyRed.color
-        indicatorButton.tintColor = ColorPalette.SparklyWhite.color
-        indicatorButton.imageView?.contentMode = .ScaleAspectFit
-        indicatorButton.layer.cornerRadius = CGRectGetHeight(indicatorButton.bounds) / 2.0
-        indicatorButton.setTitle("", forState: .Normal)
-        indicatorButton.setImage(UIImage.randomChristmasIcon(), forState: .Normal)
-        indicatorButton.imageEdgeInsets = UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6)
-        indicatorButton.userInteractionEnabled = false
         nameLabel.font = ChristmasCrackFont.Regular(52.0).font
         locationLabel.font = ChristmasCrackFont.Regular(52.0).font
         returnTheCheerButton.backgroundColor = ColorPalette.SparklyRed.color
@@ -91,13 +72,6 @@ class CheerListCell: UITableViewCell {
         locationLabel.text = note.fromLocation
         returnTheCheerButton.enabled = !note.hasBeenRespondedTo
         cheerNotification = note
-        
-        // Is a response
-        if let _ = note.initiationNoteId {
-            indicatorButton.backgroundColor = ColorPalette.Green.color
-        } else {
-            indicatorButton.backgroundColor = ColorPalette.SparklyRed.color
-        }
     }
     
 }

@@ -121,8 +121,8 @@ class CheerListViewController: UIViewController, CheerListCellDelegate {
     func setupDataAndReloadTableViewWithRawNotifications(rawNotifications: [ChristmasCheerNotification]) {
         let notifications = rawNotifications.sort { $0.createdAt > $1.createdAt }
         let unresponded = notifications.filter { !$0.hasBeenRespondedTo }
-        let receivedCheer = notifications.filter { $0.initiationNoteId == nil && $0.hasBeenRespondedTo }
-        let returnedCheer = notifications.filter { $0.initiationNoteId != nil }
+        let receivedCheer = notifications.filter { $0.isInitiatorCheer && $0.hasBeenRespondedTo }
+        let returnedCheer = notifications.filter { $0.isResponseCheer }
         
         tableViewData = [
             CheerListTableViewSection(title: nil, sectionType: .Unresponded, associatedCheer: unresponded),
@@ -263,8 +263,8 @@ extension CheerListViewController : UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let heightWithButton: CGFloat = 260
-        let heightWithOutButton: CGFloat = 200
+        let heightWithButton: CGFloat = 194 // 260
+        let heightWithOutButton: CGFloat = 194 - 60 // Height of return cheer button being covered up
         let section = tableViewData[indexPath.section]
         let note = section.associatedCheer[indexPath.row]
         return note.hasBeenRespondedTo ? heightWithOutButton : heightWithButton

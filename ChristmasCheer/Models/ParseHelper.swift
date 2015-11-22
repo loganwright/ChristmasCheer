@@ -21,6 +21,11 @@ enum Result<T> {
     case Failure(ErrorType)
 }
 
+struct CheerPair {
+    let initiator: Cheer
+    let response: Cheer?
+}
+
 final class ParseHelper {
     
     class func sendRandomCheer(completion: Result<Void> -> Void) {
@@ -41,7 +46,7 @@ final class ParseHelper {
         }
     }
     
-    class func returnCheer(notification: Notification, completion: Result<ChristmasCheerNotification> -> Void) {
+    class func returnCheer(notification: Notification, completion: Result<Cheer> -> Void) {
         ChristmasCheerNotification.fetchWithNotification(notification) { result in
             switch result {
             case let .Success(originalNote):
@@ -52,12 +57,12 @@ final class ParseHelper {
         }
     }
     
-    class func returnCheer(originalNote: ChristmasCheerNotification, completion: Result<ChristmasCheerNotification> -> Void) {
+    class func returnCheer(originalNote: Cheer, completion: Result<Cheer> -> Void) {
         var params = baseNotificationParams()
         params["originalNoteId"] = originalNote.objectId
-
+        
         Qu.Background {
-            let result: Result<ChristmasCheerNotification>
+            let result: Result<Cheer>
             do {
                 let _ = try PFCloud.callFunction("returnCheer", withParameters: params)
                 // No need to save, it is mirrored server side.  Just edit locally.
@@ -83,7 +88,7 @@ final class ParseHelper {
         return params
     }
     
-
+    
     class func playAlertSoundfForResult<T>(result: Result<T>) {
         let sound: SoundFile
         switch result {
@@ -97,7 +102,7 @@ final class ParseHelper {
     
     // MARK: Get Notifications
     
-    class func fetchUnreturnedCheer(completion: Result<[ChristmasCheerNotification]> -> Void) {
+    class func fetchUnreturnedCheer(completion: Result<[Cheer]> -> Void) {
         guard let query = PFQuery.cheerQuery() else {
             let error = ParseError.Unknown("Unable to create cheer query")
             completion(.Failure(error))
@@ -111,7 +116,7 @@ final class ParseHelper {
         query.findObjects(completion)
     }
     
-    class func fetchNotifications(completion: Result<[ChristmasCheerNotification]> -> Void) {
+    class func fetchNotifications(completion: Result<[Cheer]> -> Void) {
         guard let query = PFQuery.cheerQuery() else {
             let error = ParseError.Unknown("Unable to create cheer query")
             completion(.Failure(error))
@@ -119,6 +124,42 @@ final class ParseHelper {
         }
         
         query.execute(completion)
+    }
+    
+    class func _fetchNotifications(completion: Result<[CheerPair]> -> Void) {
+        guard let query = PFQuery.alt_cheerQuery() else {
+            let error = ParseError.Unknown("Unable to create cheer query")
+            completion(.Failure(error))
+            return
+        }
+        
+        query.execute { (result: Result<[Cheer]>) in
+            switch result {
+            case let .Success(cheer):
+                parseCheer(cheer, completion: completion)
+            case let .Failure(error):
+                completion(.Failure(error))
+            }
+            
+        }
+    }
+    
+    private class func parseCheer(cheers: [Cheer], completion: Result<[CheerPair]> -> Void) {
+        let (initiators, responses) = cheers.splitFilter { $0.isInitiatorCheer }
+        
+        var responseDictionary: [String : Cheer] = [:]
+        responses.forEach { response in
+            guard let id = response.initiationNoteId else { return }
+            responseDictionary[id] = response
+        }
+
+        let pairs = initiators.map { initiator -> CheerPair in
+            let currentInitiatorObjectId = initiator.objectId ?? ""
+            let first = responseDictionary[currentInitiatorObjectId]
+            return CheerPair(initiator: initiator, response: first)
+        }
+        
+        completion(.Success(pairs))
     }
     
     // MARK: Feedback / Support
@@ -153,6 +194,7 @@ final class ParseHelper {
             locationDescription: ApplicationSettings.locationName
         )
     }
+    
 }
 
 private extension PFQuery {
@@ -168,6 +210,67 @@ private extension PFQuery {
         query.limit = 1000
         query.orderByDescending("createdAt")
         query.cachePolicy = .NetworkElseCache
+        return query
+    }
+    
+    static func alt_cheerQuery() -> PFQuery? {
+        guard
+            let sent = sentCheerQuery(),
+            let received = receivedCheerQuery()
+            else {
+                return nil
+        }
+        
+        let query = PFQuery.orQueryWithSubqueries([sent, received])
+        query.limit = 1000
+        query.orderByDescending("createdAt")
+        query.cachePolicy = .NetworkElseCache
+        return query
+    }
+    
+    static func baseCheerQuery() -> PFQuery? {
+        guard
+            let query = ChristmasCheerNotification.query()
+            else {
+                return nil
+        }
+        query.cachePolicy = .NetworkElseCache
+        return query
+    }
+    
+    /**
+     Sent doesn't inherently mean initiated, this is any cheer that the user returned or intitiated.  When initiated, we only want the ones returned.
+     
+     - returns: A query for all sent cheer
+     */
+    static func sentCheerQuery() -> PFQuery? {
+        guard
+            let query = baseCheerQuery(),
+            let installationId = PFInstallation.currentInstallation().objectId
+            else {
+                return nil
+        }
+        
+        query.whereKey("fromInstallationId", equalTo: installationId)
+        query.whereKey("hasBeenRespondedTo", equalTo: true)
+        return query
+    }
+    
+    
+    /**
+     Received cheer doesn't inherently mean initiated.  This is any cheer that was received by the current user.
+     
+     - returns: all received cheer.
+     */
+    static func receivedCheerQuery() -> PFQuery? {
+        guard
+            let query = baseCheerQuery(),
+            let installationId = PFInstallation.currentInstallation().objectId
+            else {
+                return nil
+        }
+        
+        query.whereKey("toInstallationId", equalTo: installationId)
         return query
     }
 }
@@ -237,3 +340,41 @@ extension PFQuery {
         }
     }
 }
+
+extension CollectionType {
+    public func splitFilter(@noescape filter: (Generator.Element) throws -> Bool) rethrows -> (passed: [Generator.Element], failed: [Generator.Element]) {
+        var passed: [Generator.Element] = []
+        var failed: [Generator.Element] = []
+        try forEach {
+            if try filter($0) {
+                passed.append($0)
+            } else {
+                failed.append($0)
+            }
+        }
+        return (passed, failed)
+    }
+    
+    public func first(@noescape test: (Generator.Element) throws -> Bool) rethrows -> Generator.Element? {
+        for element in self where try test(element) {
+            return element
+        }
+        return nil
+    }
+}
+
+extension Dictionary {
+    init(pairs: [(Key, Value)]) {
+        self.init()
+        pairs.forEach { (key, val) in
+            self[key] = val
+        }
+    }
+}
+//func + <Key : Hashable, Value>(lhs: [Key : Value], rhs: [Key : Value]) -> [Key : Value] {
+//    var combined: [Key : Value] = lhs
+//    rhs.forEach {
+//        combined[$0] = $1
+//    }
+//    return combined
+//}
