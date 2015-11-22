@@ -108,12 +108,17 @@ Parse.Cloud.define("sendRandomCheer", sendRandomCheer)
 function sendRandomCheer(request, response) {
   Parse.Cloud.useMasterKey();
 
-  // THIS IS TEMPORARY TO SANDBOX APPLE TESTERS
-  var APP_STORE_TESTING_VERSION = "1.0.3";
-  var currentVersion = request.object.get("appVersion");
-  if (currentVersion === APP_STORE_TESTING_VERSION) {
-    request.success("Congratulations");
-  }
+  // // THIS IS TEMPORARY TO SANDBOX APPLE TESTERS
+  // var APP_STORE_TESTING_VERSION = "1.0.3";
+  // // Passed up from client > 1.0.3
+  // var currentVersion = request.params.appVersion;
+  // console.log("Current version " + currentVersion);
+  // if (currentVersion === APP_STORE_TESTING_VERSION) {
+  //   // Return success so app testers don't go out into production but test that it works.
+  //   console.log("Is app store version");
+  //   response.success("Congratulations");
+  //   return
+  // }
 
   var fromId = request.params.fromInstallationId;
   console.log("Cheer sent from Id: " + fromId);
@@ -346,6 +351,7 @@ function readOnlyACL() {
   var acl = new Parse.ACL();
   acl.setPublicReadAccess(true);
   acl.setPublicWriteAccess(false);
+  return acl
 }
 
 /*
@@ -394,22 +400,8 @@ Parse.Cloud.define("returnCheer", function(request, response) {
           var toInstallationId = originalNote.get("fromInstallationId")
           var message = fromName + " from " + fromLocation + " returned your Christmas cheer!";
 
-          var ChristmasCheerNotification = Parse.Object.extend("ChristmasCheerNotification");
-          var newChristmasCheerNotification = new ChristmasCheerNotification();
-          newChristmasCheerNotification.set("fromUserId", fromUserId);
-          newChristmasCheerNotification.set("fromName", fromName);
-          newChristmasCheerNotification.set("fromInstallationId", fromInstallationId);
-          newChristmasCheerNotification.set("fromLocation", fromLocation);
-          newChristmasCheerNotification.set("toInstallationId", toInstallationId);
-          newChristmasCheerNotification.set("hasBeenRespondedTo", true);
-          newChristmasCheerNotification.set("initiationNoteId", originalNote.id);
-          newChristmasCheerNotification.set("message", message);
-
-          var acl = new Parse.ACL();
-          acl.setPublicReadAccess(true);
-          acl.setPublicWriteAccess(false);
-          newChristmasCheerNotification.setACL(acl);
-
+          request.params.message = fromName + " from " + fromLocation + " returned your Christmas cheer!";
+          var newChristmasCheerNotification = newChristmasCheerNotificationWithParams(request.params);
           newChristmasCheerNotification.save(null, {
             success: function(newNote) {
               var successMessage = "Succesfully saved response note from " + fromInstallationId + " to " + toInstallationId;

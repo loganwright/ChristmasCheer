@@ -24,7 +24,7 @@ enum Result<T> {
 final class ParseHelper {
     
     class func sendRandomCheer(completion: Result<Void> -> Void) {
-        let params: [String : String] = self.baseNotificationParams()
+        let params: [String : String] = baseCheerParams()
         Qu.Background {
             let result: Result<Void>
             do {
@@ -53,7 +53,7 @@ final class ParseHelper {
     }
     
     class func returnCheer(originalNote: ChristmasCheerNotification, completion: Result<ChristmasCheerNotification> -> Void) {
-        var params = baseNotificationParams()
+        var params = baseCheerParams()
         params["originalNoteId"] = originalNote.objectId
 
         Qu.Background {
@@ -74,12 +74,13 @@ final class ParseHelper {
         }
     }
     
-    class func baseNotificationParams() -> [String : String] {
+    class func baseCheerParams() -> [String : String] {
         var params: [String : String] = [:]
         params["fromUserId"] = ApplicationSettings.userIdentifier
         params["fromInstallationId"] = PFInstallation.currentInstallation().objectId
         params["fromLocation"] = ApplicationSettings.locationName
         params["fromName"] = ApplicationSettings.displayName
+        params["appVersion"] = MainBundle.infoDictionary?["\(kCFBundleVersionKey)"] as? String
         return params
     }
     
