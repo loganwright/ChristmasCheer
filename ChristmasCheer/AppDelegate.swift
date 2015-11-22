@@ -156,7 +156,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         * 
         *  This is done so that adding notification actions / categories happens automatically for upgrading users
         */
-        NotificationManager.requestRemoteNotificationAuthorization { _ in }
+        if NotificationManager.notificationsAuthorized {
+            NotificationManager.requestRemoteNotificationAuthorization { _ in }
+        }
+        
         return true
     }
 

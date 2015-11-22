@@ -121,8 +121,8 @@ class CheerListViewController: UIViewController, CheerListCellDelegate {
     func setupDataAndReloadTableViewWithRawNotifications(rawNotifications: [ChristmasCheerNotification]) {
         let notifications = rawNotifications.sort { $0.createdAt > $1.createdAt }
         let unresponded = notifications.filter { !$0.hasBeenRespondedTo }
-        let receivedCheer = notifications.filter { $0.initiationNoteId == nil && $0.hasBeenRespondedTo }
-        let returnedCheer = notifications.filter { $0.initiationNoteId != nil }
+        let receivedCheer = notifications.filter { $0.isInitiatorCheer && $0.hasBeenRespondedTo }
+        let returnedCheer = notifications.filter { $0.isResponseCheer }
         
         tableViewData = [
             CheerListTableViewSection(title: nil, sectionType: .Unresponded, associatedCheer: unresponded),
