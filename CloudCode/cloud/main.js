@@ -5,7 +5,7 @@ Can't change installation class so this functions as both.
 var COUNT_ID = "7lX8Qe2HC7"
 // THIS IS TEMPORARY TO SANDBOX APPLE TESTERS & Pre 1.0.4 Users
 var APP_STORE_TESTING_VERSION = "1.0.4";
-var IS_OFF_SEASON = true;
+var IS_OFF_SEASON = false;
 
 Parse.Cloud.afterSave(Parse.Installation, function(request) {
 
@@ -110,25 +110,25 @@ SEND RANDOM CHEER FUNCTIONALITY
 Parse.Cloud.define("sendRandomCheer", sendRandomCheer)
 
 function sendRandomCheer(request, response) {
-  var successResponse = {
-    isOffSeason: false,
-    message: "Somewhere in the world, another person has just received your Christmas Cheer! We'll let you know if they return it to you!  Merry Christmas!"
-  };
-
-  // THIS IS TEMPORARY TO SANDBOX APPLE TESTERS & Pre 1.0.4 Users
-  // Passed up from client > 1.0.4
-  var currentVersion = request.params.appVersion;
-  console.log("Current version " + currentVersion);
-  if (currentVersion === APP_STORE_TESTING_VERSION) {
-    response.success(successResponse);
-    return;
-  } else {
-    response.success({
-      isOffSeason: true,
-      message: "We'll be back next year"
-    });
-    return;
-  }
+  // var successResponse = {
+  //   isOffSeason: false,
+  //   message: "Somewhere in the world, another person has just received your Christmas Cheer! We'll let you know if they return it to you!  Merry Christmas!"
+  // };
+  //
+  // // THIS IS TEMPORARY TO SANDBOX APPLE TESTERS & Pre 1.0.4 Users
+  // // Passed up from client > 1.0.4
+  // var currentVersion = request.params.appVersion;
+  // console.log("Current version " + currentVersion);
+  // if (currentVersion === APP_STORE_TESTING_VERSION) {
+  //   response.success(successResponse);
+  //   return;
+  // } else {
+  //   response.success({
+  //     isOffSeason: true,
+  //     message: "We'll be back next year"
+  //   });
+  //   return;
+  // }
 
   Parse.Cloud.useMasterKey();
 
@@ -392,25 +392,25 @@ RETURN CHEER FUNCTIONALITY
 */
 
 Parse.Cloud.define("returnCheer", function(request, response) {
-  var successResponse = {
-    isOffSeason: false,
-    message: "The reindeer have your message and they'll be passing it on for you.  Thanks for embracing the Christmas spirit!"
-  };
-
-  // THIS IS TEMPORARY TO SANDBOX APPLE TESTERS
-  // Passed up from client > 1.0.4
-  var currentVersion = request.params.appVersion;
-  console.log("Current version " + currentVersion);
-  if (currentVersion === APP_STORE_TESTING_VERSION) {
-    response.success(successResponse);
-    return;
-  } else {
-    response.success({
-      isOffSeason: true,
-      message: "We'll be back next year :)"
-    });
-    return;
-  }
+  // var successResponse = {
+  //   isOffSeason: false,
+  //   message: "The reindeer have your message and they'll be passing it on for you.  Thanks for embracing the Christmas spirit!"
+  // };
+  //
+  // // THIS IS TEMPORARY TO SANDBOX APPLE TESTERS
+  // // Passed up from client > 1.0.4
+  // var currentVersion = request.params.appVersion;
+  // console.log("Current version " + currentVersion);
+  // if (currentVersion === APP_STORE_TESTING_VERSION) {
+  //   response.success(successResponse);
+  //   return;
+  // } else {
+  //   response.success({
+  //     isOffSeason: true,
+  //     message: "We'll be back next year :)"
+  //   });
+  //   return;
+  // }
 
   Parse.Cloud.useMasterKey();
 
