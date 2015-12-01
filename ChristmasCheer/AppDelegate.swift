@@ -30,7 +30,7 @@ extension Parse {
         if IS_DEVELOPMENT_TARGET {
             Parse.setApplicationId("Bb6vmkJpOfJJXnam6Sz1QhrtcIie5KzKgREZccId", clientKey: "RA7rEfXsi9zIC2ylJkOWu9WQ8WsBTLlSClTARSCw")
         } else {
-            fatalError("uh uh uh")
+            Parse.setApplicationId("uZwcu9TSxPkYzAANnShydDUrjtMmrLxXCWuSyrEB", clientKey: "Uh13gPzg3vxYvMpYmq25wDbBEq1AJCuuldkxL9Ef")
         }
         PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
     }

@@ -719,7 +719,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "exit 42 // Don't do that :)";
+			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" 9b16ec25dd035034ab712e8572591e2f9897b7bc b3ca25001b396a0b3d9fe85d20f4d68e4ea96e5533ab3057666bd4fde360ec51";
 		};
 		9F754B4707277440E7089647 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -954,7 +954,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.loganwright.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "69cc0f02-e0bd-462d-96e4-9cbf6106e76f";
+				PROVISIONING_PROFILE = "785b57e1-586d-4f55-8693-556fbcad1ee7";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/ChristmasCheer/ChristmasCheer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -979,7 +979,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.loganwright.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "69cc0f02-e0bd-462d-96e4-9cbf6106e76f";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/ChristmasCheer/ChristmasCheer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

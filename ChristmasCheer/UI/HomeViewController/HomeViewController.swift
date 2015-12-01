@@ -270,6 +270,7 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
             case let .Success(response):
                 self?.showSendChristmasCheerSuccessAlert(response.message)
                 success = true
+                ApplicationSettings.lastSentChristmasCheerTimestamp = NSDate()
             case .Failure(_):
                 self?.showSendChristmasCheerFailureAlert()
                 success = false

@@ -110,7 +110,8 @@ class ApplicationSettings: NSObject {
         }
         
         if let timestamp = lastSentChristmasCheerTimestamp?.timeIntervalSince1970 {
-            return timestamp > 1.minute
+            let difference = NSDate().timeIntervalSince1970 - timestamp
+            return difference > 1.minute
         } else {
             return true
         }
