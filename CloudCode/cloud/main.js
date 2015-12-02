@@ -446,11 +446,16 @@ Parse.Cloud.define("returnCheer", function(request, response) {
           var fromInstallationId = request.params.fromInstallationId;
           var fromName = request.params.fromName;
           var fromLocation = request.params.fromLocation;
-          var toInstallationId = originalNote.get("fromInstallationId")
+          var toInstallationId = originalNote.get("fromInstallationId");
           var message = fromName + " from " + fromLocation + " returned your Christmas cheer!";
+          request.params.toInstallationId = originalNote.get("fromInstallationId");
 
           request.params.message = fromName + " from " + fromLocation + " returned your Christmas cheer!";
           var newChristmasCheerNotification = newChristmasCheerNotificationWithParams(request.params);
+          newChristmasCheerNotification.set("initiationNoteId", originalNote.id);
+          newChristmasCheerNotification.set("toInstallationId", originalNote.get("fromInstallationId"));
+          newChristmasCheerNotification.set("hasBeenRespondedTo", true);
+
           newChristmasCheerNotification.save(null, {
             success: function(newNote) {
               var successMessage = "Succesfully saved response note from " + fromInstallationId + " to " + toInstallationId;
