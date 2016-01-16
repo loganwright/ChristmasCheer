@@ -5,7 +5,7 @@ Can't change installation class so this functions as both.
 var COUNT_ID = "7lX8Qe2HC7"
 // THIS IS TEMPORARY TO SANDBOX APPLE TESTERS & Pre 1.0.4 Users
 var APP_STORE_TESTING_VERSION = "1.0.4";
-var IS_OFF_SEASON = false;
+var IS_OFF_SEASON = true;
 
 Parse.Cloud.afterSave(Parse.Installation, function(request) {
 
