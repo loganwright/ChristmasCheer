@@ -104,7 +104,7 @@ class SCLAlertView: UIViewController {
 		// Set up main view
 		view.frame = UIScreen.main.bounds
 		view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        view.backgroundColor = UIColor(red:0, green:0, blue:0, alpha:kDefaultShadowOpacity)
+        view.backgroundColor = UIColor.clear
 		view.addSubview(contentView)
 		// Content View
         contentView.backgroundColor = ColorPalette.TexturedBackground.color
@@ -219,7 +219,8 @@ class SCLAlertView: UIViewController {
 		inputs.append(txt)
 		return txt
 	}
-	
+
+    @discardableResult
 	func addButton(_ title:String, action: @escaping ()->Void)->SCLButton {
 		let btn = addButton(title)
 		btn.actionType = SCLActionType.Closure
@@ -227,8 +228,9 @@ class SCLAlertView: UIViewController {
         btn.addTarget(self, action: #selector(buttonTapped), for:.touchUpInside)
 		return btn
 	}
-	
-	func addButton(_ title:String, target:AnyObject, selector:Selector)->SCLButton {
+
+    @discardableResult
+	func addButton(_ title:String, target:AnyObject, selector:Selector) -> SCLButton {
 		let btn = addButton(title)
 		btn.actionType = SCLActionType.Selector
 		btn.target = target
@@ -236,8 +238,9 @@ class SCLAlertView: UIViewController {
         btn.addTarget(self, action:  #selector(buttonTapped), for:.touchUpInside)
 		return btn
 	}
-	
-	private func addButton(_ title: String)->SCLButton {
+
+    @discardableResult
+	private func addButton(_ title: String) -> SCLButton {
 		// Update view height
 		kWindowHeight += 45.0
 		// Add button
@@ -263,27 +266,27 @@ class SCLAlertView: UIViewController {
 		hideView()
 	}
 	
-	// showSuccess(view, title, subTitle)
+	@discardableResult
 	func showSuccess(_ title: String, subTitle: String, closeButtonTitle: String? = nil, duration: TimeInterval = 0.0) -> SCLAlertViewResponder {
 		return showTitle(title, subTitle: subTitle, duration: duration, completeText:closeButtonTitle, style: .Success)
 	}
 	
-	// showError(view, title, subTitle)
+	@discardableResult
 	func showError(_ title: String, subTitle: String, closeButtonTitle:String? = nil, duration: TimeInterval = 0.0) -> SCLAlertViewResponder {
 		return showTitle(title, subTitle: subTitle, duration: duration, completeText:closeButtonTitle, style: .Error)
 	}
 	
-	// showNotice(view, title, subTitle)
+	@discardableResult
 	func showNotice(_ title: String, subTitle: String, closeButtonTitle:String?=nil, duration:TimeInterval=0.0) -> SCLAlertViewResponder {
 		return showTitle(title, subTitle: subTitle, duration: duration, completeText:closeButtonTitle, style: .Notice)
 	}
 	
-	// showWarning(view, title, subTitle)
+	@discardableResult
 	func showWarning(_ title: String, subTitle: String, closeButtonTitle:String?=nil, duration:TimeInterval=0.0) -> SCLAlertViewResponder {
 		return showTitle(title, subTitle: subTitle, duration: duration, completeText:closeButtonTitle, style: .Warning)
 	}
 	
-	// showInfo(view, title, subTitle)
+	@discardableResult
 	func showInfo(_ title: String, subTitle: String, closeButtonTitle:String?=nil, duration:TimeInterval=0.0) -> SCLAlertViewResponder {
 		return showTitle(title, subTitle: subTitle, duration: duration, completeText:closeButtonTitle, style: .Info)
 	}
@@ -300,10 +303,6 @@ class SCLAlertView: UIViewController {
     // showTitle(view, title, subTitle, duration, style)
     func showTitle(_ title: String, subTitle: String, duration: TimeInterval?, completeText: String?, style: SCLAlertViewStyle) -> SCLAlertViewResponder {
         view.alpha = 0
-        // TODO: !!
-        let rv: UIView = UIApplication.shared.keyWindow!.subviews.first!
-		rv.addSubview(view)
-		view.frame = rv.bounds
 		
         // Alert colour/icon
         var viewColor = UIColor()
@@ -383,12 +382,12 @@ class SCLAlertView: UIViewController {
         
         // Animate in the alert view
         UIView.animate(withDuration: 0.2, animations: {
-				self.view.frame.origin.y = rv.center.y - 100
+//				self.view.frame.origin.y = rv.center.y - 100
 				self.view.alpha = 1
             }, completion: { finished in
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.view.center = rv.center
-				})
+//                UIView.animate(withDuration: 0.2, animations: {
+//                    self.view.center = rv.center
+//				})
         })
         // Chainable objects
         return SCLAlertViewResponder(alertview: self)
@@ -400,8 +399,7 @@ class SCLAlertView: UIViewController {
         UIView.animate(withDuration: 0.2, animations: {
             self.view.alpha = 0
             }, completion: { finished in
-                self.completion()
-                self.view.removeFromSuperview()
+                self.dismiss(animated: true, completion: self.completion)
         })
     }
     

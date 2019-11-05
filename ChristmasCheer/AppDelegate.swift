@@ -26,7 +26,7 @@ let MainBundle = Bundle.main
 typealias Application = UIApplication
 
 extension Parse {
-    static func configure(launchOptions: [NSObject : AnyObject]?) {
+    static func configure(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
         if IS_DEVELOPMENT_TARGET.boolValue {
             Parse.setApplicationId("Bb6vmkJpOfJJXnam6Sz1QhrtcIie5KzKgREZccId", clientKey: "RA7rEfXsi9zIC2ylJkOWu9WQ8WsBTLlSClTARSCw")
         } else {
@@ -123,8 +123,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let homeViewController = HomeViewController()
-    
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         Parse.configure(launchOptions: launchOptions)
         
         setupWindow()

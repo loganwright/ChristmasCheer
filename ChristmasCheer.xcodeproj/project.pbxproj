@@ -480,7 +480,6 @@
 				5124A651D7B39F90F7C2FD42 /* Pods-ChristmasCheer.debug.xcconfig */,
 				8E123DE046325BD6A14934D6 /* Pods-ChristmasCheer.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

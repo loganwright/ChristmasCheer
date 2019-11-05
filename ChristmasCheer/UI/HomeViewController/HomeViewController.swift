@@ -133,6 +133,11 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
             return true
         } else {
             let nameEntryVC = NameEntryViewController()
+            if #available(iOS 13.0, *) {
+                nameEntryVC.isModalInPresentation = true
+            } else {
+                // Fallback on earlier versions
+            }
             navigationController?.present(nameEntryVC, animated: true, completion: nil)
             return false
         }
@@ -180,10 +185,17 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
         
         let permissionsVC = PermissionsRequestViewController(purpose: purpose)
         permissionsVC.delegate = self
-        let navigationVC = NavigationController(rootViewController: permissionsVC)
 
+//        let navigationVC = UINavigationController(rootViewController: permissionsVC)
+
+        let toPresent = permissionsVC // UINavigationController(rootViewController: permissionsVC)
+        if #available(iOS 13.0, *) {
+            toPresent.isModalInPresentation = true
+        } else {
+            // Fallback on earlier versions
+        }
         isPermissionsViewControllerPresented = true
-        present(navigationVC, animated: true, completion: nil)
+        present(toPresent, animated: true, completion: nil)
     }
     
     // MARK: Setup
@@ -299,6 +311,7 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
         let confirmation = "See you then!"
         let alert = SCLAlertView()
         alert.showSuccess(title, subTitle: message, closeButtonTitle: confirmation)
+        present(alert, animated: true, completion: nil)
     }
     
     private func showChristmasCheerWaitAlert() {
@@ -307,6 +320,7 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
         let confirmation = "Fine!"
         let alert = SCLAlertView()
         alert.showSuccess(title, subTitle: message, closeButtonTitle: confirmation)
+        present(alert, animated: true, completion: nil)
     }
     
     private func showSendChristmasCheerFailureAlert() {
@@ -315,6 +329,7 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
         let confirmation = "Rabble!"
         let alert = SCLAlertView()
         alert.showError(title, subTitle: message, closeButtonTitle: confirmation)
+        present(alert, animated: true, completion: nil)
     }
     
     private func showSendChristmasCheerSuccessAlert(successMessage: String?) {
@@ -324,6 +339,7 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
         let confirmation = "Yay!"
         let alert = SCLAlertView()
         alert.showSuccess(title, subTitle: message, closeButtonTitle: confirmation)
+        present(alert, animated: true, completion: nil)
     }
     
     // MARK: Buffer

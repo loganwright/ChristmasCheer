@@ -171,6 +171,7 @@ class CheerListViewController: UIViewController, CheerListCellDelegate {
         let confirmation = "Hogwash!"
         let alert = SCLAlertView()
         alert.showError(title, subTitle: message, closeButtonTitle: confirmation)
+        present(alert, animated: true, completion: nil)
     }
 
     private func notifyReturnCheerSendSuccessForName(toName: String, successMessage: String?) {
@@ -180,6 +181,7 @@ class CheerListViewController: UIViewController, CheerListCellDelegate {
         let confirmation = "I'm Awesome!"
         let alert = SCLAlertView()
         alert.showSuccess(title, subTitle: message, closeButtonTitle: confirmation)
+        present(alert, animated: true, completion: nil)
     }
     
     // MARK: Button Presses
@@ -215,6 +217,7 @@ class CheerListViewController: UIViewController, CheerListCellDelegate {
         let confirmation = "Sounds Fun!"
         let alert = SCLAlertView()
         alert.showSuccess(title, subTitle: message, closeButtonTitle: confirmation)
+        present(alert, animated: true, completion: nil)
     }
     
     private func showRatingAlert() {
@@ -227,6 +230,7 @@ class CheerListViewController: UIViewController, CheerListCellDelegate {
             UIApplication.shared.openURL(appStoreURL)
         })
         alert.showSuccess(title, subTitle: message, closeButtonTitle: confirmation)
+        present(alert, animated: true, completion: nil)
     }
 }
 

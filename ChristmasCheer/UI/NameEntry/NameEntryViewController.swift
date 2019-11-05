@@ -40,7 +40,7 @@ class NameEntryViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Button Presses
     
-    @IBAction func letsGoButtonPressed(sender: UIButton) {
+    @IBAction func letsGoButtonPressed(_ sender: UIButton) {
         nameEntryTextField.resignFirstResponder()
         guard let text = nameEntryTextField.text else { return }
         
@@ -62,9 +62,15 @@ class NameEntryViewController: UIViewController, UITextFieldDelegate {
         alert.addButton("Yup, I'm Sure!") { [weak self] in
             ApplicationSettings.displayName = name
             FeedbackSounds.SuccessSound.play()
-            self?.dismiss(animated: true, completion: nil)
+//            self?.dismiss(animated: true, completion: nil)
+        }
+        alert.completion = { [weak self] in
+            if ApplicationSettings.hasEnteredName {
+                self?.dismiss(animated: true, completion: nil)
+            }
         }
         alert.showSuccess(title, subTitle: message, closeButtonTitle: confirmation)
+        present(alert, animated: true, completion: nil)
     }
     
     private func showProfanityFailureAlert() {
@@ -73,6 +79,7 @@ class NameEntryViewController: UIViewController, UITextFieldDelegate {
         let confirmation = "Thanks!"
         let alert = SCLAlertView()
         alert.showError(title, subTitle: message, closeButtonTitle: confirmation)
+        present(alert, animated: true, completion: nil)
     }
 
     // MARK: Setup

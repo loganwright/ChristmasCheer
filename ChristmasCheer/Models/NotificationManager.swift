@@ -216,6 +216,8 @@ extension SCLAlertView {
         let confirmation = "Malarky!"
         let alert = SCLAlertView()
         alert.showError(title, subTitle: message, closeButtonTitle: confirmation)
+        todo()
+//        present(alert, animated: true, completion: nil)
     }
     
     static func notifyReturnCheerSendSuccessForName(_ toName: String, successMessage: String?) {
@@ -225,9 +227,11 @@ extension SCLAlertView {
         let confirmation = "Done!"
         let alert = SCLAlertView()
         alert.showSuccess(title, subTitle: message, closeButtonTitle: confirmation)
+        todo()
     }
     
     func showSuccess(_ notification: Notification) {
         showSuccess(notification.title, subTitle: notification.aps.message ?? "", closeButtonTitle: notification.confirmation)
+        todo()
     }
 }

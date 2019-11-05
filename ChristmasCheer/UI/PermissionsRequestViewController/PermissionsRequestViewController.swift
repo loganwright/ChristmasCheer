@@ -117,6 +117,9 @@ class PermissionsRequestViewController: UIViewController {
     private func setup() {
         setupTitle()
         setupPermissionCallbacks()
+
+        self.cancelButton.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
+        self.confirmationButton.addTarget(self, action: #selector(confirmationButtonPressed), for: .touchUpInside)
     }
     
     private func setupTitle() {
@@ -212,12 +215,12 @@ class PermissionsRequestViewController: UIViewController {
     
     // MARK: Button Presses
     
-    @IBAction func cancelButtonPressed(sender: UIButton) {
+    @objc func cancelButtonPressed(_ sender: UIButton) {
         guard !isRegistering else { return }
         dismiss()
     }
     
-    @IBAction func confirmationButtonPressed(sender: UIButton) {
+    @objc func confirmationButtonPressed(_ sender: UIButton) {
         guard !isRegistering else { return }
         performActionForCurrentPurpose()
     }
@@ -289,6 +292,7 @@ class PermissionsRequestViewController: UIViewController {
         let confirmation = "Ok"
         let alert = SCLAlertView()
         alert.showError(title, subTitle: message, closeButtonTitle: confirmation)
+        present(alert, animated: true, completion: nil)
     }
     
     private func showPermissionsDeniedAlert(_ completion: @escaping () -> Void = {}) {
@@ -301,6 +305,7 @@ class PermissionsRequestViewController: UIViewController {
         }
         alert.showSuccess(title, subTitle: message, closeButtonTitle: "Cancel")
         alert.completion = completion
+        present(alert, animated: true, completion: nil)
     }
 }
 
@@ -351,6 +356,7 @@ extension PermissionsRequestViewController {
         let confirmation = "Ok"
         let alert = SCLAlertView()
         alert.showSuccess(title, subTitle: message, closeButtonTitle: confirmation)
+        present(alert, animated: true, completion: nil)
     }
 }
 

@@ -9,34 +9,14 @@
 import UIKit
 import Parse
 
-class ChristmasCheerNotification: PFObject, PFSubclassing {
-    
-    // MARK: Properties
-
-    @NSManaged var fromName: String
-    @NSManaged var fromLocation: String
-    @NSManaged var fromInstallationId: String
-    @NSManaged var fromUserId: String
-    @NSManaged var toInstallationId: String
-    @NSManaged var message: String
-    @NSManaged var hasBeenRespondedTo: Bool
-    @NSManaged var initiationNoteId: String?
-    
-    // MARK: Initialization
-    
-    override init() {
-        super.init()
-    }
-    
-    // MARK: PFObject Requirements
-
-    // TODO: 
-//    override class func initialize() {
-//        super.initialize()
-//        registerSubclass()
-//    }
-    
-    class func parseClassName() -> String {
-        return "ChristmasCheerNotification"
-    }
+struct ChristmasCheerNotification {
+    let createdAt: Date
+    let fromName: String
+    let fromLocation: String
+    let fromInstallationId: String
+    let fromUserId: String
+    let toInstallationId: String
+    let message: String
+    let hasBeenRespondedTo: Bool
+    let initiationNoteId: String?
 }

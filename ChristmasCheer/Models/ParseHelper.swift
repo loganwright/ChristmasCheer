@@ -34,7 +34,7 @@ final class ParseHelper {
         Qu.Background {
             let result: Result<ServerResponse>
             do {
-                todo()
+                result = .Success(.init(message: "this isn't filled in", isOffSeason: false))
 //                let rawResponse = try PFCloud.callFunction("sendRandomCheer", withParameters: params)
 //                let json = rawResponse as? JSON ?? [:]
 //                let response = try ServerResponse.mappedInstance(json)
@@ -63,7 +63,7 @@ final class ParseHelper {
     
     class func returnCheer(_ originalNote: ChristmasCheerNotification, completion: @escaping (Result<(ChristmasCheerNotification, ServerResponse)>) -> Void) {
         var params = baseCheerParams()
-        params["originalNoteId"] = originalNote.objectId
+//        params["originalNoteId"] = originalNote.objectId
         
         Qu.Background {
             todo()
@@ -111,7 +111,8 @@ final class ParseHelper {
     // MARK: Get Notifications
     
     class func fetchUnreturnedCheer(_ completion: @escaping (Result<[ChristmasCheerNotification]>) -> Void) {
-        todo()
+        print("todo aswe32df3")
+        completion(.Success([]))
 //        guard let query = PFQuery.cheerQuery() else {
 //            let error = ParseError.Unknown("Unable to create cheer query")
 //            completion(.Failure(error))
@@ -126,7 +127,9 @@ final class ParseHelper {
     }
     
     class func fetchNotifications(_ completion: @escaping (Result<[ChristmasCheerNotification]>) -> Void) {
-        todo()
+        let a = ChristmasCheerNotification(createdAt: Date(), fromName: "test", fromLocation: "madeupville, us", fromInstallationId: "1294910", fromUserId: "1-2903", toInstallationId: "23829", message: "sent you some cheer", hasBeenRespondedTo: true, initiationNoteId: "sadfd22")
+        let b = ChristmasCheerNotification(createdAt: Date(), fromName: "test", fromLocation: "madeupville, us", fromInstallationId: "1294910", fromUserId: "1-2903", toInstallationId: "23829", message: "sent you some cheer", hasBeenRespondedTo: false, initiationNoteId: "sadfd22")
+        completion(.Success([a, b]))
 //        guard let query = PFQuery.cheerQuery() else {
 //            let error = ParseError.Unknown("Unable to create cheer query")
 //            completion(.Failure(error))
@@ -173,17 +176,17 @@ final class ParseHelper {
 private extension PFQuery {
     @objc
     static func cheerQuery() -> PFQuery? {
-        guard
-            let query = ChristmasCheerNotification.query(),
-            let installationId = PFInstallation.current()?.objectId
-            else {
-                return nil
-        }
-        
-        query.whereKey("toInstallationId", equalTo: installationId)
-        query.limit = 1000
-        query.order(byDescending: "createdAt")
-        query.cachePolicy = .networkElseCache
+//        guard
+//            let query = ChristmasCheerNotification.query(),
+//            let installationId = PFInstallation.current()?.objectId
+//            else {
+//                return nil
+//        }
+//
+//        query.whereKey("toInstallationId", equalTo: installationId)
+//        query.limit = 1000
+//        query.order(byDescending: "createdAt")
+//        query.cachePolicy = .networkElseCache
         return nil
 //        return query
     }
@@ -191,21 +194,22 @@ private extension PFQuery {
 
 extension ChristmasCheerNotification {
     static func fetchWithNotification(_ notification: Notification, completion: @escaping (Result<ChristmasCheerNotification>) -> Void) {
-        let originalNote = ChristmasCheerNotification()
-        originalNote.objectId = notification.originalNoteId
-        Qu.Background {
-            let result: Result<ChristmasCheerNotification>
-            do {
-                let fullNote = try originalNote.fetch()
-                result = .Success(fullNote)
-            } catch {
-                result = .Failure(error)
-            }
-            
-            Qu.Main {
-                completion(result)
-            }
-        }
+        print("[warn] unimplemented \(#file) \(#line)")
+//        let originalNote = ChristmasCheerNotification()
+//        originalNote.objectId = notification.originalNoteId
+//        Qu.Background {
+//            let result: Result<ChristmasCheerNotification>
+//            do {
+//                let fullNote = try originalNote.fetch()
+//                result = .Success(fullNote)
+//            } catch {
+//                result = .Failure(error)
+//            }
+//
+//            Qu.Main {
+//                completion(result)
+//            }
+//        }
     }
 }
 

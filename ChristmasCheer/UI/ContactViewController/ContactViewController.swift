@@ -125,6 +125,7 @@ class ContactViewController: UIViewController, UITextViewDelegate {
             self.navigationController?.dismiss(animated: true, completion: nil)
         }
         alert.showSuccess(title, subTitle: message, closeButtonTitle: confirmation)
+        present(alert, animated: true, completion: nil)
         FeedbackSounds.SuccessSound.play()
     }
     
@@ -134,6 +135,7 @@ class ContactViewController: UIViewController, UITextViewDelegate {
         let confirmation = "Balderdash!"
         let alert = SCLAlertView()
         alert.showError(title, subTitle: message, closeButtonTitle: confirmation)
+        present(alert, animated: true, completion: nil)
         FeedbackSounds.ErrorSound.play()
     }
     
