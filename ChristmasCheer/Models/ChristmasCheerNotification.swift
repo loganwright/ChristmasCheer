@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class ChristmasCheerNotification : PFObject, PFSubclassing {
+class ChristmasCheerNotification: PFObject, PFSubclassing {
     
     // MARK: Properties
 
@@ -29,11 +29,12 @@ class ChristmasCheerNotification : PFObject, PFSubclassing {
     }
     
     // MARK: PFObject Requirements
-    
-    override class func initialize() {
-        super.initialize()
-        registerSubclass()
-    }
+
+    // TODO: 
+//    override class func initialize() {
+//        super.initialize()
+//        registerSubclass()
+//    }
     
     class func parseClassName() -> String {
         return "ChristmasCheerNotification"

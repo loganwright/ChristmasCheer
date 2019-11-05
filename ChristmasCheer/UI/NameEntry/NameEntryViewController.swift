@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Parse
+//import Parse
 
 /*
 Remove namespacing for iOS 8, otherwise, nibs don't load properly
@@ -28,12 +28,12 @@ class NameEntryViewController: UIViewController, UITextFieldDelegate {
         setup()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         listenForKeyboardChanges()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unregisterKeyboardObservers()
     }
@@ -53,7 +53,7 @@ class NameEntryViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    private func showNameConfirmationAlertForName(name: String) {
+    private func showNameConfirmationAlertForName(_ name: String) {
         guard let name = nameEntryTextField.text else { return }
         let title = "Are You Sure?"
         let message = "Once you've chosen a name, you won't be able to go back and change it.  Are you sure you want to be called \(name)?"
@@ -62,7 +62,7 @@ class NameEntryViewController: UIViewController, UITextFieldDelegate {
         alert.addButton("Yup, I'm Sure!") { [weak self] in
             ApplicationSettings.displayName = name
             FeedbackSounds.SuccessSound.play()
-            self?.dismissViewControllerAnimated(true, completion: nil)
+            self?.dismiss(animated: true, completion: nil)
         }
         alert.showSuccess(title, subTitle: message, closeButtonTitle: confirmation)
     }
@@ -91,13 +91,13 @@ class NameEntryViewController: UIViewController, UITextFieldDelegate {
         nameEntryTextField.tintColor = ColorPalette.Green.color
         nameEntryTextField.textColor = ColorPalette.DarkGray.color
         nameEntryTextField.backgroundColor = ColorPalette.TexturedBackground.color
-        nameEntryTextField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
+        nameEntryTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         nameEntryTextField.delegate = self
     }
     
     private func setupChristmasTreeButton() {
-        christmasTreeButton.imageView?.contentMode = .ScaleAspectFit
-        christmasTreeButton.userInteractionEnabled = false
+        christmasTreeButton.imageView?.contentMode = .scaleAspectFit
+        christmasTreeButton.isUserInteractionEnabled = false
         christmasTreeButton.tintColor = ColorPalette.SparklyRed.color
     }
     
@@ -109,37 +109,38 @@ class NameEntryViewController: UIViewController, UITextFieldDelegate {
     // MARK: Keyboard Notifications
     
     private func listenForKeyboardChanges() {
-        let defaultCenter = NSNotificationCenter.defaultCenter()
-        defaultCenter.addObserver(self, selector: "keyboardWillChangeFrame:", name: UIKeyboardWillChangeFrameNotification, object: nil)
+        let defaultCenter = NotificationCenter.default
+        defaultCenter.addObserver(self, selector: #selector(keyboardWillChangeFrame), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
     private func unregisterKeyboardObservers() {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: iOS 8 Keyboard Animations
     
-    dynamic private func keyboardWillChangeFrame(note: NSNotification) {
+    @objc dynamic private func keyboardWillChangeFrame(note: NSNotification) {
         guard let animation = note.animationDetail else { return }
-        let viewHeight = CGRectGetHeight(view.bounds)
-        let minY = CGRectGetMinY(animation.keyboardFrame)
+        let viewHeight = view.bounds.height
+        let minY = animation.keyboardFrame.minY
         let offset = viewHeight - minY
         let padding = CGFloat(8.0)
         view.layoutIfNeeded()
         bottomConstraint.constant = offset + padding
-        UIView.animateWithKeyboard(animation) { 
+        UIView.animateWithKeyboard(animation) {
             self.view.layoutIfNeeded()
         }
     }
     
     // MARK: TextField Listeners
-    
+
+    @objc
     dynamic private func textFieldDidChange(textField: UITextField) {
         textField.clean()
         updateLetsGoButtonEnabled()
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
@@ -147,8 +148,8 @@ class NameEntryViewController: UIViewController, UITextFieldDelegate {
     // MARK: Let's Go Button
     
     private func updateLetsGoButtonEnabled() {
-        let count = nameEntryTextField.text?.characters.count
-        if count > 2 && count < 18 {
+        let count = nameEntryTextField.text?.count ?? -1
+        if (count > 2 && count < 18) {
             enableLetsGoButton()
         } else {
             disableLetsGoButton()
@@ -156,27 +157,27 @@ class NameEntryViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func enableLetsGoButton() {
-        self.letsGoButton.enabled = true
+        self.letsGoButton.isEnabled = true
         self.letsGoButton.alpha = 1.0
     }
     
     private func disableLetsGoButton() {
-        self.letsGoButton.enabled = false
+        self.letsGoButton.isEnabled = false
         self.letsGoButton.alpha = 0.5
     }
     
     // MARK: Status Bar
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 }
 
 extension UITextField {
     func clean() {
         guard let text = text else { return }
-        let charactersToRemove = NSCharacterSet.alphanumericCharacterSet().invertedSet
-        let trimmedReplacement = text.componentsSeparatedByCharactersInSet(charactersToRemove)
+        let charactersToRemove = CharacterSet.alphanumerics.inverted
+        let trimmedReplacement = text.components(separatedBy: charactersToRemove)
         let replacementText = trimmedReplacement.reduce("") { $0 + $1 }
         self.text = replacementText
     }

@@ -19,7 +19,7 @@ class ContactViewController: UIViewController, UITextViewDelegate {
 
     private var bottomTextViewConstraint: NSLayoutConstraint!
     private let textView = UITextView()
-    private let sendButton = UIButton(type: .System)
+    private let sendButton = UIButton(type: .system)
     
     // MARK: Lifecycle
     
@@ -28,17 +28,17 @@ class ContactViewController: UIViewController, UITextViewDelegate {
         setup()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         listenForKeyboardChanges()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         textView.becomeFirstResponder()
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unregisterKeyboardObservers()
     }
@@ -53,22 +53,22 @@ class ContactViewController: UIViewController, UITextViewDelegate {
     }
     
     private func setupCancelButton() {
-        let cancelButton = UIButton(type: .System) as UIButton
-        cancelButton.setTitleColor(ColorPalette.SparklyWhite.color, forState: .Normal)
+        let cancelButton = UIButton(type: .system) as UIButton
+        cancelButton.setTitleColor(ColorPalette.SparklyWhite.color, for: .normal)
         cancelButton.bounds = CGRect(x: 0, y: 0, width: 44, height: 44)
-        cancelButton.setTitle("Cancel", forState: .Normal)
+        cancelButton.setTitle("Cancel", for: .normal)
         cancelButton.titleLabel?.font = ChristmasCrackFont.Regular(32.0).font
-        cancelButton.addTarget(self, action: "cancelButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        cancelButton.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: cancelButton)
     }
     
     private func setupSendButton() {
-        sendButton.setTitleColor(ColorPalette.SparklyWhite.color, forState: .Normal)
+        sendButton.setTitleColor(ColorPalette.SparklyWhite.color, for: .normal)
         sendButton.frame = CGRect(x: 10, y: 0, width: 44, height: 44)
-        sendButton.setTitle("Send", forState: .Normal)
+        sendButton.setTitle("Send", for: .normal)
         sendButton.titleLabel?.font = ChristmasCrackFont.Regular(32.0).font
-        sendButton.addTarget(self, action: "sendButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
-        sendButton.hidden = true
+        sendButton.addTarget(self, action: #selector(sendButtonPressed), for: .touchUpInside)
+        sendButton.isHidden = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: sendButton)
     }
     
@@ -88,19 +88,21 @@ class ContactViewController: UIViewController, UITextViewDelegate {
             textView.left == view.left
             textView.right == view.right
         }
-        bottomTextViewConstraint = NSLayoutConstraint(item: self.textView, attribute: .Bottom, relatedBy: .Equal, toItem: self.view, attribute: .Bottom, multiplier: 1.0, constant: 0.0)
+        bottomTextViewConstraint = NSLayoutConstraint(item: self.textView, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: 0.0)
         view.addConstraint(bottomTextViewConstraint)
     }
     
     // MARK: Button Presses
-    
+
+    @objc
     func cancelButtonPressed(sender: UIBarButtonItem) {
-        navigationController?.dismissViewControllerAnimated(true, completion: nil)
+        navigationController?.dismiss(animated: true, completion: nil)
     }
-    
+
+    @objc
     func sendButtonPressed(sender: UIBarButtonItem) {
         textView.resignFirstResponder()
-        PJProgressHUD.showWithStatus("Contacting the North Pole ...")
+        PJProgressHUD.show(withStatus: "Contacting the North Pole ...")
         ParseHelper.sendFeedback(textView.text) { [weak self] result in
             switch result {
             case .Success(_):
@@ -120,7 +122,7 @@ class ContactViewController: UIViewController, UITextViewDelegate {
         let confirmation = "Merry Christmas!"
         let alert = SCLAlertView()
         alert.completion = {
-            self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+            self.navigationController?.dismiss(animated: true, completion: nil)
         }
         alert.showSuccess(title, subTitle: message, closeButtonTitle: confirmation)
         FeedbackSounds.SuccessSound.play()
@@ -138,23 +140,24 @@ class ContactViewController: UIViewController, UITextViewDelegate {
     // MARK: UITextViewDelegate
     
     func textViewDidChange(textView: UITextView) {
-        sendButton.hidden = textView.text.isEmpty
+        sendButton.isHidden = textView.text.isEmpty
     }
     
     // MARK: Keyboard Notifications
     
     private func listenForKeyboardChanges() {
-        let defaultCenter = NSNotificationCenter.defaultCenter()
-        defaultCenter.addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-        defaultCenter.addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        let defaultCenter = NotificationCenter.default
+        defaultCenter.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        defaultCenter.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     private func unregisterKeyboardObservers() {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: Keyboard Listeners
-    
+
+    @objc
     func keyboardWillShow(note: NSNotification) {
         guard let animation = note.animationDetail else { return }
         view.layoutIfNeeded()
@@ -163,7 +166,8 @@ class ContactViewController: UIViewController, UITextViewDelegate {
             self.view.layoutIfNeeded()
         }
     }
-    
+
+    @objc
     func keyboardWillHide(note: NSNotification) {
         guard let animation = note.animationDetail else { return }
         view.layoutIfNeeded()
@@ -175,8 +179,8 @@ class ContactViewController: UIViewController, UITextViewDelegate {
 }
 
 struct KeyboardAnimationDetail {
-    let duration: NSTimeInterval
-    let animationCurve: UIViewAnimationOptions
+    let duration: TimeInterval
+    let animationCurve: UIView.AnimationOptions
     let keyboardHeight: CGFloat
     let keyboardFrame: CGRect
 }
@@ -185,16 +189,16 @@ extension NSNotification {
     var animationDetail: KeyboardAnimationDetail? {
         guard
         let keyboardAnimationDetail = userInfo,
-        let duration = keyboardAnimationDetail[UIKeyboardAnimationDurationUserInfoKey] as? NSTimeInterval,
-        let keyboardFrame = (keyboardAnimationDetail[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue(),
-        let animationCurve = keyboardAnimationDetail[UIKeyboardAnimationCurveUserInfoKey] as? UInt
+            let duration = keyboardAnimationDetail[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
+            let keyboardFrame = (keyboardAnimationDetail[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+        let animationCurve = keyboardAnimationDetail[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt
         else { return nil }
         
-        let keyboardHeight = UIInterfaceOrientationIsPortrait(UIApplication.sharedApplication().statusBarOrientation)
-            ? CGRectGetHeight(keyboardFrame) : CGRectGetWidth(keyboardFrame)
+        let keyboardHeight = UIApplication.shared.statusBarOrientation.isPortrait
+            ? keyboardFrame.height : keyboardFrame.width
         return KeyboardAnimationDetail(
             duration: duration,
-            animationCurve: UIViewAnimationOptions(rawValue: animationCurve),
+            animationCurve: UIView.AnimationOptions(rawValue: animationCurve),
             keyboardHeight: keyboardHeight,
             keyboardFrame: keyboardFrame
         )
@@ -202,9 +206,9 @@ extension NSNotification {
 }
 
 extension UIView {
-    static func animateWithKeyboard(keyboardAnimationDetail: KeyboardAnimationDetail, animations: Void -> Void) {
-        UIView.animateWithDuration(
-            keyboardAnimationDetail.duration,
+    static func animateWithKeyboard(_ keyboardAnimationDetail: KeyboardAnimationDetail, animations: @escaping () -> Void) {
+        UIView.animate(
+            withDuration: keyboardAnimationDetail.duration,
             delay: 0.0,
             options: keyboardAnimationDetail.animationCurve,
             animations: animations,

@@ -9,13 +9,9 @@
 import Foundation
 
 extension String {
-    subscript(range: Range<Int>) -> String {
-        let chars = Array(characters)
+    subscript(range range: Range<Int>) -> String {
+        let chars = Array(self)
         let substringCharacters = chars[range]
         return String(substringCharacters)
-    }
-    
-    mutating func dropFirst() {
-        self = self[1..<characters.count]
     }
 }

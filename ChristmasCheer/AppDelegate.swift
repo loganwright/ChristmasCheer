@@ -8,7 +8,7 @@
 
 import UIKit
 import Parse
-import Genome
+//import Genome
 
 import Fabric
 import Crashlytics
@@ -21,24 +21,24 @@ var IS_SIMULATOR: Bool = {
     #endif
 }()
 
-let MainBundle = NSBundle.mainBundle()
+let MainBundle = Bundle.main
 
 typealias Application = UIApplication
 
 extension Parse {
     static func configure(launchOptions: [NSObject : AnyObject]?) {
-        if IS_DEVELOPMENT_TARGET {
+        if IS_DEVELOPMENT_TARGET.boolValue {
             Parse.setApplicationId("Bb6vmkJpOfJJXnam6Sz1QhrtcIie5KzKgREZccId", clientKey: "RA7rEfXsi9zIC2ylJkOWu9WQ8WsBTLlSClTARSCw")
         } else {
             Parse.setApplicationId("uZwcu9TSxPkYzAANnShydDUrjtMmrLxXCWuSyrEB", clientKey: "Uh13gPzg3vxYvMpYmq25wDbBEq1AJCuuldkxL9Ef")
         }
-        PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
+        PFAnalytics.trackAppOpenedWithLaunchOptions(inBackground: launchOptions, block: nil)
     }
 }
 
 extension Application {
     static func resetBadgeCount() {
-        let installation = PFInstallation.currentInstallation()
+        guard let installation = PFInstallation.current() else { return }
         guard installation.badge != 0 else { return }
         installation.badge = 0
         installation.saveEventually()
@@ -48,10 +48,10 @@ extension Application {
 private extension AppDelegate {
    
     func setupDevelopmentUI() {
-        guard IS_DEVELOPMENT_TARGET else { return }
+        guard IS_DEVELOPMENT_TARGET.boolValue else { return }
         let statusBarView = UIView()
-        statusBarView.frame = CGRect(x: 0, y: 0, width: CGRectGetWidth(UIScreen.mainScreen().bounds), height: 20)
-        statusBarView.backgroundColor = UIColor.orangeColor()
+        statusBarView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 20)
+        statusBarView.backgroundColor = UIColor.orange
         window?.addSubview(statusBarView)
     }
     
@@ -61,7 +61,7 @@ private extension AppDelegate {
     
     func setupCrashlytics() {
         // Production only
-        guard !IS_DEVELOPMENT_TARGET else { return }
+        guard !IS_DEVELOPMENT_TARGET.boolValue else { return }
         Fabric.with([Crashlytics.self])
     }
     
@@ -125,7 +125,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let homeViewController = HomeViewController()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        Parse.configure(launchOptions)
+        Parse.configure(launchOptions: launchOptions)
         
         setupWindow()
         setupDevelopmentUI()
@@ -133,8 +133,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setupCrashlytics()
         
-        let installation = PFInstallation.currentInstallation()
-        installation.saveIfRegisteredForNotifications()
+        let installation = PFInstallation.current()
+        if installation == nil { print("[warn] installation is nil") }
+        installation?.saveIfRegisteredForNotifications()
         
         /**
         *  This will not request authorization unless the user has already approved.
@@ -148,67 +149,68 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func setupWindow() {
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = NavigationController(rootViewController: self.homeViewController)
         window?.makeKeyAndVisible()
     }
-    
-    func applicationDidBecomeActive(application: UIApplication) {
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
         Application.resetBadgeCount()
         updateForActiveState()
     }
     
     // MARK: Notifications Response
-    
-    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
+
+    func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
         application.registerForRemoteNotifications()
     }
     
     // Has Registered
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        PFInstallation.currentInstallation().setDeviceTokenFromData(deviceToken)
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        PFInstallation.current()?.setDeviceTokenFrom(deviceToken)
         
         ApplicationSettings.deviceTokenData = deviceToken
         
         NotificationManager.hasReceivedNotificationRegistrationPrompt = true
         NotificationManager.didRegisterNotificationSettings()
     }
-    
-    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("FAILED TO REGISTER ERROR: \(error)")
         NotificationManager.didFailToRegisterNotificationSettings()
     }
-    
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        guard
-            let info = userInfo as? JSON,
-            let notification = try? Notification.mappedInstance(info)
-            else {
-                return
-            }
-        
-        SCLAlertView.showNotification(notification)
-        notification.aps.sound?.play()
-        
-        homeViewController.refreshCheerListIfPossible()
+
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        todo()
+//        guard
+//            let info = userInfo as? JSON,
+//            let notification = try? Notification.mappedInstance(info)
+//            else {
+//                return
+//            }
+//
+//        SCLAlertView.showNotification(notification)
+//        notification.aps.sound?.play()
+//
+//        homeViewController.refreshCheerListIfPossible()
     }
-    
-    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
-        guard
-            let id = identifier,
-            let action = NotificationAction(rawValue: id),
-            let info = userInfo as? JSON,
-            let notification = try? Notification.mappedInstance(info)
-            else {
-                completionHandler()
-                return
-            }
-        
-        action.handleNotification(notification, completion: completionHandler)
+
+    func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, for notification: UILocalNotification, completionHandler: @escaping () -> Void) {
+        todo()
+//        guard
+//            let id = identifier,
+//            let action = NotificationAction(rawValue: id),
+//            let info = userInfo as? JSON,
+//            let notification = try? Notification.mappedInstance(info)
+//            else {
+//                completionHandler()
+//                return
+//            }
+//
+//        action.handleNotification(notification, completion: completionHandler)
     }
-    
-    @available(iOS 9.0, *)
-    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         guard let shortcut = ApplicationShortcut(rawValue: shortcutItem.type) else {
             completionHandler(false)
             return
@@ -220,7 +222,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    private func handleSendRandomCheerShortcut(completionHandler: Bool -> Void) {
+    private func handleSendRandomCheerShortcut(_ completionHandler: @escaping (Bool) -> Void) {
         /*
         I realize this probably isn't the best way to do this w/ mixing UI and model, but for now, this is the best way I can think of w/o too much time.
         */
@@ -228,7 +230,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.homeViewController.sendCheer(completionHandler)
         }
         if homeViewController.presentedViewController != nil {
-            homeViewController.dismissViewControllerAnimated(false, completion: op)
+            homeViewController.dismiss(animated: false, completion: op)
         } else {
             homeViewController.sendCheer(completionHandler)
         }
@@ -238,4 +240,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 enum ApplicationShortcut : String {
     // Defined in .plist
     case SendRandomCheer = "io.loganwright.christmasCheer.sendRandomCheer"
+}
+
+public func todo(file: StaticString = #file, line: Int = #line) -> Never {
+    fatalError("\(file): \(line)")
 }

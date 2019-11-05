@@ -17,14 +17,14 @@ public class Qu {
     public enum Priority {
         case Background
         case Main
-        case Custom(NSOperationQueue)
+        case Custom(OperationQueue)
         
-        var queue: NSOperationQueue {
+        var queue: OperationQueue {
             switch self {
             case .Background:
-                return NSOperationQueue()
+                return OperationQueue()
             case .Main:
-                return NSOperationQueue.mainQueue()
+                return OperationQueue.main
             case .Custom(let customQueue):
                 return customQueue
             }
@@ -40,7 +40,7 @@ public class Qu {
     // MARK: Properties
     
     private(set) var priority: Priority
-    private(set) var operationQueue: NSOperationQueue
+    private(set) var operationQueue: OperationQueue
     
     /// Completion operation that will attempt to wait for other operations to finish and then execute.  If all operations have already executed before this operation is added, it will run immediately.  Even if you add operations afterwards.
     private(set) var completion: Operation? {
@@ -59,37 +59,39 @@ public class Qu {
     }
     
     // MARK: Class Functions
-    
-    class func Background(block: Block) -> Self {
+
+    @discardableResult
+    class func Background(_ block: @escaping Block) -> Self {
         let q = self.init(priority: .Background)
         return q.Run(block)
     }
-    
-    class func Main(block: Block) -> Self {
+
+    @discardableResult
+    class func Main(_ block: @escaping Block) -> Self {
         let q = self.init(priority: .Main)
         return q.Run(block)
     }
     
-    class func Custom(queue: NSOperationQueue, block: Block) -> Self {
+    class func Custom(_ queue: OperationQueue, block: @escaping Block) -> Self {
         let q = self.init(priority: .Custom(queue))
         return q.Run(block)
     }
     
     // MARK: Dispatching Functions
     
-    func Run(block: Block) -> Self {
+    func Run(_ block: @escaping Block) -> Self {
         return queue(block)
     }
     
-    func Also(block: Block) -> Self {
+    func Also(_ block: @escaping Block) -> Self {
         return queue(block)
     }
     
-    func Then(block: Block) -> Self {
+    func Then(_ block: @escaping Block) -> Self {
         return ThenAfter(.Last, block: block)
     }
     
-    func ThenAfter(dependency: Dependency, block: Block) -> Self {
+    func ThenAfter(_ dependency: Dependency, block: @escaping Block) -> Self {
         let blockOp = Operation(block: block)
         switch dependency {
         case .Last:
@@ -114,17 +116,17 @@ public class Qu {
     
     // MARK: Completion
     
-    func Finally(block: Block) -> Self {
+    func Finally(_ block: @escaping Block) -> Self {
         let op = Operation(block: block)
         completion = op
         operationQueue.setCompletion(op)
         return self
     }
     
-    func FinallyOn(priority: Priority, block: Block) -> Self {
+    func FinallyOn(_ priority: Priority, block: @escaping Block) -> Self {
         let wrapped: Block = {
             if let queue = priority.queue.underlyingQueue {
-                dispatch_async(queue, block)
+                queue.async(execute: block)
             }
         }
         return Finally(wrapped)
@@ -132,11 +134,11 @@ public class Qu {
     
     // MARK: Queueing
     
-    private func queue(block: Block) -> Self {
+    private func queue(_ block: @escaping Block) -> Self {
         return queue(Operation(block: block))
     }
     
-    private func queue(op: Operation) -> Self {
+    private func queue(_ op: Operation) -> Self {
         if let completion = completion {
             completion.addDependency(op)
         }
@@ -147,11 +149,11 @@ public class Qu {
 
 // MARK: Operation
 
-class Operation : NSBlockOperation {
+class Operation : BlockOperation {
     
     private(set) var block: Block!
     
-    init(block: Block) {
+    init(block: @escaping Block) {
         super.init()
         self.block = block
         addExecutionBlock(self.block)
@@ -166,16 +168,16 @@ extension Operation {
 
 // MARK: Operators
 
-func +=(operationQueue: NSOperationQueue, block: Block) {
-    operationQueue.addOperationWithBlock(block)
+func +=(operationQueue: OperationQueue, block: @escaping Block) {
+    operationQueue.addOperation(block)
 }
-func +=(operationQueue: NSOperationQueue, operation: NSOperation) {
+func +=(operationQueue: OperationQueue, operation: Operation) {
     operationQueue.addOperation(operation)
 }
 
-// MARK: NSOperationQueue+Operations
+// MARK: OperationQueue+Operations
 
-private extension NSOperationQueue {
+private extension OperationQueue {
     
     /// This is the most recently added operation.  According to the docs, `operation` is returned in the order they were added to the queue, NOT the order in which they are executed.
     var lastOperation: Operation? {
@@ -186,12 +188,12 @@ private extension NSOperationQueue {
         return operations as? [Operation] ?? []
     }
     
-    func setCompletion(block: Block) -> Operation {
+    func setCompletion(_ block: @escaping Block) -> Operation {
         let blockOp = Operation(block: block)
         return setCompletion(blockOp)
     }
     
-    func setCompletion(blockOp: Operation) -> Operation {
+    func setCompletion(_ blockOp: Operation) -> Operation {
         for op in ops {
             blockOp.addDependency(op)
         }

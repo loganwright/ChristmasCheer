@@ -12,15 +12,14 @@ import Parse
 extension PFACL {
     static var MasterKey: PFACL {
         let acl = PFACL()
-        acl.setPublicReadAccess(false)
-        acl.setPublicWriteAccess(false)
+        // todo
         return acl
     }
 }
 
 class Feedback : PFObject, PFSubclassing {
     
-    @NSManaged private(set) var feedbackTextFile: PFFile
+    @NSManaged private(set) var feedbackTextFile: PFFileObject
     @NSManaged private(set) var userId: String
     @NSManaged private(set) var installationId: String
     @NSManaged private(set) var name: String
@@ -35,8 +34,8 @@ class Feedback : PFObject, PFSubclassing {
     init?(feedback: String, userId: String, installationId: String, name: String, locationDescription: String) {
         super.init()
         guard
-            let feedbackData = feedback.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false),
-            let feedbackTextFile = PFFile(name: "feedback.txt", data: feedbackData)
+            let feedbackData = feedback.data(using: .utf8, allowLossyConversion: false),
+            let feedbackTextFile = PFFileObject(name: "feedback.txt", data: feedbackData)
             else { return nil }
         
         self.name = name
@@ -44,15 +43,15 @@ class Feedback : PFObject, PFSubclassing {
         self.installationId = installationId
         self.locationDescription = locationDescription
         self.feedbackTextFile = feedbackTextFile
-        self.ACL = PFACL.MasterKey
+        self.acl = PFACL.MasterKey
     }
     
     // MARK: PFObject Requirements
     
-    override class func initialize() {
-        super.initialize()
-        registerSubclass()
-    }
+//    override class func initialize() {
+//        super.initialize()
+//        registerSubclass()
+//    }
     
     class func parseClassName() -> String {
         return "Feedback"

@@ -28,33 +28,33 @@ class MESnowFallView: UIView, UICollisionBehaviorDelegate {
     
     lazy var collision: UICollisionBehavior = {
         let collision = UICollisionBehavior()
-        let viewWidth = CGRectGetWidth(self.bounds)
-        let viewHeight = CGRectGetHeight(self.bounds)
+        let viewWidth = self.bounds.width
+        let viewHeight = self.bounds.height
         let minX = -viewWidth // Offscreen Left to account for wind
         let maxX = viewWidth * 2.0 // Offscreen Right to account for wind
         
-        let lowerLeft = CGPointMake(-1000, 1000)
-        let lowerRight = CGPointMake(2000, 1000)
-        collision.addBoundaryWithIdentifier("bottom", fromPoint: lowerLeft, toPoint: lowerRight)
-        collision.collisionMode = .Boundaries
+        let lowerLeft = CGPoint(x: -1000, y: 1000)
+        let lowerRight = CGPoint(x: 2000, y: 1000)
+        collision.addBoundary(withIdentifier: "bottom" as NSString, from: lowerLeft, to: lowerRight)
+        collision.collisionMode = .boundaries
         collision.collisionDelegate = self
         self.animator.addBehavior(collision)
         return collision
         }()
     
-    var windTimer: NSTimer?
-    var snowTimer: NSTimer?
+    var windTimer: Timer?
+    var snowTimer: Timer?
     
     // MARK: Initialization
     
     convenience init() {
-        self.init(frame: CGRectZero)
+        self.init(frame: .zero)
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.clearColor()
-        self.userInteractionEnabled = false
+        self.backgroundColor = UIColor.clear
+        self.isUserInteractionEnabled = false
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -63,8 +63,8 @@ class MESnowFallView: UIView, UICollisionBehaviorDelegate {
     
     // MARK: LifeCycle
     
-    override func willMoveToSuperview(newSuperview: UIView?) {
-        super.willMoveToSuperview(newSuperview)
+    override func willMove(toSuperview newSuperview: UIView?) {
+        super.willMove(toSuperview: newSuperview)
         if windTimer == nil {
             self.windTimerFired(nil)
         }
@@ -74,26 +74,34 @@ class MESnowFallView: UIView, UICollisionBehaviorDelegate {
     }
     
     // MARK: Wind
-    
-    func windTimerFired(timer: NSTimer?) {
+
+    @objc
+    func windTimerFired(_ timer: Timer?) {
         gravity.angle = randomWindDirection()
         
         // 2 ... 10
-        let randomTimeInterval = NSTimeInterval(arc4random_uniform(9) + 2)
-        self.windTimer = NSTimer.scheduledTimerWithTimeInterval(randomTimeInterval, target: self, selector: "windTimerFired:", userInfo: nil, repeats: false)
+        let randomTimeInterval = TimeInterval(arc4random_uniform(9) + 2)
+        self.windTimer = Timer.scheduledTimer(timeInterval: randomTimeInterval, target: self, selector: #selector(windTimerFired), userInfo: nil, repeats: false)
     }
     
     // MARK: Snowfall
-    
-    func snowTimerFired(timer: NSTimer?) {
+
+    @objc
+    func snowTimerFired(_ timer: Timer?) {
         let randomSnowflake = randomSnowflakeImageView()
         self.addSubview(randomSnowflake)
         gravity.addItem(randomSnowflake)
         collision.addItem(randomSnowflake)
         
         // 0.6 - 2.0 Seconds
-        let randomInterval = NSTimeInterval(CGFloat(arc4random_uniform(15) + 6) / 10.0)
-        self.snowTimer = NSTimer.scheduledTimerWithTimeInterval(randomInterval, target: self, selector: "snowTimerFired:", userInfo: nil, repeats: false)
+        let randomInterval = TimeInterval(CGFloat(arc4random_uniform(15) + 6) / 10.0)
+        self.snowTimer = Timer.scheduledTimer(
+            timeInterval: randomInterval,
+            target: self,
+            selector: #selector(snowTimerFired),
+            userInfo: nil,
+            repeats: false
+        )
     }
     
     func randomWindDirection() -> CGFloat {
@@ -102,7 +110,7 @@ class MESnowFallView: UIView, UICollisionBehaviorDelegate {
         let maxDegrees = 110
         let range = maxDegrees - minDegrees
         let randomDegree = arc4random_uniform(UInt32(range)) + UInt32(minDegrees)
-        let radians = CGFloat(randomDegree) * CGFloat(M_PI / 180.0)
+        let radians = CGFloat(randomDegree) * CGFloat(.pi / 180.0)
         return radians
     }
     
@@ -114,14 +122,14 @@ class MESnowFallView: UIView, UICollisionBehaviorDelegate {
         
         let randomImgName = availableSnowflakeImageNames[Int(arc4random_uniform(UInt32(availableSnowflakeImageNames.count)))]
         let randomImage = UIImage(named: randomImgName)
-        let randomImageView = UIButton(type: .System) as UIButton
-        randomImageView.setImage(randomImage, forState: .Normal)
+        let randomImageView = UIButton(type: .system) as UIButton
+        randomImageView.setImage(randomImage, for: .normal)
         randomImageView.tintColor = ColorPalette.SparklyWhite.color
         let range = MEMaximumSnowFlakeSize - MEMinimumSnowFlakeSize
         let randomSize: CGFloat = CGFloat(arc4random_uniform(UInt32(range))) + MEMinimumSnowFlakeSize
-        randomImageView.bounds.size = CGSizeMake(randomSize, randomSize)
+        randomImageView.bounds.size = CGSize(width: randomSize, height: randomSize)
         
-        let maxX = CGRectGetWidth(self.bounds)
+        let maxX = self.bounds.width
         let randomStartX = arc4random_uniform(UInt32(maxX + 1))
         
         let randomStartY = arc4random_uniform(60)
@@ -133,7 +141,7 @@ class MESnowFallView: UIView, UICollisionBehaviorDelegate {
     
     // MARK: UICollisionBehaviorDelegate
     
-    func collisionBehavior(behavior: UICollisionBehavior, beganContactForItem item: UIDynamicItem, withBoundaryIdentifier identifier: NSCopying?, atPoint p: CGPoint) {
+    func collisionBehavior(_ behavior: UICollisionBehavior, beganContactFor item: UIDynamicItem, withBoundaryIdentifier identifier: NSCopying?, at p: CGPoint) {
         if let v = item as? UIView {
             v.removeFromSuperview()
             self.gravity.removeItem(v)

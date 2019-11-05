@@ -1,16 +1,27 @@
-source 'https://github.com/CocoaPods/Specs.git'
+project 'ChristmasCheer.xcodeproj/'
 
-use_frameworks!
-platform :ios, '8.0'
+# Uncomment the next line to define a global platform for your project
+platform :ios, '12.0'
 
-link_with 'ChristmasCheer', 'ChristmasCheerDevelopment'
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['SWIFT_VERSION'] = '5.0'
+        end
+    end
+end
 
-pod 'Parse'
+target 'ChristmasCheer' do
+  use_frameworks!
 
-pod 'Genome'
+  pod 'Parse'
 
-pod 'Cartography'
-pod 'YamlSwift'
+#  pod 'Genome'
 
-pod 'Fabric'
-pod 'Crashlytics'
+  pod 'Cartography'
+#  pod 'YamlSwift'
+
+  pod 'Fabric'
+  pod 'Crashlytics'
+  
+end

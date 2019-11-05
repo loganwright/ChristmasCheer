@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CheerListCellDelegate : class {
-    func cheerListCell(menuViewCell: CheerListCell, didPressReturnCheerButtonForOriginalNote originalNote: ChristmasCheerNotification)
+    func cheerListCell(_ menuViewCell: CheerListCell, didPressReturnCheerButtonForOriginalNote originalNote: ChristmasCheerNotification)
 }
 
 @objc(CheerListCell)
@@ -26,7 +26,7 @@ class CheerListCell: UITableViewCell {
     @available(iOS 8.0, *)
     override var layoutMargins: UIEdgeInsets {
         get {
-            return UIEdgeInsetsZero
+            return .zero
         }
         set {
             super.layoutMargins = newValue
@@ -38,7 +38,7 @@ class CheerListCell: UITableViewCell {
             return indicatorButton.imageView?.image
         }
         set {
-            indicatorButton.setImage(newValue, forState: .Normal)
+            indicatorButton.setImage(newValue, for: .normal)
         }
     }
     
@@ -46,22 +46,22 @@ class CheerListCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         clipsToBounds = true
-        backgroundColor = UIColor.clearColor()
+        backgroundColor = UIColor.clear
         indicatorButton.backgroundColor = ColorPalette.SparklyRed.color
         indicatorButton.tintColor = ColorPalette.SparklyWhite.color
-        indicatorButton.imageView?.contentMode = .ScaleAspectFit
-        indicatorButton.layer.cornerRadius = CGRectGetHeight(indicatorButton.bounds) / 2.0
-        indicatorButton.setTitle("", forState: .Normal)
-        indicatorButton.setImage(UIImage.randomChristmasIcon(), forState: .Normal)
+        indicatorButton.imageView?.contentMode = .scaleAspectFit
+        indicatorButton.layer.cornerRadius = indicatorButton.bounds.height / 2.0
+        indicatorButton.setTitle("", for: .normal)
+        indicatorButton.setImage(UIImage.randomChristmasIcon(), for: .normal)
         indicatorButton.imageEdgeInsets = UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6)
-        indicatorButton.userInteractionEnabled = false
+        indicatorButton.isUserInteractionEnabled = false
         nameLabel.font = ChristmasCrackFont.Regular(52.0).font
         locationLabel.font = ChristmasCrackFont.Regular(52.0).font
         returnTheCheerButton.backgroundColor = ColorPalette.SparklyRed.color
-        returnTheCheerButton.setTitleColor(ColorPalette.SparklyWhite.color, forState: .Normal)
+        returnTheCheerButton.setTitleColor(ColorPalette.SparklyWhite.color, for: .normal)
         returnTheCheerButton.titleLabel?.font = ChristmasCrackFont.Regular(42.0).font
         returnTheCheerButton.titleEdgeInsets = UIEdgeInsets(top: 6.0, left: 0, bottom: 0, right: 0)
-        returnTheCheerButton.layer.cornerRadius = CGRectGetHeight(returnTheCheerButton.bounds) / 4.0
+        returnTheCheerButton.layer.cornerRadius = returnTheCheerButton.bounds.height / 4.0
     }
 
     @IBAction func returnTheCheerButtonPressed(sender: UIButton) {
@@ -70,18 +70,18 @@ class CheerListCell: UITableViewCell {
     
     // MARK: Selected
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         let color: UIColor
-        if highlighted {
+        if isHighlighted {
             color = ColorPalette.SparklyWhite.color
         } else {
-            color = UIColor.clearColor()
+            color = UIColor.clear
         }
         backgroundColor = color
         contentView.backgroundColor = color
     }
     
-    override func setHighlighted(highlighted: Bool, animated: Bool) {
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         // Selected / Highlighted == Same
         setSelected(highlighted, animated: animated)
     }
@@ -89,7 +89,7 @@ class CheerListCell: UITableViewCell {
     func configure(note: ChristmasCheerNotification) {
         nameLabel.text = note.fromName
         locationLabel.text = note.fromLocation
-        returnTheCheerButton.enabled = !note.hasBeenRespondedTo
+        returnTheCheerButton.isEnabled = !note.hasBeenRespondedTo
         cheerNotification = note
         
         // Is a response

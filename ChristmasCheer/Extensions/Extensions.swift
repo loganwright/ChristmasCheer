@@ -20,7 +20,7 @@ enum FeedbackSounds : String, SoundFile {
     }
 }
 
-enum NotificationSounds : String, SoundFile {
+enum NotificationSounds: String, SoundFile, Codable {
     case MerryChristmas = "merry_christmas.mp3"
     case SantaLaugh = "santa_laugh.wav"
     case SleighBells = "sleighbells.wav"
@@ -86,7 +86,7 @@ enum ChristmasCrackFont : Fontable {
 extension CLPlacemark {
     var cc_locationDescription: String {
         var description = locality ?? "North Pole"
-        if let countryCode = ISOcountryCode where countryCode != "US" {
+        if let countryCode = isoCountryCode, countryCode != "US" {
             description += ", \(countryCode)"
         } else if let administrative = administrativeArea {
             description += ", \(administrative)"
@@ -97,14 +97,15 @@ extension CLPlacemark {
 
 
 extension UIImage {
+    @objc
     class func randomChristmasIcon() -> UIImage {
         let randomInt = Int(arc4random_uniform(10))
         let randomImage = "christmas_icon_\(randomInt)"
         return UIImage(named: randomImage)!
     }
-    
+
+    @objc
     class func randomCircleLoader() -> UIImage {
-        
         let randomInt = Int(arc4random_uniform(16))
         let randomImage = "circle_loader_\(randomInt)"
         return UIImage(named: randomImage)!
@@ -122,16 +123,20 @@ extension String {
 // MARK: ObjC
 
 extension UIColor {
+    @objc
     class func christmasCheerTexturedBackgroundColor() -> UIColor {
         return ColorPalette.TexturedBackground.color
     }
+
+    @objc
     class func christmasCheerSparklyRedColor() -> UIColor {
         return ColorPalette.SparklyRed.color
     }
 }
 
 extension UIFont {
-    class func christmasCheerCrackFontOfSize(size: CGFloat) -> UIFont {
+    @objc
+    class func christmasCheerCrackFont(withSize size: CGFloat) -> UIFont {
         return ChristmasCrackFont.Regular(size).font
     }
 }

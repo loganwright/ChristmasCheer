@@ -10,25 +10,25 @@ import UIKit
 
 protocol SettingsKeyAccessible {
     var key: String { get }
-    var defaults: NSUserDefaults { get }
+    var defaults: UserDefaults { get }
 }
 
 extension SettingsKeyAccessible {
-    var defaults: NSUserDefaults {
-        return NSUserDefaults.standardUserDefaults()
+    var defaults: UserDefaults {
+        return UserDefaults.standard
     }
     
-    func writeToDefaults(any: AnyObject?) {
+    func writeToDefaults<T>(_ any: T?) {
         if let any = any {
-            defaults.setValue(any, forKey: key)
+            defaults.setValue(any as AnyObject, forKey: key)
         } else {
-            defaults.removeObjectForKey(key)
+            defaults.removeObject(forKey: key)
         }
         defaults.synchronize()
     }
     
     func readFromDefaults<T>() -> T? {
-        return defaults.objectForKey(key) as? T
+        return defaults.object(forKey: key) as? T
     }
 }
 
@@ -53,7 +53,7 @@ enum Setting : String, EnumSettingsKeyAccessible {
 
 class ApplicationSettings: NSObject {
     
-    static let defaults = NSUserDefaults.standardUserDefaults()
+    static let defaults = UserDefaults.standard
     
     class var hasEnteredName: Bool {
         return displayName != "<unknown>"
@@ -83,7 +83,7 @@ class ApplicationSettings: NSObject {
         if let currentUserId: String = identifierKey.readFromDefaults() {
             uniqueId = currentUserId
         } else {
-            uniqueId = NSUUID().UUIDString
+            uniqueId = NSUUID().uuidString
             identifierKey.writeToDefaults(uniqueId)
         }
         return uniqueId
@@ -98,14 +98,14 @@ class ApplicationSettings: NSObject {
         }
     }
 
-    class var timeSinceLastSentChristmasCheerTimestamp: NSTimeInterval {
+    class var timeSinceLastSentChristmasCheerTimestamp: TimeInterval {
         guard let last = lastSentChristmasCheerTimestamp?.timeIntervalSince1970 else { return 0 }
         let now = NSDate().timeIntervalSince1970
         return now - last
     }
     
     class var canSendChristmasCheer: Bool {
-        if IS_DEVELOPMENT_TARGET {
+        if IS_DEVELOPMENT_TARGET.boolValue {
             return true
         }
         
@@ -120,7 +120,7 @@ class ApplicationSettings: NSObject {
     /*
     For the rare situation where a user registers for notifications without a connection and then the app crashes, we store the token here.  Otherwise, our PFInstallation doesn't have a connection to it.
     */
-    class var deviceTokenData: NSData? {
+    class var deviceTokenData: Data? {
         get {
             return Setting.DeviceTokenData.readFromDefaults()
         }
@@ -131,17 +131,17 @@ class ApplicationSettings: NSObject {
 }
 
 extension Double {
-    var minute: NSTimeInterval {
+    var minute: TimeInterval {
         return self * 60
     }
 }
 
-import Parse
+import Parse.PFInstallation
 
 extension ApplicationSettings {
     class var installationId: String {
         guard
-            let installationId = PFInstallation.currentInstallation().objectId
+            let installationId = PFInstallation.current()?.objectId
             else { return "<unknown>" }
         return installationId
     }

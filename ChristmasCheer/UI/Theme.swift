@@ -14,7 +14,8 @@ struct Theme {
     }
     
     private static func stylizeStatusBar() {
-        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: false)
+        // todo()
+        UIApplication.shared.setStatusBarStyle(.lightContent, animated: false)
     }
 }
 
@@ -22,15 +23,15 @@ struct Theme {
 class NavigationController : UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationBar.setTitleVerticalPositionAdjustment(4.0, forBarMetrics: .Default)
-        navigationBar.setBackgroundImage(UIImage(named: "red_christmas_bg"), forBarMetrics: .Default)
+        navigationBar.setTitleVerticalPositionAdjustment(4.0, for: .default)
+        navigationBar.setBackgroundImage(UIImage(named: "red_christmas_bg"), for: .default)
         let attributes =  [
-            NSForegroundColorAttributeName : ColorPalette.SparklyWhite.color,
-            NSFontAttributeName : ChristmasCrackFont.Regular(42.0).font
+            NSAttributedString.Key.foregroundColor : ColorPalette.SparklyWhite.color,
+            NSAttributedString.Key.font : ChristmasCrackFont.Regular(42.0).font
         ]
         navigationBar.titleTextAttributes = attributes
         navigationBar.tintColor = ColorPalette.SparklyWhite.color
-        navigationBar.translucent = false
+        navigationBar.isTranslucent = false
 
     }
 }

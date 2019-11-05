@@ -11,38 +11,38 @@ import UIKit
 extension UITableView {
     func registerCell<T : UITableViewCell>(_: T.Type, identifier: String = T.identifier) {
         if let nib = T.nib {
-            registerNib(nib, forCellReuseIdentifier: identifier)
+            register(nib, forCellReuseIdentifier: identifier)
         } else {
-            registerClass(T.self, forCellReuseIdentifier: identifier)
+            register(T.self, forCellReuseIdentifier: identifier)
         }
     }
     
     func registerHeader<T: UITableViewHeaderFooterView>(_: T.Type, identifier: String = T.identifier) {
         if let nib = T.nib {
-            registerNib(nib, forHeaderFooterViewReuseIdentifier: identifier)
+            register(nib, forHeaderFooterViewReuseIdentifier: identifier)
         } else {
-            registerClass(T.self, forHeaderFooterViewReuseIdentifier: identifier)
+            register(T.self, forHeaderFooterViewReuseIdentifier: identifier)
         }
     }
     
-    func dequeueCell<T: UITableViewCell>(indexPath: NSIndexPath, identifier: String = T.identifier) -> T {
-        let cell = dequeueReusableCellWithIdentifier(T.identifier, forIndexPath: indexPath) as! T
+    func dequeueCell<T: UITableViewCell>(indexPath: IndexPath, identifier: String = T.identifier) -> T {
+        let cell = dequeueReusableCell(withIdentifier: T.identifier, for: indexPath as IndexPath) as! T
         return cell
     }
     
     func dequeueHeader<T: UITableViewHeaderFooterView>(section: Int, identifier: String = T.identifier) -> T {
-        let header = dequeueReusableHeaderFooterViewWithIdentifier(T.identifier) as! T
+        let header = dequeueReusableHeaderFooterView(withIdentifier: T.identifier) as! T
         return header
     }
 }
 
 extension UITableViewHeaderFooterView {
     class var nibName: String {
-        let name = "\(self)".componentsSeparatedByString(".").first ?? ""
+        let name = "\(self)".components(separatedBy: ".").first ?? ""
         return name
     }
     class var nib: UINib? {
-        if let _ = MainBundle.pathForResource(nibName, ofType: "nib") {
+        if let _ = MainBundle.path(forResource: nibName, ofType: "nib") {
             return UINib(nibName: nibName, bundle: nil)
         } else {
             return nil
@@ -55,11 +55,11 @@ extension UITableViewHeaderFooterView {
 
 extension UITableViewCell {
     class var nibName: String {
-        let name = "\(self)".componentsSeparatedByString(".").first ?? ""
+        let name = "\(self)".components(separatedBy: ".").first ?? ""
         return name
     }
     class var nib: UINib? {
-        if let _ = MainBundle.pathForResource(nibName, ofType: "nib") {
+        if let _ = MainBundle.path(forResource: nibName, ofType: "nib") {
             return UINib(nibName: nibName, bundle: nil)
         } else {
             return nil

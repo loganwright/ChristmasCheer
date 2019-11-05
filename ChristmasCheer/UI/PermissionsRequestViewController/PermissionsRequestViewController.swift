@@ -10,7 +10,7 @@ import UIKit
 import Parse.PFInstallation
 
 protocol PermissionsRequestViewControllerDelegate : class {
-    func shouldDismissPermissionsRequestViewController(prvc: PermissionsRequestViewController)
+    func shouldDismissPermissionsRequestViewController(_ prvc: PermissionsRequestViewController)
 }
 
 extension PermissionsRequestViewController {
@@ -102,12 +102,12 @@ class PermissionsRequestViewController: UIViewController {
         style()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateMessagingLabel()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         ensurePermissionsRequired()
     }
@@ -124,7 +124,7 @@ class PermissionsRequestViewController: UIViewController {
     }
     
     private func setupPermissionCallbacks() {
-        let callback: Bool -> Void = { [weak self] _ in
+        let callback: (Bool) -> Void = { [weak self] _ in
             self?.performActionForCurrentPurpose()
         }
         
@@ -148,7 +148,7 @@ class PermissionsRequestViewController: UIViewController {
     }
     
     private func styleLabelBackground() {
-        labelBackgroundView.backgroundColor = UIColor.clearColor()
+        labelBackgroundView.backgroundColor = UIColor.clear
     }
     
     private func styleMessageLabel() {
@@ -164,15 +164,15 @@ class PermissionsRequestViewController: UIViewController {
         messageLabel.clipsToBounds = true
     }
     
-    private func styleButtons(btns: UIButton...) {
+    private func styleButtons(_ btns: UIButton...) {
         let buttonFont = ChristmasCrackFont.Regular(42.0).font
         let buttonTitleInsets = UIEdgeInsets(top: 6.0, left: 0, bottom: 0, right: 0)
         btns.forEach { btn in
             btn.backgroundColor = ColorPalette.SparklyRed.color
-            btn.setTitleColor(ColorPalette.SparklyWhite.color, forState: .Normal)
+            btn.setTitleColor(ColorPalette.SparklyWhite.color, for: .normal)
             btn.titleLabel?.font = buttonFont
             btn.contentEdgeInsets = buttonTitleInsets
-            btn.layer.cornerRadius = CGRectGetHeight(self.cancelButton.bounds) / 4.0
+            btn.layer.cornerRadius = self.cancelButton.bounds.height / 4.0
         }
     }
     
@@ -193,8 +193,8 @@ class PermissionsRequestViewController: UIViewController {
     }
     
     private func saveOrDismissInstallation() {
-        let installation = PFInstallation.currentInstallation()
-        if !installation.isDirty() {
+        let installation = PFInstallation.current()
+        if let installation = installation, !installation.isDirty {
             dismiss()
         } else {
             // We've approved location, but the installation hasn't been saved yet.
@@ -235,11 +235,11 @@ class PermissionsRequestViewController: UIViewController {
     
     private func performLocationPermissionAction() {
         switch CLLocationManager.authorizationStatus() {
-        case .NotDetermined:
+        case .notDetermined:
             LocationManager.requestPermissions()
-        case .Authorized, .AuthorizedWhenInUse:
+        case .authorizedAlways, .authorizedWhenInUse:
             saveOrDismissInstallation()
-        case .Denied, .Restricted:
+        case .denied, .restricted:
             showPermissionsDeniedAlert()
         }
     }
@@ -256,7 +256,7 @@ class PermissionsRequestViewController: UIViewController {
     }
     
     private func requestNotificationPermissions() {
-        PJProgressHUD.showWithStatus("Registering your device with Apple. (Requires Internet)")
+        PJProgressHUD.show(withStatus: "Registering your device with Apple. (Requires Internet)")
         NotificationManager.requestRemoteNotificationAuthorization { [weak self] auth in
             PJProgressHUD.hide()
             // If auth still isn't determined, then the request failed, usually due to no internet, or simulator
@@ -269,9 +269,9 @@ class PermissionsRequestViewController: UIViewController {
     
     private func registerInstallationWithServer() {
         guard !self.isRegistering else { return }
-        PJProgressHUD.showWithStatus("Registering With North Pole.")
+        PJProgressHUD.show(withStatus: "Registering With North Pole.")
         self.isRegistering = true
-        PFInstallation.currentInstallation().register { [weak self] result in
+        PFInstallation.current()?.register { [weak self] result in
             self?.isRegistering = false
             PJProgressHUD.hide()
             switch result {
@@ -291,7 +291,7 @@ class PermissionsRequestViewController: UIViewController {
         alert.showError(title, subTitle: message, closeButtonTitle: confirmation)
     }
     
-    private func showPermissionsDeniedAlert(completion: Void -> Void = {}) {
+    private func showPermissionsDeniedAlert(_ completion: @escaping () -> Void = {}) {
         let title = purpose.alertTitle
         let message = purpose.permissionDeniedMessage
         
@@ -306,8 +306,8 @@ class PermissionsRequestViewController: UIViewController {
 
 extension UIApplication {
     static func cc_goToSettings() {
-        guard let url = NSURL(string: UIApplicationOpenSettingsURLString) else { return }
-        sharedApplication().openURL(url)
+        guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+        shared.openURL(url)
     }
 }
 
@@ -317,15 +317,15 @@ extension PFInstallation {
         return objectId != nil
     }
     
-    func register(completion: Result<Void> -> Void) {
+    func register(completion: @escaping (Result<Int>) -> Void) {
         setTokenDataIfNecessary(ApplicationSettings.deviceTokenData)
         
-        PJProgressHUD.showWithStatus("Registering With North Pole.")
+        PJProgressHUD.show(withStatus: "Registering With North Pole.")
         Qu.Background {
-            let result: Result<Void>
+            let result: Result<Int>
             do {
                 try self.save()
-                result = .Success()
+                result = .Success(1)
             } catch {
                 result = .Failure(error)
             }
@@ -337,10 +337,10 @@ extension PFInstallation {
         }
     }
     
-    func setTokenDataIfNecessary(tokenData: NSData?) {
+    func setTokenDataIfNecessary(_ tokenData: Data?) {
         // If the app quit before saving to server, we persist the data here.
         guard deviceToken == nil, let data = tokenData else { return }
-        setDeviceTokenFromData(data)
+        setDeviceTokenFrom(data)
     }
 }
 
@@ -355,9 +355,9 @@ extension PermissionsRequestViewController {
 }
 
 class MarginLabel : UILabel {
-    var marginInsets = UIEdgeInsetsZero
-    override func drawTextInRect(rect: CGRect) {
-        let insetRect = UIEdgeInsetsInsetRect(rect, marginInsets)
-        super.drawTextInRect(insetRect)
+    var marginInsets = UIEdgeInsets.zero
+    override func drawText(in rect: CGRect) {
+        let insetRect = rect.inset(by: marginInsets)
+        super.drawText(in: insetRect)
     }
 }

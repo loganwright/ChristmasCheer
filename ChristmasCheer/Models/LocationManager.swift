@@ -21,8 +21,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         return locationManager
         }()
     
-    var locationUpdatedBlock: (location: CLLocation) -> Void = { _ in }
-    var locationStatusUpdated: (approved: Bool) -> Void = { _ in }
+    var locationUpdatedBlock: (CLLocation) -> Void = { _ in }
+    var locationStatusUpdated: (Bool) -> Void = { _ in }
     
     let geocoder = CLGeocoder()
     
@@ -41,15 +41,16 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         get {
             var enabled = false
             switch CLLocationManager.authorizationStatus() {
-            case .Authorized:
-                fallthrough
-            case .AuthorizedWhenInUse:
+            case .authorizedAlways, .authorizedWhenInUse:
                 enabled = true
-            case .NotDetermined:
+            case .notDetermined:
                 break
-            case .Denied:
+            case .denied:
                 break
-            case .Restricted:
+            case .restricted:
+                break
+            @unknown default:
+                print("[warn] - unexpected status")
                 break
             }
             return enabled
@@ -62,7 +63,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     // MARK: Start / Stop Listening
 
-    class func listenForPlacemark(update: CLPlacemark -> Void) {
+    class func listenForPlacemark(_ update: @escaping (CLPlacemark) -> Void) {
         startListeningForLocationWithUpdatedBlock { location in
             sharedManager.geocoder.reverseGeocodeLocation(location) { (placemarks, error) -> Void in
                 guard let placemark = placemarks?.first else { return }
@@ -71,7 +72,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    class func startListeningForLocationWithUpdatedBlock(locationUpdatedBlock:(location: CLLocation) -> Void) {
+    class func startListeningForLocationWithUpdatedBlock(locationUpdatedBlock: @escaping (CLLocation) -> Void) {
         guard locationServicesEnabled else {
             fatalError("Must ensure authorization before you begin listening!")
         }
@@ -88,10 +89,10 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
-        locationUpdatedBlock(location: location)
+        locationUpdatedBlock(location)
     }
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        locationStatusUpdated(approved: LocationManager.locationServicesEnabled)
+        locationStatusUpdated(LocationManager.locationServicesEnabled)
     }
 }

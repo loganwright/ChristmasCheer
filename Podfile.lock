@@ -1,30 +1,35 @@
 PODS:
-  - Bolts/Tasks (1.4.0)
-  - Cartography (0.6.0)
-  - Crashlytics (3.3.4)
-  - Fabric (1.5.5):
-    - Fabric/Base (= 1.5.5)
-  - Fabric/Base (1.5.5)
-  - Genome (1.0.4)
-  - Parse (1.9.1):
-    - Bolts/Tasks (>= 1.4.0)
-  - YamlSwift (1.2.1)
+  - Bolts/Tasks (1.9.0)
+  - Cartography (4.0.0)
+  - Crashlytics (3.14.0):
+    - Fabric (~> 1.10.2)
+  - Fabric (1.10.2)
+  - Parse (1.17.3):
+    - Parse/Core (= 1.17.3)
+  - Parse/Core (1.17.3):
+    - Bolts/Tasks (~> 1.9)
 
 DEPENDENCIES:
   - Cartography
   - Crashlytics
   - Fabric
-  - Genome
   - Parse
-  - YamlSwift
+
+SPEC REPOS:
+  trunk:
+    - Bolts
+    - Cartography
+    - Crashlytics
+    - Fabric
+    - Parse
 
 SPEC CHECKSUMS:
-  Bolts: 0e9bce58b9b9f5e8a7a4d47b16d2fabec289072b
-  Cartography: 70af183a248547694a8cfaa6b989cb7e04589985
-  Crashlytics: 41c082440d2e14da444186fff65e79c0b4b35d4c
-  Fabric: 190bf1a6eb65f7500de1347d027d2e59a7e53db1
-  Genome: f0e4174695eb73d72398500417e4f61a0958e97b
-  Parse: 54a965c8c19a6dde90284ab654dbcc77ef8c001b
-  YamlSwift: 297225be9d8e342f38c566b770289507862d06a1
+  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  Cartography: c5626d29056b20f1e95c017326ee4df57cc39ad8
+  Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
+  Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
+  Parse: c1ad2a04d2cab2b54b6fb7da05f741abf2cf57d1
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: ae91846ff3bc8fad6df4dd95605d185166fbe90c
+
+COCOAPODS: 1.8.3

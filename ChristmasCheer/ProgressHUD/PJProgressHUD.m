@@ -55,7 +55,7 @@
     
     self.doubleActivityIndicator.backgroundColor = [UIColor clearColor];
     self.statusLabel.backgroundColor = [UIColor clearColor];
-    self.statusLabel.font = [UIFont christmasCheerCrackFontOfSize:42.0];
+    self.statusLabel.font = [UIFont christmasCheerCrackFontWithSize:42.0];
     self.statusLabel.textAlignment = NSTextAlignmentCenter;
     self.statusLabel.minimumScaleFactor = 0.5;
     self.statusLabel.textColor = [UIColor christmasCheerSparklyRedColor];

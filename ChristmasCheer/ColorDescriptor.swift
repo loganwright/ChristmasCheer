@@ -14,7 +14,7 @@ enum ColorDescriptor {
     case Hex(hex: String)
 }
 
-extension ColorDescriptor : StringLiteralConvertible, RawRepresentable, Equatable {
+extension ColorDescriptor : ExpressibleByStringLiteral, RawRepresentable, Equatable {
     typealias RawValue = StringLiteralType
     typealias ExtendedGraphemeClusterLiteralType = StringLiteralType
     typealias UnicodeScalarLiteralType = StringLiteralType
@@ -65,8 +65,8 @@ extension ColorDescriptor : StringLiteralConvertible, RawRepresentable, Equatabl
     }
     
     init(_ string: String) {
-        let rgbComponents = string.componentsSeparatedByString(",")
-            .flatMap { Int($0) }
+        let rgbComponents = string.components(separatedBy: ",")
+            .compactMap { Int($0) }
         if rgbComponents.count == 4 {
             self = .RGB(r: rgbComponents[0], g: rgbComponents[1], b: rgbComponents[2], a: rgbComponents[3])
         } else if string.hasPrefix("#") {

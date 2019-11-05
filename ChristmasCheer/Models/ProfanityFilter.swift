@@ -540,18 +540,12 @@ struct ProfanityFilter {
         return Set(EnglishProfanityList + SpanishProfanityList + LoganAdditions)
     }
     
-    static func isWordSafe(word: String) -> Bool {
-        let lowercaseWord = word.lowercaseString
+    static func isWordSafe(_ word: String) -> Bool {
+        let lowercaseWord = word.lowercased()
         for profanity in MasterProfanityList where lowercaseWord.contains(profanity) {
             return false
         }
         return true
     }
     
-}
-
-private extension String {
-    func contains(string: String) -> Bool {
-        return rangeOfString(string) != nil
-    }
 }

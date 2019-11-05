@@ -9,25 +9,25 @@
 import UIKit
 
 extension UIView {
-    class func ip_fromNib(nibNameOrNil: String? = nil) -> Self {
+    class func ip_fromNib(_ nibNameOrNil: String? = nil) -> Self {
         return ip_fromNib(nibNameOrNil, type: self)
     }
     
-    class func ip_fromNib<T : UIView>(nibNameOrNil: String? = nil, type: T.Type) -> T {
+    class func ip_fromNib<T : UIView>(_ nibNameOrNil: String? = nil, type: T.Type) -> T {
         let v: T? = ip_fromNib(nibNameOrNil, type: T.self)
         return v!
     }
     
-    class func ip_fromNib<T : UIView>(nibNameOrNil: String? = nil, type: T.Type) -> T? {
+    class func ip_fromNib<T : UIView>(_ nibNameOrNil: String? = nil, type: T.Type) -> T? {
         var view: T?
         let name: String
         if let nibName = nibNameOrNil {
             name = nibName
         } else {
             // Most nibs are demangled by practice, if not, just declare string explicitly
-            name = "\(T.self)".componentsSeparatedByString(".").last!
+            name = "\(T.self)".components(separatedBy: ".").last!
         }
-        let nibViews = NSBundle.mainBundle().loadNibNamed(name, owner: nil, options: nil)
+        let nibViews = Bundle.main.loadNibNamed(name, owner: nil, options: nil) ?? []
         for v in nibViews {
             if let tog = v as? T {
                 view = tog

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Genome
+//import Genome
 
 class NotificationManager: NSObject {
 
@@ -26,8 +26,8 @@ class NotificationManager: NSObject {
         if !self.hasReceivedNotificationRegistrationPrompt {
             authStatus = .NotYetDetermined
         } else {
-            let registeredTypes = UIApplication.sharedApplication().currentUserNotificationSettings()!.types
-            if UIUserNotificationType.Alert == UIUserNotificationType.Alert.intersect(registeredTypes) {
+            let registeredTypes = UIApplication.shared.currentUserNotificationSettings!.types
+            if UIUserNotificationType.alert == UIUserNotificationType.alert.intersection(registeredTypes) {
                 authStatus = .Authorized
             } else {
                 authStatus = .Denied
@@ -36,7 +36,7 @@ class NotificationManager: NSObject {
         return authStatus
     }
     
-    static var authorizationStatusUpdated: AuthorizationStatus -> Void = { _ in }
+    static var authorizationStatusUpdated: (AuthorizationStatus) -> Void = { _ in }
     
     class func didRegisterNotificationSettings() {
         authorizationStatusUpdated(authorizationStatus)
@@ -57,20 +57,20 @@ class NotificationManager: NSObject {
     
     class var hasReceivedNotificationRegistrationPrompt: Bool {
         get {
-            return NSUserDefaults.standardUserDefaults().boolForKey(NotificationManagerDefaultsKeyHasReceivedNotificationRegistrationPrompt)
+            return UserDefaults.standard.bool(forKey: NotificationManagerDefaultsKeyHasReceivedNotificationRegistrationPrompt)
         }
         set {
             if !newValue {
                 fatalError("Can not set `hasReceivedNotificationRegistrationPrompt` to false!")
             }
-            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: NotificationManagerDefaultsKeyHasReceivedNotificationRegistrationPrompt)
-            NSUserDefaults.standardUserDefaults().synchronize()
+            UserDefaults.standard.set(newValue, forKey: NotificationManagerDefaultsKeyHasReceivedNotificationRegistrationPrompt)
+            UserDefaults.standard.synchronize()
         }
     }
     
     // MARK: Permissions Request
     
-    class func requestRemoteNotificationAuthorization(completion: AuthorizationStatus -> Void) {
+    class func requestRemoteNotificationAuthorization(completion: @escaping (AuthorizationStatus) -> Void) {
         guard !self.hasReceivedNotificationRegistrationPrompt
             || authorizationStatus == .Authorized
             // If the user is already authorized, we call this function multiple times so that we can register new notification types on upgrade
@@ -81,16 +81,16 @@ class NotificationManager: NSObject {
         
         authorizationStatusUpdated = completion
         let userNotificationTypes: UIUserNotificationType = [
-            .Alert,
-            .Badge,
-            .Sound
+            .alert,
+            .badge,
+            .sound
         ]
         let categories = NotificationCategory.allCategories.flatMap { $0.category }
         let notificationSettings = UIUserNotificationSettings(
-            forTypes: userNotificationTypes,
+            types: userNotificationTypes,
             categories: Set(categories)
         )
-        UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
+        UIApplication.shared.registerUserNotificationSettings(notificationSettings)
     }
 }
 
@@ -102,7 +102,7 @@ returnedCheer == ResponseCheer
 
 Initiator and Response is more clear
 */
-enum NotificationCategory : String {
+enum NotificationCategory: String, Codable {
     // These keys are replicated on server, must be updated there, or WILL NOT WORK
     case InitiatorCheer
     case ResponseCheer
@@ -117,7 +117,7 @@ enum NotificationCategory : String {
             let actions = [
                 NotificationAction.ReturnCheer.action
             ]
-            category.setActions(actions, forContext: .Default)
+            category.setActions(actions, for: .default)
             return category
         case .ResponseCheer:
             return nil
@@ -132,16 +132,16 @@ enum NotificationAction : String {
         let action = UIMutableUserNotificationAction()
         switch self {
         case .ReturnCheer:
-            action.activationMode = .Background
+            action.activationMode = .background
             action.title = "Return Cheer"
             action.identifier = rawValue
-            action.destructive = false
-            action.authenticationRequired = false
+            action.isDestructive = false
+            action.isAuthenticationRequired = false
             return action
         }
     }
     
-    func handleNotification(notification: Notification, completion: Void -> Void) {
+    func handleNotification(_ notification: Notification, completion: @escaping () -> Void) {
         switch self {
         case .ReturnCheer:
             ParseHelper.returnCheer(notification) { result in
@@ -160,11 +160,11 @@ enum NotificationAction : String {
 }
 
 
-struct Notification : BasicMappable {
+struct Notification: Codable {
     
-    var isResponse: Bool = false
-    var originalNoteId: String = ""
-    var aps: Aps!
+    var isResponse: Bool
+    var originalNoteId: String
+    var aps: Aps
     
     var title: String {
         if isResponse {
@@ -181,39 +181,20 @@ struct Notification : BasicMappable {
             return "That's Nice!"
         }
     }
-    
-    mutating func sequence(map: Map) throws {
-        try isResponse <~ map["isResponse"]
-        try originalNoteId <~ map["originalNoteId"]
-        try aps <~ map["aps"]
-    }
 }
 
-struct Aps : BasicMappable {
-    
-    var message: String!
+struct Aps: Codable {
+    var message: String?
     var sound: NotificationSounds?
     var category: NotificationCategory?
-    
-    mutating func sequence(map: Map) throws {
-        try message <~ map["alert"]
-        try sound <~ map["sound"]
-            .transformFromJson {
-                NotificationSounds(rawValue: $0)
-        }
-        try category <~ map["category"]
-            .transformFromJson {
-                NotificationCategory(rawValue: $0)
-        }
-    }
 }
 
 extension SCLAlertView {
-    static func showNotification(notification: Notification) {
+    static func showNotification(_ notification: Notification) {
         let alert = SCLAlertView()
         if !notification.isResponse {
             alert.addButton("Return The Cheer!") {
-                PJProgressHUD.showWithStatus("Contacting the North Pole ...")
+                PJProgressHUD.show(withStatus: "Contacting the North Pole ...")
                 ParseHelper.returnCheer(notification) { result in
                     switch result {
                     case let .Success(originalNote, response):
@@ -237,7 +218,7 @@ extension SCLAlertView {
         alert.showError(title, subTitle: message, closeButtonTitle: confirmation)
     }
     
-    static func notifyReturnCheerSendSuccessForName(toName: String, successMessage: String?) {
+    static func notifyReturnCheerSendSuccessForName(_ toName: String, successMessage: String?) {
         let title = "Sweet!"
         let message = successMessage
             ?? "The elves are delivering your cheer to \(toName) as we speak!  Way to get into the Christmas spirit!"
@@ -246,7 +227,7 @@ extension SCLAlertView {
         alert.showSuccess(title, subTitle: message, closeButtonTitle: confirmation)
     }
     
-    func showSuccess(notification: Notification) {
-        showSuccess(notification.title, subTitle: notification.aps.message, closeButtonTitle: notification.confirmation)
+    func showSuccess(_ notification: Notification) {
+        showSuccess(notification.title, subTitle: notification.aps.message ?? "", closeButtonTitle: notification.confirmation)
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 import MessageUI
-import Parse
+//import Parse
 
 // MARK: CheerListTableViewSection
 
@@ -50,15 +50,15 @@ class CheerListViewController: UIViewController, CheerListCellDelegate {
         fetchDataAndReloadTableView()
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         resize()
     }
     
     func resize() {
-        let rect = UIScreen.mainScreen().bounds
-        let width = CGRectGetWidth(rect)
-        let height = CGRectGetHeight(rect)
+        let rect = UIScreen.main.bounds
+        let width = rect.width
+        let height = rect.height
         let smallerEdge = width < height ? width : height
         let longerEdge = width < height ? height : width
         self.view.frame = CGRect(x: 0, y: 0, width: smallerEdge * 0.8, height: longerEdge)
@@ -75,11 +75,11 @@ class CheerListViewController: UIViewController, CheerListCellDelegate {
     
     private func setupNavBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem
-            .cc_backBarButtonItem(self, selector: "backButtonPressed:")
+            .cc_backBarButtonItem(self, selector: #selector(backButtonPressed))
     }
     
     func setupTableView() {
-        tableView.backgroundColor = UIColor.clearColor()
+        tableView.backgroundColor = UIColor.clear
         tableView.tableFooterView = UIView()
         tableView.registerCell(CheerListCell.self)
         tableView.registerHeader(AttributionHeaderCell.self)
@@ -97,19 +97,19 @@ class CheerListViewController: UIViewController, CheerListCellDelegate {
     func stylizeButtonTray() {
         [attributionButton, supportButton, rateButton, infoButton]
             .forEach { button in
-                button.backgroundColor = ColorPalette.Green.color
-                button.tintColor = ColorPalette.SparklyWhite.color
+                button?.backgroundColor = ColorPalette.Green.color
+                button?.tintColor = ColorPalette.SparklyWhite.color
             }
     }
     
     // MARK: TableView Reload
     
     func fetchDataAndReloadTableView() {
-        PJProgressHUD.showWithStatus("Contacting the North Pole ...")
+        PJProgressHUD.show(withStatus: "Contacting the North Pole ...")
         ParseHelper.fetchNotifications { result in
             switch result {
             case .Success(let notifications):
-                self.setupDataAndReloadTableViewWithRawNotifications(notifications)
+                self.setupDataAndReloadTableViewWithRawNotifications(rawNotifications: notifications)
             case .Failure(let error):
                 print("Got error: \(error)")
                 self.notifyFetchFailure()
@@ -119,7 +119,7 @@ class CheerListViewController: UIViewController, CheerListCellDelegate {
     }
     
     func setupDataAndReloadTableViewWithRawNotifications(rawNotifications: [ChristmasCheerNotification]) {
-        let notifications = rawNotifications.sort { $0.createdAt > $1.createdAt }
+        let notifications = rawNotifications.sorted { $0.createdAt ?? Date(timeIntervalSince1970: 0) > $1.createdAt ?? Date(timeIntervalSince1970: 0) }
         let unresponded = notifications.filter { !$0.hasBeenRespondedTo }
         let receivedCheer = notifications.filter { $0.initiationNoteId == nil && $0.hasBeenRespondedTo }
         let returnedCheer = notifications.filter { $0.initiationNoteId != nil }
@@ -148,16 +148,16 @@ class CheerListViewController: UIViewController, CheerListCellDelegate {
     
     // MARK: CheerListCellDelegate
     
-    func cheerListCell(menuViewCell: CheerListCell, didPressReturnCheerButtonForOriginalNote originalNote: ChristmasCheerNotification) {
-        PJProgressHUD.showWithStatus("Contacting the North Pole ...")
+    func cheerListCell(_ menuViewCell: CheerListCell, didPressReturnCheerButtonForOriginalNote originalNote: ChristmasCheerNotification) {
+        PJProgressHUD.show(withStatus: "Contacting the North Pole ...")
         ParseHelper.returnCheer(originalNote) { [weak self] result in
             guard let welf = self else { return }
             switch result {
             case let .Success(originalNote, response):
                 let rawNotifications = welf.tableViewData
                     .flatMap { $0.associatedCheer }
-                welf.setupDataAndReloadTableViewWithRawNotifications(rawNotifications)
-                welf.notifyReturnCheerSendSuccessForName(originalNote.fromName, successMessage: response.message)
+                welf.setupDataAndReloadTableViewWithRawNotifications(rawNotifications: rawNotifications)
+                welf.notifyReturnCheerSendSuccessForName(toName: originalNote.fromName, successMessage: response.message)
             case .Failure(_):
                 welf.notifyReturnCheerSendFailure()
             }
@@ -183,21 +183,22 @@ class CheerListViewController: UIViewController, CheerListCellDelegate {
     }
     
     // MARK: Button Presses
-    
+
+    @objc
     func backButtonPressed(sender: UIButton) {
-        navigationController?.dismissViewControllerAnimated(true, completion: nil)
+        navigationController?.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func attributionButtonPressed(sender: UIButton) {
         let attributionVC = AttributionViewController()
         let nav = NavigationController(rootViewController: attributionVC)
-        presentViewController(nav, animated: true, completion: nil)
+        present(nav, animated: true, completion: nil)
     }
     
     @IBAction func supportButtonPressed(sender: UIButton) {
         let contactVC = ContactViewController()
         let nav = NavigationController(rootViewController: contactVC)
-        presentViewController(nav, animated: true, completion: nil)
+        present(nav, animated: true, completion: nil)
     }
 
     @IBAction func rateButtonPressed(sender: UIButton) {
@@ -222,48 +223,49 @@ class CheerListViewController: UIViewController, CheerListCellDelegate {
         let confirmation = "Maybe later."
         let alert = SCLAlertView()
         alert.addButton("Let's Go!", action: { () -> Void in
-            let appStoreURL = NSURL(string: "itms-apps://itunes.apple.com/app/id946161841")!
-            UIApplication.sharedApplication().openURL(appStoreURL)
+            let appStoreURL = URL(string: "itms-apps://itunes.apple.com/app/id946161841")!
+            UIApplication.shared.openURL(appStoreURL)
         })
         alert.showSuccess(title, subTitle: message, closeButtonTitle: confirmation)
     }
 }
 
-extension CheerListViewController : UITableViewDataSource {
+extension CheerListViewController: UITableViewDataSource {
+
 
     // MARK: UITableViewDataSource
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return tableViewData.count
     }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let section = self.tableViewData[section]
         return section.associatedCheer.count
     }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = self.tableViewData[indexPath.section]
         let cheer = section.associatedCheer[indexPath.row]
-        let cell: CheerListCell = tableView.dequeueCell(indexPath)
-        cell.configure(cheer)
+        let cell: CheerListCell = tableView.dequeueCell(indexPath: indexPath)
+        cell.configure(note: cheer)
         cell.delegate = self
         return cell
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header: AttributionHeaderCell = tableView.dequeueHeader(section)
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header: AttributionHeaderCell = tableView.dequeueHeader(section: section)
         let menuSection = tableViewData[section]
         header.label.text = menuSection.title
         return header
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         let section = tableViewData[section]
         return section.title == nil ? 0 : 66
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
         let heightWithButton: CGFloat = 260
         let heightWithOutButton: CGFloat = 200
         let section = tableViewData[indexPath.section]
@@ -271,7 +273,7 @@ extension CheerListViewController : UITableViewDataSource {
         return note.hasBeenRespondedTo ? heightWithOutButton : heightWithButton
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
