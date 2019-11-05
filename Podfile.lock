@@ -8,12 +8,14 @@ PODS:
     - Parse/Core (= 1.17.3)
   - Parse/Core (1.17.3):
     - Bolts/Tasks (~> 1.9)
+  - Yams (2.0.0)
 
 DEPENDENCIES:
   - Cartography
   - Crashlytics
   - Fabric
   - Parse
+  - Yams
 
 SPEC REPOS:
   trunk:
@@ -22,6 +24,7 @@ SPEC REPOS:
     - Crashlytics
     - Fabric
     - Parse
+    - Yams
 
 SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
@@ -29,7 +32,8 @@ SPEC CHECKSUMS:
   Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   Parse: c1ad2a04d2cab2b54b6fb7da05f741abf2cf57d1
+  Yams: cb96472112d99e4b368f8dae9ab62e8a3eb8a3f9
 
-PODFILE CHECKSUM: ae91846ff3bc8fad6df4dd95605d185166fbe90c
+PODFILE CHECKSUM: ebab8c1e72cd80873408cd23ec099276655b6fd3
 
 COCOAPODS: 1.8.3

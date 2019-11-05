@@ -19,7 +19,7 @@ target 'ChristmasCheer' do
 #  pod 'Genome'
 
   pod 'Cartography'
-#  pod 'YamlSwift'
+  pod 'Yams'
 
   pod 'Fabric'
   pod 'Crashlytics'

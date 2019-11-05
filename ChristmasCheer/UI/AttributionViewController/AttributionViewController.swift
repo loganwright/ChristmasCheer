@@ -9,8 +9,18 @@
 import UIKit
 import Cartography
 //import Genome
-//import YamlSwift
+import Yams
 
+//struct AttributionCategory: Codable {
+//    let title: String
+//    let attributions: [Attribution]
+//}
+//
+//struct Attribution: Codable {
+//    let title: String
+//    let author: String
+//    let link: URL
+//}
 //func +(lhs: JSON, rhs: JSON) -> JSON {
 //    var combined = lhs
 //    rhs.forEach { combined[$0] = $1 }
@@ -51,20 +61,27 @@ import Cartography
 //    }
 //}
 //
-///*
-//I like yaml format when writing, but parsing json is easier, mixing both for now
-//*/
-//extension NSBundle {
-//    func loadYaml(fileName: String) -> Yaml? {
-//        guard
-//            let filePath = MainBundle
-//                .pathForResource(fileName, ofType: "yml"),
-//            let data = NSData(contentsOfFile: filePath),
-//            let string = String(data: data, encoding: NSUTF8StringEncoding)
-//            else { return nil }
-//        return Yaml.load(string).value
-//    }
-//}
+
+extension Bundle {
+    func loadYaml(fileName: String) throws -> [AttributionSection] {
+        let filePath = MainBundle
+        .path(forResource: fileName, ofType: "yml")
+        print(filePath)
+        print("")
+        guard
+            let fp = filePath
+             else { return [] }
+        let url = URL(fileURLWithPath: fp)
+        let data = try Data(contentsOf: url)
+        guard
+            let string = String(data: data, encoding: .utf8)
+            else { return [] }
+
+        let decoder = YAMLDecoder()
+        let decoded = try decoder.decode([AttributionSection].self, from: string)
+        return decoded
+    }
+}
 //
 //extension Array where Element : MappableObject {
 //    static func mappedYaml(yamlFile: String) throws -> Array {
@@ -223,17 +240,13 @@ class AttributionViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     private func setupData() {
-//        guard
-//            let attributionJson = MainBundle.loadYaml("attributions")?.jsonArray(),
-//            let attributionSections = try? [AttributionSection].mappedInstance(attributionJson)
-//            else {
-//                self.attributionSections = []
-//                return
-//            }
-
-        // todo
-        print("todo")
-        self.attributionSections = []
+        do {
+            self.attributionSections = try MainBundle.loadYaml(fileName: "attributions")
+        } catch {
+            self.attributionSections = [
+                .init(title: "something went wrong :/", attributions: [])
+            ]
+        }
     }
     
     // MARK: Main Label

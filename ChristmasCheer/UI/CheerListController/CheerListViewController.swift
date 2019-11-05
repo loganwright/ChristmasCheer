@@ -191,23 +191,23 @@ class CheerListViewController: UIViewController, CheerListCellDelegate {
         navigationController?.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func attributionButtonPressed(sender: UIButton) {
+    @IBAction func attributionButtonPressed(_ sender: UIButton) {
         let attributionVC = AttributionViewController()
         let nav = NavigationController(rootViewController: attributionVC)
         present(nav, animated: true, completion: nil)
     }
     
-    @IBAction func supportButtonPressed(sender: UIButton) {
+    @IBAction func supportButtonPressed(_ sender: UIButton) {
         let contactVC = ContactViewController()
         let nav = NavigationController(rootViewController: contactVC)
         present(nav, animated: true, completion: nil)
     }
 
-    @IBAction func rateButtonPressed(sender: UIButton) {
+    @IBAction func rateButtonPressed(_ sender: UIButton) {
         showRatingAlert()
     }
     
-    @IBAction func infoButtonPressed(sender: UIButton) {
+    @IBAction func infoButtonPressed(_ sender: UIButton) {
         showInfoAlert()
     }
     
