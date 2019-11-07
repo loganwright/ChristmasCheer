@@ -38,6 +38,11 @@
 	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSLocationUsageDescription</key>
 	<string>We use your location to share with others what geographic region of the world their Christmas Cheer is coming from.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

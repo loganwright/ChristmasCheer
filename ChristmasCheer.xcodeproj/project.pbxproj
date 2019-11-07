@@ -74,8 +74,8 @@
 		809483961BDCA0D500F69A46 /* UIView+Nib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809483941BDCA0D500F69A46 /* UIView+Nib.swift */; };
 		809483981BDDD16700F69A46 /* Comparables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809483971BDDD16700F69A46 /* Comparables.swift */; };
 		809483991BDDD16A00F69A46 /* Comparables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809483971BDDD16700F69A46 /* Comparables.swift */; };
-		8094839B1BDDD1C500F69A46 /* Bag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8094839A1BDDD1C500F69A46 /* Bag.swift */; };
-		8094839C1BDDD1C800F69A46 /* Bag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8094839A1BDDD1C500F69A46 /* Bag.swift */; };
+		8094839B1BDDD1C500F69A46 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8094839A1BDDD1C500F69A46 /* Networking.swift */; };
+		8094839C1BDDD1C800F69A46 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8094839A1BDDD1C500F69A46 /* Networking.swift */; };
 		8094839E1BDDD33B00F69A46 /* attributions.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8094839D1BDDD33B00F69A46 /* attributions.yml */; };
 		8094839F1BDDD78000F69A46 /* attributions.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8094839D1BDDD33B00F69A46 /* attributions.yml */; };
 		809A6EF11A27802A00F1D6EC /* success_tone.wav in Resources */ = {isa = PBXBuildFile; fileRef = 809A6EF01A27802A00F1D6EC /* success_tone.wav */; };
@@ -156,7 +156,7 @@
 		809483911BDC9F4700F69A46 /* CellConfiguring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CellConfiguring.swift; path = Helpers/CellConfiguring.swift; sourceTree = "<group>"; };
 		809483941BDCA0D500F69A46 /* UIView+Nib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Nib.swift"; sourceTree = "<group>"; };
 		809483971BDDD16700F69A46 /* Comparables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comparables.swift; sourceTree = "<group>"; };
-		8094839A1BDDD1C500F69A46 /* Bag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bag.swift; sourceTree = "<group>"; };
+		8094839A1BDDD1C500F69A46 /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		8094839D1BDDD33B00F69A46 /* attributions.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = attributions.yml; sourceTree = "<group>"; };
 		809A6EF01A27802A00F1D6EC /* success_tone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success_tone.wav; sourceTree = "<group>"; };
 		809A6EF21A27806C00F1D6EC /* error_tone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = error_tone.mp3; sourceTree = "<group>"; };
@@ -373,7 +373,7 @@
 				809483911BDC9F4700F69A46 /* CellConfiguring.swift */,
 				809483941BDCA0D500F69A46 /* UIView+Nib.swift */,
 				809483971BDDD16700F69A46 /* Comparables.swift */,
-				8094839A1BDDD1C500F69A46 /* Bag.swift */,
+				8094839A1BDDD1C500F69A46 /* Networking.swift */,
 				805D04B11BDFEC18007D9070 /* String+Substrings.swift */,
 				805D04B31BDFF40D007D9070 /* UIColor+Hex.swift */,
 			);
@@ -720,7 +720,7 @@
 				80E20D421A26E5770094D629 /* SCLAlertView.swift in Sources */,
 				806A69551A21374C00DBAC27 /* Extensions.swift in Sources */,
 				806A69511A21247A00DBAC27 /* NameEntryViewController.swift in Sources */,
-				8094839B1BDDD1C500F69A46 /* Bag.swift in Sources */,
+				8094839B1BDDD1C500F69A46 /* Networking.swift in Sources */,
 				80E20D3E1A26D14F0094D629 /* PJProgressHUD.m in Sources */,
 				809A6EFE1A27AEE700F1D6EC /* ContactViewController.swift in Sources */,
 				809483891BDC710C00F69A46 /* Theme.swift in Sources */,
@@ -768,7 +768,7 @@
 				805D04B61BDFF412007D9070 /* String+Substrings.swift in Sources */,
 				808F26E41A337C5D001A8CE3 /* Extensions.swift in Sources */,
 				808F26E51A337C5D001A8CE3 /* NameEntryViewController.swift in Sources */,
-				8094839C1BDDD1C800F69A46 /* Bag.swift in Sources */,
+				8094839C1BDDD1C800F69A46 /* Networking.swift in Sources */,
 				808F26E61A337C5D001A8CE3 /* PJProgressHUD.m in Sources */,
 				805D04B51BDFF410007D9070 /* UIColor+Hex.swift in Sources */,
 				808F26E71A337C5D001A8CE3 /* ContactViewController.swift in Sources */,

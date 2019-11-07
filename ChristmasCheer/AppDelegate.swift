@@ -123,6 +123,11 @@ extension PFInstallation {
 
     var window: UIWindow?
     let homeViewController = HomeViewController()
+    let test: UIViewController = {
+        let vc = UIViewController()
+        vc.view.backgroundColor = .green
+        return vc
+    }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         Parse.configure(launchOptions: launchOptions)
@@ -150,7 +155,7 @@ extension PFInstallation {
 
     private func setupWindow() {
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = NavigationController(rootViewController: self.homeViewController)
+        window?.rootViewController = NavigationController(rootViewController: self.test)//self.homeViewController)
         window?.makeKeyAndVisible()
     }
 
@@ -160,13 +165,14 @@ extension PFInstallation {
     }
     
     // MARK: Notifications Response
-
-    func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
-        application.registerForRemoteNotifications()
-    }
     
     // Has Registered
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print("got device token")
+        Backend.makeInstallation(deviceToken: deviceToken, for: UUID()) { done in
+            print("registered \(done)")
+        }
+        
         PFInstallation.current()?.setDeviceTokenFrom(deviceToken)
         
         ApplicationSettings.deviceTokenData = deviceToken

@@ -17,7 +17,7 @@ enum ParseError: Error {
     case UnableToConvertToData(String)
 }
 
-enum Result<T> {
+enum OrigResult<T> {
     case Success(T)
     case Failure(Error)
 }
@@ -29,10 +29,10 @@ struct ServerResponse: Codable {
 
 final class ParseHelper {
     
-    class func sendRandomCheer(_ completion: @escaping (Result<ServerResponse>) -> Void) {
+    class func sendRandomCheer(_ completion: @escaping (OrigResult<ServerResponse>) -> Void) {
         let params: [String : String] = baseCheerParams()
         Qu.Background {
-            let result: Result<ServerResponse>
+            let result: OrigResult<ServerResponse>
             do {
                 result = .Success(.init(message: "this isn't filled in", isOffSeason: false))
 //                let rawResponse = try PFCloud.callFunction("sendRandomCheer", withParameters: params)
@@ -50,7 +50,7 @@ final class ParseHelper {
         }
     }
     
-    class func returnCheer(_ notification: Notification, completion: @escaping (Result<(ChristmasCheerNotification, ServerResponse)>) -> Void) {
+    class func returnCheer(_ notification: Notification, completion: @escaping (OrigResult<(ChristmasCheerNotification, ServerResponse)>) -> Void) {
         ChristmasCheerNotification.fetchWithNotification(notification) { result in
             switch result {
             case let .Success(originalNote):
@@ -61,13 +61,13 @@ final class ParseHelper {
         }
     }
     
-    class func returnCheer(_ originalNote: ChristmasCheerNotification, completion: @escaping (Result<(ChristmasCheerNotification, ServerResponse)>) -> Void) {
+    class func returnCheer(_ originalNote: ChristmasCheerNotification, completion: @escaping (OrigResult<(ChristmasCheerNotification, ServerResponse)>) -> Void) {
         var params = baseCheerParams()
 //        params["originalNoteId"] = originalNote.objectId
         
         Qu.Background {
             todo()
-//            let result: Result<(originalNote: ChristmasCheerNotification, response: ServerResponse)>
+//            let result: OrigResult<(originalNote: ChristmasCheerNotification, response: ServerResponse)>
 //            do {
 //                let rawResponse = try PFCloud.callFunction("returnCheer", withParameters: params)
 //                let json = rawResponse as? JSON ?? [:]
@@ -97,7 +97,7 @@ final class ParseHelper {
     }
     
 
-    class func playAlertSoundfForResult<T>(_ result: Result<T>) {
+    class func playAlertSoundfForResult<T>(_ result: OrigResult<T>) {
         let sound: SoundFile
         switch result {
         case .Success(_):
@@ -110,7 +110,7 @@ final class ParseHelper {
     
     // MARK: Get Notifications
     
-    class func fetchUnreturnedCheer(_ completion: @escaping (Result<[ChristmasCheerNotification]>) -> Void) {
+    class func fetchUnreturnedCheer(_ completion: @escaping (OrigResult<[ChristmasCheerNotification]>) -> Void) {
         print("todo aswe32df3")
         completion(.Success([]))
 //        guard let query = PFQuery.cheerQuery() else {
@@ -126,7 +126,7 @@ final class ParseHelper {
 //        QueryWrapper(query: query).findObjects(completion)
     }
     
-    class func fetchNotifications(_ completion: @escaping (Result<[ChristmasCheerNotification]>) -> Void) {
+    class func fetchNotifications(_ completion: @escaping (OrigResult<[ChristmasCheerNotification]>) -> Void) {
         let a = ChristmasCheerNotification(createdAt: Date(), fromName: "test", fromLocation: "madeupville, us", fromInstallationId: "1294910", fromUserId: "1-2903", toInstallationId: "23829", message: "sent you some cheer", hasBeenRespondedTo: true, initiationNoteId: "sadfd22")
         let b = ChristmasCheerNotification(createdAt: Date(), fromName: "test", fromLocation: "madeupville, us", fromInstallationId: "1294910", fromUserId: "1-2903", toInstallationId: "23829", message: "sent you some cheer", hasBeenRespondedTo: false, initiationNoteId: "sadfd22")
         completion(.Success([a, b]))
@@ -141,7 +141,7 @@ final class ParseHelper {
     
     // MARK: Feedback / Support
     
-    class func sendFeedback(_ string: String, completion: @escaping (Result<Int>) -> Void) {
+    class func sendFeedback(_ string: String, completion: @escaping (OrigResult<Int>) -> Void) {
         guard let feedback = feedback(string) else {
             let error = ParseError.UnableToConvertToData("Unable to convert feedback to data!")
             completion(.Failure(error))
@@ -149,7 +149,7 @@ final class ParseHelper {
         }
         
         Qu.Background {
-            let result: Result<Int>
+            let result: OrigResult<Int>
             do {
                 try feedback.save()
                 result = .Success(1)
@@ -193,12 +193,12 @@ private extension PFQuery {
 }
 
 extension ChristmasCheerNotification {
-    static func fetchWithNotification(_ notification: Notification, completion: @escaping (Result<ChristmasCheerNotification>) -> Void) {
+    static func fetchWithNotification(_ notification: Notification, completion: @escaping (OrigResult<ChristmasCheerNotification>) -> Void) {
         print("[warn] unimplemented \(#file) \(#line)")
 //        let originalNote = ChristmasCheerNotification()
 //        originalNote.objectId = notification.originalNoteId
 //        Qu.Background {
-//            let result: Result<ChristmasCheerNotification>
+//            let result: OrigResult<ChristmasCheerNotification>
 //            do {
 //                let fullNote = try originalNote.fetch()
 //                result = .Success(fullNote)
@@ -218,9 +218,9 @@ extension ChristmasCheerNotification {
 //}
 //
 //extension QueryWrapper {
-//    func findObjects<T : PFObject>(_ completion: @escaping (Result<[T]>) -> Void) {
+//    func findObjects<T : PFObject>(_ completion: @escaping (OrigResult<[T]>) -> Void) {
 //        query.findObjectsInBackground { objects, error in
-//            let result: Result<[T]>
+//            let result: OrigResult<[T]>
 //            if let objects = objects as? [T] {
 //                result = .Success(objects)
 //            } else if let objects = objects {
@@ -247,9 +247,9 @@ extension ChristmasCheerNotification {
 //        return objects
 //    }
 //
-//    func execute<T : PFObject>(_ completion: @escaping (Result<[T]>) -> Void) {
+//    func execute<T : PFObject>(_ completion: @escaping (OrigResult<[T]>) -> Void) {
 //        Qu.Background {
-//            let result: Result<[T]>
+//            let result: OrigResult<[T]>
 //            do {
 //                result = .Success(try self.findObjects())
 //            } catch {

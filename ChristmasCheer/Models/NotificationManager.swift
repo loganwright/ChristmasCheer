@@ -81,28 +81,31 @@ class NotificationManager: NSObject {
             }
         
         authorizationStatusUpdated = completion
-        UNUserNotificationCenter.current().getNotificationSettings { settings in
-//            switch settings.authorizationStatus {
-//            case .provisional
+//        UNUserNotificationCenter.current().getNotificationSettings { settings in
+////            switch settings.authorizationStatus {
+////            case .provisional
+////            }
+//        }
+//        UIApplication.shared.registerForRemoteNotifications()
+        UNUserNotificationCenter.current().setNotificationCategories(Set(NotificationCategory.allCategories.compactMap { $0.category }))
+//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) {
+//         (granted, error) in
+//            if let error = error {
+//                print("failed to get notification permissions \(error)")
 //            }
-        }
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) {
-         (granted, error) in
-            if granted {
-
-            }
-        }
-        let userNotificationTypes: UIUserNotificationType = [
-            .alert,
-            .badge,
-            .sound
-        ]
-        let categories = NotificationCategory.allCategories.flatMap { $0.category }
-        let notificationSettings = UIUserNotificationSettings(
-            types: userNotificationTypes,
-            categories: Set(categories)
-        )
-        UIApplication.shared.registerUserNotificationSettings(notificationSettings)
+//            guard granted else { return }
+//        }
+//        let userNotificationTypes: UIUserNotificationType = [
+//            .alert,
+//            .badge,
+//            .sound
+//        ]
+//        let categories = NotificationCategory.allCategories.flatMap { $0.category }
+//        let notificationSettings = UIUserNotificationSettings(
+//            types: userNotificationTypes,
+//            categories: Set(categories)
+//        )
+//        UIApplication.shared.registerUserNotificationSettings(1 as! UIUserNotificationSettings)
     }
 }
 
@@ -121,16 +124,14 @@ enum NotificationCategory: String, Codable {
     
     static let allCategories: [NotificationCategory] = [.InitiatorCheer, .ResponseCheer]
     
-    var category: UIUserNotificationCategory? {
+    var category: UNNotificationCategory? {
         switch self {
         case .InitiatorCheer:
-            let category = UIMutableUserNotificationCategory()
-            category.identifier = rawValue
-            let actions = [
-                NotificationAction.ReturnCheer.action
-            ]
-            category.setActions(actions, for: .default)
-            return category
+            return .init(
+                identifier: rawValue,
+                actions: [NotificationAction.ReturnCheer.action],
+                intentIdentifiers: [],
+                options: [])
         case .ResponseCheer:
             return nil
         }
@@ -140,16 +141,10 @@ enum NotificationCategory: String, Codable {
 enum NotificationAction : String {
     case ReturnCheer
     
-    var action: UIUserNotificationAction {
-        let action = UIMutableUserNotificationAction()
+    var action: UNNotificationAction {
         switch self {
         case .ReturnCheer:
-            action.activationMode = .background
-            action.title = "Return Cheer"
-            action.identifier = rawValue
-            action.isDestructive = false
-            action.isAuthenticationRequired = false
-            return action
+            return .init(identifier: rawValue, title: "Return Cheer", options: [])
         }
     }
     

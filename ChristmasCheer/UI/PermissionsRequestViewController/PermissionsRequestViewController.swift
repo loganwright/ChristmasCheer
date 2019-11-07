@@ -322,12 +322,12 @@ extension PFInstallation {
         return objectId != nil
     }
     
-    func register(completion: @escaping (Result<Int>) -> Void) {
+    func register(completion: @escaping (OrigResult<Int>) -> Void) {
         setTokenDataIfNecessary(ApplicationSettings.deviceTokenData)
         
         PJProgressHUD.show(withStatus: "Registering With North Pole.")
         Qu.Background {
-            let result: Result<Int>
+            let result: OrigResult<Int>
             do {
                 try self.save()
                 result = .Success(1)
