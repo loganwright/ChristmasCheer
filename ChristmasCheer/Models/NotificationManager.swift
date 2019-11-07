@@ -8,6 +8,7 @@
 
 import UIKit
 //import Genome
+import UserNotifications
 
 class NotificationManager: NSObject {
 
@@ -80,6 +81,17 @@ class NotificationManager: NSObject {
             }
         
         authorizationStatusUpdated = completion
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+//            switch settings.authorizationStatus {
+//            case .provisional
+//            }
+        }
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) {
+         (granted, error) in
+            if granted {
+
+            }
+        }
         let userNotificationTypes: UIUserNotificationType = [
             .alert,
             .badge,

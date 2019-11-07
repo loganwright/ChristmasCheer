@@ -195,6 +195,10 @@ extension PFInstallation {
 //        homeViewController.refreshCheerListIfPossible()
     }
 
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+
+    }
+
     func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, for notification: UILocalNotification, completionHandler: @escaping () -> Void) {
         todo()
 //        guard
