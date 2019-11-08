@@ -130,6 +130,11 @@ extension PFInstallation {
     }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        NotificationManager.requestRemoteNotificationAuthorization { auth in
+            print("authed \(auth)")
+            print("")
+        }
+
         Parse.configure(launchOptions: launchOptions)
         
         setupWindow()

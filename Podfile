@@ -11,7 +11,7 @@ post_install do |installer|
     end
 end
 
-target 'ChristmasCheer' do
+def shared_pods
   use_frameworks!
 
   pod 'Parse'
@@ -23,5 +23,12 @@ target 'ChristmasCheer' do
 
   pod 'Fabric'
   pod 'Crashlytics'
-  
+end
+
+target 'ChristmasCheer' do
+  shared_pods
+end
+
+target 'ChristmasCheerDevelopment' do
+  shared_pods
 end

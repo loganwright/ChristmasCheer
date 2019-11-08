@@ -108,6 +108,7 @@
 		80E20D3E1A26D14F0094D629 /* PJProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 80E20D3A1A26D14F0094D629 /* PJProgressHUD.m */; };
 		80E20D3F1A26D14F0094D629 /* PJProgressHUD.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80E20D3B1A26D14F0094D629 /* PJProgressHUD.xib */; };
 		80E20D421A26E5770094D629 /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E20D411A26E5770094D629 /* SCLAlertView.swift */; };
+		D1A53815CBDA2F85237C660A /* Pods_ChristmasCheerDevelopment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA0A1CF1BBFE9D08D8BA8264 /* Pods_ChristmasCheerDevelopment.framework */; };
 		DF28C337215241CB4F67DC33 /* Pods_ChristmasCheer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E198BE404252404A05CBB51E /* Pods_ChristmasCheer.framework */; };
 /* End PBXBuildFile section */
 
@@ -132,6 +133,7 @@
 		803942B61A22D63B006BF273 /* merry_christmas.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = merry_christmas.mp3; sourceTree = "<group>"; };
 		805D04B11BDFEC18007D9070 /* String+Substrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Substrings.swift"; sourceTree = "<group>"; };
 		805D04B31BDFF40D007D9070 /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		8064D27E2374E4E7004FEB7A /* ChristmasCheerDevelopmentDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChristmasCheerDevelopmentDebug.entitlements; sourceTree = "<group>"; };
 		806A69491A2123FF00DBAC27 /* ApplicationSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApplicationSettings.swift; path = Models/ApplicationSettings.swift; sourceTree = "<group>"; };
 		806A694B1A21242800DBAC27 /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParseHelper.swift; path = Models/ParseHelper.swift; sourceTree = "<group>"; };
 		806A694F1A21247A00DBAC27 /* NameEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NameEntryViewController.swift; path = UI/NameEntry/NameEntryViewController.swift; sourceTree = "<group>"; };
@@ -186,6 +188,9 @@
 		80E20D3B1A26D14F0094D629 /* PJProgressHUD.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PJProgressHUD.xib; sourceTree = "<group>"; };
 		80E20D411A26E5770094D629 /* SCLAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCLAlertView.swift; sourceTree = "<group>"; };
 		8E123DE046325BD6A14934D6 /* Pods-ChristmasCheer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChristmasCheer.release.xcconfig"; path = "Target Support Files/Pods-ChristmasCheer/Pods-ChristmasCheer.release.xcconfig"; sourceTree = "<group>"; };
+		A196003AB1CC16CB77A0A8EC /* Pods-ChristmasCheerDevelopment.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChristmasCheerDevelopment.release.xcconfig"; path = "Target Support Files/Pods-ChristmasCheerDevelopment/Pods-ChristmasCheerDevelopment.release.xcconfig"; sourceTree = "<group>"; };
+		BA0A1CF1BBFE9D08D8BA8264 /* Pods_ChristmasCheerDevelopment.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChristmasCheerDevelopment.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFDFFFA552C714D49D3C61E4 /* Pods-ChristmasCheerDevelopment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChristmasCheerDevelopment.debug.xcconfig"; path = "Target Support Files/Pods-ChristmasCheerDevelopment/Pods-ChristmasCheerDevelopment.debug.xcconfig"; sourceTree = "<group>"; };
 		C3B7ABE0BDED2A70AE7A2259 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E198BE404252404A05CBB51E /* Pods_ChristmasCheer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChristmasCheer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -212,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				808F26F31A337C5D001A8CE3 /* AVFoundation.framework in Frameworks */,
+				D1A53815CBDA2F85237C660A /* Pods_ChristmasCheerDevelopment.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,6 +230,7 @@
 				80BB9C631A2771EA00682931 /* AVFoundation.framework */,
 				C3B7ABE0BDED2A70AE7A2259 /* Pods.framework */,
 				E198BE404252404A05CBB51E /* Pods_ChristmasCheer.framework */,
+				BA0A1CF1BBFE9D08D8BA8264 /* Pods_ChristmasCheerDevelopment.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -302,6 +309,7 @@
 		80723B801A1FCFA70027EBDA = {
 			isa = PBXGroup;
 			children = (
+				8064D27E2374E4E7004FEB7A /* ChristmasCheerDevelopmentDebug.entitlements */,
 				80723B8B1A1FCFA70027EBDA /* ChristmasCheer */,
 				80723BA11A1FCFA70027EBDA /* ChristmasCheerTests */,
 				80723B8A1A1FCFA70027EBDA /* Products */,
@@ -479,6 +487,8 @@
 			children = (
 				5124A651D7B39F90F7C2FD42 /* Pods-ChristmasCheer.debug.xcconfig */,
 				8E123DE046325BD6A14934D6 /* Pods-ChristmasCheer.release.xcconfig */,
+				BFDFFFA552C714D49D3C61E4 /* Pods-ChristmasCheerDevelopment.debug.xcconfig */,
+				A196003AB1CC16CB77A0A8EC /* Pods-ChristmasCheerDevelopment.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -528,9 +538,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 808F27071A337C5D001A8CE3 /* Build configuration list for PBXNativeTarget "ChristmasCheerDevelopment" */;
 			buildPhases = (
+				F99F091BC381DA86CB6E0B19 /* [CP] Check Pods Manifest.lock */,
 				808F26DD1A337C5D001A8CE3 /* Sources */,
 				808F26F21A337C5D001A8CE3 /* Frameworks */,
 				808F26F51A337C5D001A8CE3 /* Resources */,
+				00E1F11C1005CAEC889FCB7F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -555,10 +567,15 @@
 					80723B881A1FCFA70027EBDA = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = Q32LXKR624;
+						ProvisioningStyle = Automatic;
 					};
 					80723B9D1A1FCFA70027EBDA = {
 						CreatedOnToolsVersion = 6.1;
 						TestTargetID = 80723B881A1FCFA70027EBDA;
+					};
+					808F26DB1A337C5D001A8CE3 = {
+						DevelopmentTeam = Q32LXKR624;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -642,6 +659,30 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		00E1F11C1005CAEC889FCB7F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChristmasCheerDevelopment/Pods-ChristmasCheerDevelopment-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/Cartography/Cartography.framework",
+				"${BUILT_PRODUCTS_DIR}/Parse/Parse.framework",
+				"${BUILT_PRODUCTS_DIR}/Yams/Yams.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cartography.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parse.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Yams.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChristmasCheerDevelopment/Pods-ChristmasCheerDevelopment-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2A47E9D0BF70907E0379B573 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -700,6 +741,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChristmasCheer/Pods-ChristmasCheer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F99F091BC381DA86CB6E0B19 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ChristmasCheerDevelopment-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -819,8 +882,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -842,7 +905,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "094423fc-008e-435c-836e-14150b893b6b";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -866,8 +928,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -881,7 +943,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "094423fc-008e-435c-836e-14150b893b6b";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
@@ -894,8 +955,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q32LXKR624;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -905,9 +968,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "io.loganwright.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = adult.logan.cheer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "785b57e1-586d-4f55-8693-556fbcad1ee7";
+				PROVISIONING_PROFILE_SPECIFIER = cheer.dev;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/ChristmasCheer/ChristmasCheer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -919,8 +982,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Logan Wright (Q32LXKR624)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q32LXKR624;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -930,9 +995,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "io.loganwright.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = adult.logan.cheer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = cheer.dev;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/ChristmasCheer/ChristmasCheer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -952,7 +1018,7 @@
 				);
 				INFOPLIST_FILE = ChristmasCheerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.loganwright.ChristmasCheer;
+				PRODUCT_BUNDLE_IDENTIFIER = adult.logan.cheer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChristmasCheer.app/ChristmasCheer";
 			};
@@ -968,7 +1034,7 @@
 				);
 				INFOPLIST_FILE = ChristmasCheerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.loganwright.ChristmasCheer;
+				PRODUCT_BUNDLE_IDENTIFIER = adult.logan.cheer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChristmasCheer.app/ChristmasCheer";
 			};
@@ -976,11 +1042,15 @@
 		};
 		808F27081A337C5D001A8CE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BFDFFFA552C714D49D3C61E4 /* Pods-ChristmasCheerDevelopment.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Logan Wright (CYZ262LR3B)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Logan Wright (CYZ262LR3B)";
+				CODE_SIGN_ENTITLEMENTS = ChristmasCheerDevelopmentDebug.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q32LXKR624;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -991,10 +1061,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = io.loganwright.ChristmasCheer;
+				PRODUCT_BUNDLE_IDENTIFIER = adult.logan.cheer;
 				PRODUCT_MODULE_NAME = ChristmasCheerDevelopment;
 				PRODUCT_NAME = ChristmasCheerDevelopment;
-				PROVISIONING_PROFILE = "785b57e1-586d-4f55-8693-556fbcad1ee7";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/ChristmasCheer/ChristmasCheer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1002,11 +1072,14 @@
 		};
 		808F27091A337C5D001A8CE3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A196003AB1CC16CB77A0A8EC /* Pods-ChristmasCheerDevelopment.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Logan Wright (CYZ262LR3B)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Logan Wright (CYZ262LR3B)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -1017,10 +1090,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = io.loganwright.ChristmasCheer;
+				PRODUCT_BUNDLE_IDENTIFIER = adult.logan.cheer;
 				PRODUCT_MODULE_NAME = ChristmasCheerDevelopment;
 				PRODUCT_NAME = ChristmasCheerDevelopment;
-				PROVISIONING_PROFILE = "785b57e1-586d-4f55-8693-556fbcad1ee7";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/ChristmasCheer/ChristmasCheer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

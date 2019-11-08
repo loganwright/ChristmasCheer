@@ -10,7 +10,7 @@ import UIKit
 //import Genome
 import UserNotifications
 
-class NotificationManager: NSObject {
+class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
 
     // MARK: Auth Status
     
@@ -50,13 +50,9 @@ class NotificationManager: NSObject {
     
     // MARK: Initial Prompt
     
-    private class var NotificationManagerDefaultsKeyHasReceivedNotificationRegistrationPrompt: String {
-        get {
-            return "NotificationManagerDefaultsKeyHasReceivedNotificationRegistrationPrompt"
-        }
-    }
+    private static let NotificationManagerDefaultsKeyHasReceivedNotificationRegistrationPrompt = "NotificationManagerDefaultsKeyHasReceivedNotificationRegistrationPrompt"
     
-    class var hasReceivedNotificationRegistrationPrompt: Bool {
+    static var hasReceivedNotificationRegistrationPrompt: Bool {
         get {
             return UserDefaults.standard.bool(forKey: NotificationManagerDefaultsKeyHasReceivedNotificationRegistrationPrompt)
         }
@@ -81,15 +77,22 @@ class NotificationManager: NSObject {
             }
         
         authorizationStatusUpdated = completion
-//        UNUserNotificationCenter.current().getNotificationSettings { settings in
-////            switch settings.authorizationStatus {
-////            case .provisional
-////            }
-//        }
-//        UIApplication.shared.registerForRemoteNotifications()
-        UNUserNotificationCenter.current().setNotificationCategories(Set(NotificationCategory.allCategories.compactMap { $0.category }))
-//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) {
-//         (granted, error) in
+        let categories = NotificationCategory.allCategories.compactMap { $0.category }
+        let center = UNUserNotificationCenter.current()
+        center.setNotificationCategories(.init(categories))
+        center.getNotificationSettings { settings in
+            print(settings.authorizationStatus)
+            center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+                if let error = error {
+                    print("failed to get notification permissions \(error)")
+                }
+                guard granted else { return }
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            }
+        }
+//        center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
 //            if let error = error {
 //                print("failed to get notification permissions \(error)")
 //            }
@@ -106,6 +109,20 @@ class NotificationManager: NSObject {
 //            categories: Set(categories)
 //        )
 //        UIApplication.shared.registerUserNotificationSettings(1 as! UIUserNotificationSettings)
+    }
+
+    // MARK: UNUserNotificationCenterDelegate
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        print("will present \(notification)")
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("received response \(completionHandler)")
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, openSettingsFor notification: UNNotification?) {
+        print("open settings for \(notification)")
     }
 }
 
