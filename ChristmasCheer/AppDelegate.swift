@@ -123,18 +123,8 @@ extension PFInstallation {
 
     var window: UIWindow?
     let homeViewController = HomeViewController()
-    let test: UIViewController = {
-        let vc = UIViewController()
-        vc.view.backgroundColor = .green
-        return vc
-    }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        NotificationManager.requestRemoteNotificationAuthorization { auth in
-            print("authed \(auth)")
-            print("")
-        }
-
         Parse.configure(launchOptions: launchOptions)
         
         setupWindow()
@@ -160,7 +150,7 @@ extension PFInstallation {
 
     private func setupWindow() {
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = NavigationController(rootViewController: self.test)//self.homeViewController)
+        window?.rootViewController = NavigationController(rootViewController: self.homeViewController)
         window?.makeKeyAndVisible()
     }
 
@@ -173,7 +163,7 @@ extension PFInstallation {
     
     // Has Registered
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print("got device token")
+        print("got device token: **\(deviceToken.reduce("", {$0 + String(format: "%02X", $1)}).uppercased())**")
         Backend.makeInstallation(deviceToken: deviceToken, for: UUID()) { done in
             print("registered \(done)")
         }

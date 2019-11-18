@@ -14,6 +14,8 @@
 		803942B31A22D2BE006BF273 /* merry_christmas_darling.wav in Resources */ = {isa = PBXBuildFile; fileRef = 803942B01A22D2BE006BF273 /* merry_christmas_darling.wav */; };
 		803942B51A22D62F006BF273 /* santa_laugh.wav in Resources */ = {isa = PBXBuildFile; fileRef = 803942B41A22D62F006BF273 /* santa_laugh.wav */; };
 		803942B71A22D63B006BF273 /* merry_christmas.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 803942B61A22D63B006BF273 /* merry_christmas.mp3 */; };
+		8042752D23822B1800C29850 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8042752C23822B1800C29850 /* File.swift */; };
+		8042752E23822B1800C29850 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8042752C23822B1800C29850 /* File.swift */; };
 		805D04B21BDFEC18007D9070 /* String+Substrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805D04B11BDFEC18007D9070 /* String+Substrings.swift */; };
 		805D04B41BDFF40D007D9070 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805D04B31BDFF40D007D9070 /* UIColor+Hex.swift */; };
 		805D04B51BDFF410007D9070 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805D04B31BDFF40D007D9070 /* UIColor+Hex.swift */; };
@@ -131,6 +133,7 @@
 		803942B01A22D2BE006BF273 /* merry_christmas_darling.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = merry_christmas_darling.wav; sourceTree = "<group>"; };
 		803942B41A22D62F006BF273 /* santa_laugh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = santa_laugh.wav; sourceTree = "<group>"; };
 		803942B61A22D63B006BF273 /* merry_christmas.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = merry_christmas.mp3; sourceTree = "<group>"; };
+		8042752C23822B1800C29850 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		805D04B11BDFEC18007D9070 /* String+Substrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Substrings.swift"; sourceTree = "<group>"; };
 		805D04B31BDFF40D007D9070 /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		8064D27E2374E4E7004FEB7A /* ChristmasCheerDevelopmentDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChristmasCheerDevelopmentDebug.entitlements; sourceTree = "<group>"; };
@@ -294,6 +297,7 @@
 				806A694D1A21245100DBAC27 /* NameEntry */,
 				800819B21A22E681005B0021 /* HomeViewController.swift */,
 				800819B31A22E681005B0021 /* HomeViewController.xib */,
+				8042752C23822B1800C29850 /* File.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -567,7 +571,7 @@
 					80723B881A1FCFA70027EBDA = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = Q32LXKR624;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					80723B9D1A1FCFA70027EBDA = {
 						CreatedOnToolsVersion = 6.1;
@@ -803,6 +807,7 @@
 				808F270E1A338F0D001A8CE3 /* EnvironmentVariables.m in Sources */,
 				80D6295C1BE6D1CF000F2E2B /* CheerListCell.swift in Sources */,
 				809483921BDC9F4700F69A46 /* CellConfiguring.swift in Sources */,
+				8042752D23822B1800C29850 /* File.swift in Sources */,
 				80D0C6E91A4E5380001953C6 /* SnowFallView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -850,6 +855,7 @@
 				808F270F1A339029001A8CE3 /* EnvironmentVariables.m in Sources */,
 				80D6295D1BE6D1CF000F2E2B /* CheerListCell.swift in Sources */,
 				809483931BDC9F4700F69A46 /* CellConfiguring.swift in Sources */,
+				8042752E23822B1800C29850 /* File.swift in Sources */,
 				80D0C6EA1A4E5380001953C6 /* SnowFallView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -955,9 +961,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = ChristmasCheerDevelopmentDebug.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = Q32LXKR624;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (

@@ -32,6 +32,5 @@ class NavigationController : UINavigationController {
         navigationBar.titleTextAttributes = attributes
         navigationBar.tintColor = ColorPalette.SparklyWhite.color
         navigationBar.isTranslucent = false
-
     }
 }

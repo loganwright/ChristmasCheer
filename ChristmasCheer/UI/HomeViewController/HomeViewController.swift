@@ -49,6 +49,7 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
         // Sick of fighting weird view hierarchy issue, moving z position down
         snowFallingView.layer.zPosition = -1
         locationLabel.layer.zPosition = 0
+        update()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -105,9 +106,10 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
         }
         snowflakeButton.setTitle(title, for: .normal)
         snowflakeButton.setImage(img, for: .normal)
+        snowflakeButton.contentMode = .scaleAspectFit
+        snowflakeButton.imageView?.contentMode = .scaleAspectFit
         snowflakeButton.backgroundColor = color
         snowflakeButton.bounds.size = size
-        snowflakeButton.layer.cornerRadius = min(snowflakeButton.bounds.width, snowflakeButton.bounds.height) / 2
     }
     
     // MARK: Permissions Management
@@ -186,7 +188,7 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
         let permissionsVC = PermissionsRequestViewController(purpose: purpose)
         permissionsVC.delegate = self
 
-//        let navigationVC = UINavigationController(rootViewController: permissionsVC)
+//        let navigationVC = NavigationController(rootViewController: permissionsVC)
 
         let toPresent = permissionsVC // UINavigationController(rootViewController: permissionsVC)
         if #available(iOS 13.0, *) {
@@ -197,6 +199,12 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
         isPermissionsViewControllerPresented = true
         present(toPresent, animated: true, completion: nil)
     }
+
+    // MARK: Update
+
+    private func update() {
+        title = ApplicationSettings.displayName
+    }
     
     // MARK: Setup
     
@@ -205,9 +213,10 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
         setupSnowfallView()
         setupLocationLabel()
         setupChristmasCheerButton()
-        
-        title = ApplicationSettings.displayName
+
         view.backgroundColor = ColorPalette.Green.color
+
+        update()
     }
     
     private func setupNavBar() {
@@ -223,7 +232,7 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
         snowflakeButton.setTitleColor(ColorPalette.SparklyRed.color, for: .normal)
         snowflakeButton.setImage(UIImage(named: "snowflake_icon"), for: .normal)
         snowflakeButton.imageEdgeInsets = UIEdgeInsets(top: 11, left: 0, bottom: 13, right: 24)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: snowflakeButton)
+        navigationItem.leftBarButtonItem = .init(customView: snowflakeButton)
     }
     
     private func setupShareButton() {
@@ -231,6 +240,7 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
         button.setImage(UIImage(named: "gift_icon"), for: .normal)
         button.addTarget(self, action: #selector(shareButtonPressed), for: .touchUpInside)
         button.bounds = CGRect(x: 0, y: 0, width: 44, height: 44)
+        button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 11, left: 24, bottom: 13, right: 0)
         let barButton = UIBarButtonItem(customView: button)
         navigationItem.rightBarButtonItem = barButton
