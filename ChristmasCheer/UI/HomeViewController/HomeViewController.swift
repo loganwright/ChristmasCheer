@@ -106,10 +106,12 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
         }
         snowflakeButton.setTitle(title, for: .normal)
         snowflakeButton.setImage(img, for: .normal)
-        snowflakeButton.contentMode = .scaleAspectFit
-        snowflakeButton.imageView?.contentMode = .scaleAspectFit
+        snowflakeButton.tintColor = ColorPalette.SparklyWhite.color
+//        snowflakeButton.contentMode = .scaleAspectFit
+//        snowflakeButton.imageView?.contentMode = .scaleAspectFit
         snowflakeButton.backgroundColor = color
         snowflakeButton.bounds.size = size
+//        snowflakeButton.layer.cornerRadius = max(size.width, size.height) / 2
     }
     
     // MARK: Permissions Management
@@ -230,8 +232,8 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
         snowflakeButton.bounds = CGRect(x: 0, y: 0, width: 44, height: 44)
         snowflakeButton.titleLabel?.font = ChristmasCrackFont.Regular(26).font
         snowflakeButton.setTitleColor(ColorPalette.SparklyRed.color, for: .normal)
-        snowflakeButton.setImage(UIImage(named: "snowflake_icon"), for: .normal)
-        snowflakeButton.imageEdgeInsets = UIEdgeInsets(top: 11, left: 0, bottom: 13, right: 24)
+//        snowflakeButton.setImage(UIImage(named: "snowflake_icon"), for: .normal)
+//        snowflakeButton.imageEdgeInsets = UIEdgeInsets(top: 11, left: 0, bottom: 13, right: 24)
         navigationItem.leftBarButtonItem = .init(customView: snowflakeButton)
     }
     
@@ -240,7 +242,7 @@ class HomeViewController: UIViewController, PermissionsRequestViewControllerDele
         button.setImage(UIImage(named: "gift_icon"), for: .normal)
         button.addTarget(self, action: #selector(shareButtonPressed), for: .touchUpInside)
         button.bounds = CGRect(x: 0, y: 0, width: 44, height: 44)
-        button.imageView?.contentMode = .scaleAspectFit
+//        button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 11, left: 24, bottom: 13, right: 0)
         let barButton = UIBarButtonItem(customView: button)
         navigationItem.rightBarButtonItem = barButton
